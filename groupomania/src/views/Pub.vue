@@ -13,6 +13,7 @@
     <label for="description">description</label>
     <input type="text" id="description" required v-model="pub.description" name="description" />
     <button @click="publier">Publier</button>
+    <router-link to="/actu" class="retour">Retour à l'actu</router-link>
   </div>
 </template>
 

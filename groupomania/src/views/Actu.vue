@@ -27,6 +27,7 @@ export default {
       actu: {},
     };
   },
+  /* display all news */
   mounted() {
     DataService.getAll()
       .then((response) => {
@@ -41,6 +42,7 @@ export default {
 </script>
 
 <style scoped>
+/* Set  style for view only */
 .list__item {
   border: solid;
   border-color: black;

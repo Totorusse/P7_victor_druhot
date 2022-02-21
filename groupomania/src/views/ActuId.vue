@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1>Actu</h1>
+    <!-- To get Id from URL -->
     <h1 id="routeNumber" class="routeNumber">{{ $route.params.id }}</h1>
     <hr />
   </div>
@@ -12,18 +13,21 @@
       <button @click="deletePub">Supprimer</button>
       <button @click="modifyPub">Modifier</button>
     </div>
-    <div class="update" id="update">
-      <div>
-        <label for="titre">Titre</label>
-        <input type="text" class="form-control" id="titre" required v-model="actu.titre" name="titre" />
-      </div>
-      <div>
-        <label for="description">Description </label>
-        <input type="text" id="description" required v-model="actu.description" name="description" />
-        <button @click="updatePub">Mettre à jour</button>
+    <div class="block__update" id="update">
+      <div class="update">
+        <div>
+          <label for="titre">Nouveau titre</label><br />
+          <input type="text" class="form-control" id="titre" required v-model="actu.titre" name="titre" />
+        </div>
+        <div>
+          <label for="description">Nouvelle description </label><br />
+          <input type="text" id="description" required v-model="actu.description" name="description" /><br />
+          <button @click="updatePub">Mettre à jour</button>
+        </div>
       </div>
     </div>
   </div>
+  
 </template>
 
 <script>
@@ -49,6 +53,7 @@ export default {
       });
   },
   methods: {
+    /* fonction to delete news */
     deletePub() {
       const id = document.getElementById("routeNumber").innerHTML;
       DataService.delete(id)
@@ -60,9 +65,11 @@ export default {
           console.log(e);
         });
     },
+    /* display form to modify */
     modifyPub() {
       document.getElementById("update").style.display = "initial";
     },
+    /* fonction to update news */
     updatePub() {
       const id = document.getElementById("routeNumber").innerHTML;
       var data = {
@@ -83,6 +90,8 @@ export default {
 </script>
 
 <style scoped>
+/* Set  style for view only */
+
 .list__item {
   border: solid;
   border-color: black;
@@ -115,9 +124,16 @@ export default {
   margin-top: 4px;
   list-style-type: none;
   background-color: dodgerblue;
+  margin-bottom: 20px;
 }
 
 .update {
+  padding: 10px;
+  line-height: 30px;
+  border: solid;
+}
+
+.block__update {
   display: none;
 }
 

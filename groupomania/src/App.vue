@@ -12,6 +12,7 @@ export default {
 </script>
 
 <style>
+/* Set  style for the whole app */
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -20,6 +21,7 @@ export default {
   color: #2c3e50;
 }
 
+/* Set a style for  links */
 a {
   width: 100%;
   padding: 12px 20px;
@@ -28,17 +30,11 @@ a {
   border: 1px solid #ccc;
   box-sizing: border-box;
   text-decoration: none;
-}
-
-/* Set a style for  button */
-a {
   background-color: #ffd7d7;
   color: black;
-  padding: 14px 20px;
-  margin: 8px 0;
   border: none;
+  border-radius: 20px;
   cursor: pointer;
-  width: 100%;
 }
 
 /* Add a hover effect for buttons */
@@ -51,6 +47,7 @@ a:hover {
   padding: 16px;
 }
 
+/* Set  size for the images */
 img {
   width: 50%;
 }
