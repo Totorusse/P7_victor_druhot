@@ -12,6 +12,17 @@
       <button @click="deletePub">Supprimer</button>
       <button @click="modifyPub">Modifier</button>
     </div>
+    <div class="update" id="update">
+      <div>
+        <label for="titre">Titre</label>
+        <input type="text" class="form-control" id="titre" required v-model="actu.titre" name="titre" />
+      </div>
+      <div>
+        <label for="description">Description </label>
+        <input type="text" id="description" required v-model="actu.description" name="description" />
+        <button @click="updatePub">Mettre à jour</button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -37,7 +48,6 @@ export default {
         console.log(e);
       });
   },
-
   methods: {
     deletePub() {
       const id = document.getElementById("routeNumber").innerHTML;
@@ -51,6 +61,9 @@ export default {
         });
     },
     modifyPub() {
+      document.getElementById("update").style.display = "initial";
+    },
+    updatePub() {
       const id = document.getElementById("routeNumber").innerHTML;
       var data = {
         titre: this.actu.titre,
@@ -102,6 +115,10 @@ export default {
   margin-top: 4px;
   list-style-type: none;
   background-color: dodgerblue;
+}
+
+.update {
+  display: none;
 }
 
 a {
