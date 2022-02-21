@@ -31,6 +31,9 @@ export default {
     };
   },
   methods: {
+    delayedFunction() {
+      location.reload();
+    },
     checkUser() {
       var data = {
         email: this.user.email,
@@ -41,7 +44,9 @@ export default {
           if (response.data.token) {
             console.log(response.data);
             sessionStorage.setItem("token", response.data.token);
+            sessionStorage.setItem("userName", data.email);
             router.push("/actu");
+            window.setTimeout(this.delayedFunction, 500);
           }
         })
         .catch((e) => {

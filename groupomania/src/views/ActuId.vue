@@ -9,6 +9,7 @@
     <router-link to="/actu" class="publish">Retour à l'actu</router-link>
     <div class="bloc__actu">
       <h4>{{ actu.titre }}</h4>
+      <p class="userName">(Créé par {{ actu.userName }})</p>
       <p>{{ actu.description }}</p>
       <button @click="deletePub">Supprimer</button>
       <button @click="modifyPub">Modifier</button>
@@ -27,7 +28,6 @@
       </div>
     </div>
   </div>
-  
 </template>
 
 <script>
@@ -135,6 +135,10 @@ export default {
 
 .block__update {
   display: none;
+}
+
+.userName {
+  font-size: 10px;
 }
 
 a {

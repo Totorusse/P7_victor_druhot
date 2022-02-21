@@ -19,6 +19,8 @@
 
 <script>
 import DataService from "../services/DataService";
+import router from "../router/index";
+
 export default {
   name: "Sign",
   data() {
@@ -40,6 +42,8 @@ export default {
         .then((response) => {
           this.user.id = response.data.id;
           console.log(response.data);
+          sessionStorage.setItem("userName", response.data.email);
+          router.push("/actu");
         })
         .catch((e) => {
           console.log(e);

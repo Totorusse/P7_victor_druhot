@@ -10,7 +10,8 @@
       <li class="list__item" v-for="item in actu" :key="item">
         <router-link :to="`/actu/${item.id}`" class="link">
           <h4>{{ item.titre }}</h4>
-          {{ item.description }}
+          <p class="userName">(Créé par {{ item.userName }})</p>
+          <p>{{ item.description }}</p>
         </router-link>
       </li>
     </ul>
@@ -63,6 +64,11 @@ export default {
   border-radius: 20px;
   background-color: #ffd7d7;
 }
+
+.userName {
+  font-size: 10px;
+}
+
 a {
   background-color: dodgerblue;
 }

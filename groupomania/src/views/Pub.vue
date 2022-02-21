@@ -29,6 +29,7 @@ export default {
         id: null,
         titre: "",
         description: "",
+        userName: "",
       },
     };
   },
@@ -37,6 +38,7 @@ export default {
       var data = {
         titre: this.pub.titre,
         description: this.pub.description,
+        userName: sessionStorage.getItem("userName"),
       };
       DataService.pub(data)
         .then((response) => {

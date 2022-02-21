@@ -1,13 +1,26 @@
 <template>
   <div id="nav">
     <img src="./assets/logo.png" />
+    <button @click="logOut">Se déconnecter</button>
     <router-view />
   </div>
 </template>
 
 <script>
+import router from "./router/index";
+
 export default {
   name: "App",
+  methods: {
+    delayedFunction() {
+      location.reload();
+    },
+    logOut() {
+      sessionStorage.setItem("token", "");
+      router.push("/");
+      window.setTimeout(this.delayedFunction, 500);
+    },
+  },
 };
 </script>
 
