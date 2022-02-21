@@ -38,11 +38,11 @@ export default {
       };
       DataService.log(data)
         .then((response) => {
-          if ((this.user.id = response.data.id)) {
+          if (response.data.token) {
             console.log(response.data);
+            sessionStorage.setItem("token", response.data.token);
             router.push("/actu");
           }
-          console.log("yo");
         })
         .catch((e) => {
           console.log(e);
