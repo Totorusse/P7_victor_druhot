@@ -15,6 +15,7 @@ exports.create = (req, res) => {
     return;
   }
   // Create a user
+  // Hash password
   bcrypt
     .hash(req.body.psw, 10)
     .then((hash) => {
@@ -23,7 +24,6 @@ exports.create = (req, res) => {
         psw: hash,
       };
       // Save user in the database
-
       User.create(user).then((data) => {
         res.send(data);
       });
@@ -38,26 +38,22 @@ exports.create = (req, res) => {
 // Retrieve user from the database.
 exports.login = (req, res, next) => {
   User.findOne({ where: { email: req.body.email } })
-    .then((data) => {
-      if (!data) {
+    .then((user) => {
+      if (!user) {
         return res.status(500).send({ message: "Utilisateur non trouvé !" });
-      } else if (data.psw != req.body.psw) {
-        return res.status(500).send({ message: "Mot de passe non valide !" });
       }
-      res.send(data);
+      bcrypt
+        .compare(req.body.psw, user.psw)
+        .then((valid) => {
+          if (!valid) {
+            return res.status(401).json({ error: "Mot de passe incorrect !" });
+          }
+          res.status(200).json({
+            userId: user._id,
+            token: jwt.sign({ userId: user._id }, "RANDOM_TOKEN_SECRET", { expiresIn: "24h" }),
+          });
+        })
+        .catch((error) => res.status(500).json({ error }));
     })
-    .catch((err) => {
-      res.status(500).send({
-        message: err.message || "Utilisateur non trouvé !",
-      });
-    });
+    .catch((error) => res.status(500).json({ error }));
 };
-
-// Update a Tutorial by the id in the request
-exports.update = (req, res) => {};
-// Delete a Tutorial with the specified id in the request
-exports.delete = (req, res) => {};
-// Delete all Tutorials from the database.
-exports.deleteAll = (req, res) => {};
-// Find all published Tutorials
-exports.findAllPublished = (req, res) => {};

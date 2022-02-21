@@ -42,6 +42,7 @@ export default {
             console.log(response.data);
             router.push("/actu");
           }
+          console.log("yo");
         })
         .catch((e) => {
           console.log(e);
