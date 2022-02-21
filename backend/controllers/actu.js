@@ -30,6 +30,7 @@ exports.publish = (req, res, next) => {
   const publication = {
     titre: req.body.titre,
     description: req.body.description,
+    userName: req.body.userName,
   };
   // Save pub in the database
   Actu.create(publication)
