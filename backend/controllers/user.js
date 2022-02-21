@@ -15,14 +15,18 @@ exports.create = (req, res) => {
     return;
   }
   // Create a user
-  const user = {
-    email: req.body.email,
-    psw: req.body.psw,
-  };
-  // Save user in the database
-  User.create(user)
-    .then((data) => {
-      res.send(data);
+  bcrypt
+    .hash(req.body.psw, 10)
+    .then((hash) => {
+      const user = {
+        email: req.body.email,
+        psw: hash,
+      };
+      // Save user in the database
+
+      User.create(user).then((data) => {
+        res.send(data);
+      });
     })
     .catch((err) => {
       res.status(500).send({
@@ -48,7 +52,6 @@ exports.login = (req, res, next) => {
       });
     });
 };
-
 
 // Update a Tutorial by the id in the request
 exports.update = (req, res) => {};
