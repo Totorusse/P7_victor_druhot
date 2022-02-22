@@ -11,8 +11,8 @@
       <h4>{{ actu.titre }}</h4>
       <p class="userName">(Créé par {{ actu.userName }})</p>
       <p>{{ actu.description }}</p>
-      <div class="buttons">
-        <!-- v-if="actu.userName == userSession"L -->
+      <div class="buttons" v-if="actu.userName == userSession">
+        <!-- L -->
         <button @click="deletePub">Supprimer</button>
         <button @click="modifyPub">Modifier</button>
       </div>
