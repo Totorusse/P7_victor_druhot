@@ -9,6 +9,9 @@ module.exports = (sequelize, Sequelize) => {
     userName: {
       type: Sequelize.STRING,
     },
+    image: {
+      type: Sequelize.STRING,
+    },
   });
   return Actu;
 };

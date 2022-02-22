@@ -32,6 +32,7 @@ exports.publish = (req, res, next) => {
     titre: req.body.titre,
     description: req.body.description,
     userName: req.body.userName,
+    image: `${req.protocol}://${req.get("host")}/images/${req.body.image}`,
   };
   // Save pub in the database
   Actu.create(publication)

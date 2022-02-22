@@ -7,11 +7,10 @@
   <div>
     <label for="titre">Titre de la publication</label>
     <input type="text" class="form-control" id="titre" required v-model="pub.titre" name="titre" />
-  </div>
-
-  <div>
     <label for="description">description</label>
     <input type="text" id="description" required v-model="pub.description" name="description" />
+    <label for="image">Ajouter une image : </label>
+    <input type="file" id="image" name="image" @change="addImage" />
     <button @click="publier">Publier</button>
     <router-link to="/actu" class="retour">Retour à l'actu</router-link>
   </div>
@@ -30,6 +29,7 @@ export default {
         titre: "",
         description: "",
         userName: "",
+        image: "",
       },
     };
   },
@@ -39,6 +39,7 @@ export default {
         titre: this.pub.titre,
         description: this.pub.description,
         userName: sessionStorage.getItem("userName"),
+        image: this.pub.image,
       };
       DataService.pub(data)
         .then((response) => {
@@ -48,6 +49,10 @@ export default {
         .catch((e) => {
           console.log(e);
         });
+    },
+    addImage(event) {
+      this.pub.image = event.target.files[0].name;
+      console.log(this.pub.image);
     },
   },
 };
