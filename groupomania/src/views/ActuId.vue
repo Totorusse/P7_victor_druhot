@@ -11,8 +11,11 @@
       <h4>{{ actu.titre }}</h4>
       <p class="userName">(Créé par {{ actu.userName }})</p>
       <p>{{ actu.description }}</p>
-      <button @click="deletePub">Supprimer</button>
-      <button @click="modifyPub">Modifier</button>
+      <div class="buttons">
+        <!-- v-if="actu.userName == userSession"L -->
+        <button @click="deletePub">Supprimer</button>
+        <button @click="modifyPub">Modifier</button>
+      </div>
     </div>
     <div class="block__update" id="update">
       <div class="update">
@@ -39,6 +42,7 @@ export default {
   data() {
     return {
       actu: {},
+      userSession: sessionStorage.getItem("userName"),
     };
   },
   mounted() {
@@ -72,11 +76,13 @@ export default {
     /* fonction to update news */
     updatePub() {
       const id = document.getElementById("routeNumber").innerHTML;
-      var data = {
+      const userName = sessionStorage.getItem("userName");
+      let dataUp = {
         titre: this.actu.titre,
         description: this.actu.description,
+        userName: userName,
       };
-      DataService.update(id, data)
+      DataService.update(id, dataUp)
         .then((response) => {
           console.log(response.data);
           router.push("/actu");

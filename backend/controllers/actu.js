@@ -5,6 +5,7 @@ const sequelize = require("sequelize");
 const Op = db.Sequelize.Op;
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const { user } = require("../models");
 
 exports.getAllArticles = (req, res, next) => {
   Actu.findAll()
@@ -88,11 +89,13 @@ exports.deleteArticle = (req, res, next) => {
 
 exports.updateArticle = (req, res, next) => {
   const id = req.params.id;
+  const userName = req.body.userName;
   Actu.update(req.body, {
-    where: { id: id },
+    // Validate request : need to be the creator to update
+    where: { id: id, userName: userName },
   })
-    .then((num) => {
-      if (num == 1) {
+    .then((data) => {
+      if (data) {
         res.send({
           message: "News was updated successfully.",
         });
