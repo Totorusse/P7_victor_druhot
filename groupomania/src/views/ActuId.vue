@@ -60,9 +60,13 @@ export default {
     /* fonction to delete news */
     deletePub() {
       const id = document.getElementById("routeNumber").innerHTML;
-      DataService.delete(id)
+      const userName = sessionStorage.getItem("userName");
+      let dataDel = {
+        userName: userName,
+      };
+      DataService.delete(id, dataDel)
         .then((response) => {
-          console.log(response.data);
+          console.log(response);
           router.push("/actu");
         })
         .catch((e) => {

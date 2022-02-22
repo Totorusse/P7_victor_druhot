@@ -66,11 +66,14 @@ exports.getOneArticle = (req, res, next) => {
 
 exports.deleteArticle = (req, res, next) => {
   const id = req.params.id;
+  const userName = req.body.dataDel.userName;
+  console.log(userName);
   Actu.destroy({
-    where: { id: id },
+    // Validate request : need to be the creator to update
+    where: { id: id, userName: userName },
   })
-    .then((num) => {
-      if (num == 1) {
+    .then((data) => {
+      if (data) {
         res.send({
           message: "News was deleted successfully!",
         });

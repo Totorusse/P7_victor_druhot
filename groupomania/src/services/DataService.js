@@ -28,8 +28,8 @@ class DataService {
   update(id, data) {
     return http.put(`/actu/${id}`, data, config);
   }
-  delete(id) {
-    return http.delete(`/actu/${id}`, config);
+  delete(id, dataDel) {
+    return http.delete(`/actu/${id}`, { data: { dataDel }, headers: { Authorization: `Bearer ${token}` } });
   }
 
   findByTitle(title) {
