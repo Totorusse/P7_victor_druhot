@@ -25,6 +25,10 @@ class DataService {
     return http.post("/pub", data, config);
   }
 
+  pubImage(image) {
+    return http.post("/images", image, config);
+  }
+
   update(id, data) {
     return http.put(`/actu/${id}`, data, config);
   }

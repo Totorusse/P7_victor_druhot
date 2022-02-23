@@ -30,6 +30,7 @@ export default {
         description: "",
         userName: "",
         image: "",
+        file: "",
       },
     };
   },
@@ -41,6 +42,15 @@ export default {
         userName: sessionStorage.getItem("userName"),
         image: this.pub.image,
       };
+      const fd = new FormData();
+      fd.append("image", this.pub.file);
+      DataService.pubImage(fd)
+        .then(() => {
+          console.log("hooo");
+        })
+        .catch((e) => {
+          console.log(e);
+        });
       DataService.pub(data)
         .then((response) => {
           console.log(response.data);
@@ -52,7 +62,8 @@ export default {
     },
     addImage(event) {
       this.pub.image = event.target.files[0].name;
-      console.log(this.pub.image);
+      this.pub.file = event.target.files[0];
+      console.log(this.pub.file);
     },
   },
 };

@@ -12,6 +12,7 @@
           <h4>{{ item.titre }}</h4>
           <p class="userName">(Créé par {{ item.userName }})</p>
           <p>{{ item.description }}</p>
+          <img :src="`${actu.image}`" />
         </router-link>
       </li>
     </ul>
