@@ -94,7 +94,15 @@ exports.deleteArticle = (req, res, next) => {
 exports.updateArticle = (req, res, next) => {
   const id = req.params.id;
   const userName = req.body.userName;
-  Actu.update(req.body, {
+  const actuObject = req.body.file
+    ? {
+        ...req.body,
+        image: `${req.protocol}://${req.get("host")}/images/${req.body.file}`,
+      }
+    : { ...req.body };
+  console.log(actuObject);
+
+  Actu.update(actuObject, {
     // Validate request : need to be the creator to update
     where: { id: id, userName: userName },
   })
@@ -102,7 +110,7 @@ exports.updateArticle = (req, res, next) => {
       if (data) {
         res.send({
           message: "News was updated successfully.",
-          data,
+          actuObject,
         });
       } else {
         res.send({

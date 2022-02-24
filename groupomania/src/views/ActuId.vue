@@ -43,7 +43,9 @@ export default {
   name: "ActuId",
   data() {
     return {
-      actu: {},
+      actu: {
+        file: "",
+      },
       userSession: sessionStorage.getItem("userName"),
     };
   },
@@ -87,11 +89,18 @@ export default {
     },
     /* fonction to update news */
     updatePub() {
-      console.log(this.actu.file);
       const id = document.getElementById("routeNumber").innerHTML;
       const userName = sessionStorage.getItem("userName");
       const fd = new FormData();
       fd.append("image", this.actu.file);
+      DataService.pubImage(fd)
+        .then(() => {
+          console.log("hooo");
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+
       let dataUp = {
         titre: this.actu.titre,
         description: this.actu.description,
