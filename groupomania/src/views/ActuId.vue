@@ -12,13 +12,16 @@
       <p class="userName">(Créé par {{ actu.userName }})</p>
       <p>{{ actu.description }}</p>
       <p>{{ actu.image }}</p>
+      <div v-if="actu.image">
+        <img :src="`${actu.image}`" />
+      </div>
 
-      <img :src="`${actu.image}`" />
       <div class="buttons" v-if="actu.userName == userSession">
         <button @click="deletePub">Supprimer</button>
         <button @click="modifyPub">Modifier</button>
       </div>
     </div>
+
     <div class="block__update" id="update">
       <div class="update">
         <div>

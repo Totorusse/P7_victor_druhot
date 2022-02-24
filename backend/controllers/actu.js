@@ -27,13 +27,14 @@ exports.publish = (req, res, next) => {
     });
     return;
   }
-  // Create a publication
-  const publication = {
-    titre: req.body.titre,
-    description: req.body.description,
-    userName: req.body.userName,
-    image: `${req.protocol}://${req.get("host")}/images/${req.body.image}`,
-  };
+  const publication = req.body.image
+    ? {
+        ...req.body,
+        image: `${req.protocol}://${req.get("host")}/images/${req.body.image}`,
+      }
+    : { ...req.body };
+
+  console.log(publication.image);
   // Save pub in the database
   Actu.create(publication)
     .then((data) => {
