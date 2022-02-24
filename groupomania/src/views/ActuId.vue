@@ -90,11 +90,15 @@ export default {
       console.log(this.actu.file);
       const id = document.getElementById("routeNumber").innerHTML;
       const userName = sessionStorage.getItem("userName");
+      const fd = new FormData();
+      fd.append("image", this.actu.file);
       let dataUp = {
         titre: this.actu.titre,
         description: this.actu.description,
         userName: userName,
+        file: this.actu.file.name,
       };
+      console.log(dataUp);
       DataService.update(id, dataUp)
         .then((response) => {
           console.log(response.data);
