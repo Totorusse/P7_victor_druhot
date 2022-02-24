@@ -11,6 +11,8 @@
       <h4>{{ actu.titre }}</h4>
       <p class="userName">(Créé par {{ actu.userName }})</p>
       <p>{{ actu.description }}</p>
+      <p>{{ actu.image }}</p>
+
       <img :src="`${actu.image}`" />
       <div class="buttons" v-if="actu.userName == userSession">
         <button @click="deletePub">Supprimer</button>
@@ -43,9 +45,7 @@ export default {
   name: "ActuId",
   data() {
     return {
-      actu: {
-        file: "",
-      },
+      actu: {},
       userSession: sessionStorage.getItem("userName"),
     };
   },
@@ -80,6 +80,7 @@ export default {
     /* display form to modify */
     modifyPub() {
       document.getElementById("update").style.display = "initial";
+      this.actu.file = "";
     },
     /* fonction to update image */
     addImage(event) {
@@ -91,8 +92,10 @@ export default {
     updatePub() {
       const id = document.getElementById("routeNumber").innerHTML;
       const userName = sessionStorage.getItem("userName");
+
       const fd = new FormData();
       fd.append("image", this.actu.file);
+      /* request to post image in back */
       DataService.pubImage(fd)
         .then(() => {
           console.log("hooo");
@@ -100,7 +103,6 @@ export default {
         .catch((e) => {
           console.log(e);
         });
-
       let dataUp = {
         titre: this.actu.titre,
         description: this.actu.description,
@@ -108,6 +110,7 @@ export default {
         file: this.actu.file.name,
       };
       console.log(dataUp);
+      /* request to update */
       DataService.update(id, dataUp)
         .then((response) => {
           console.log(response.data);

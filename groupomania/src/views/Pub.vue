@@ -40,7 +40,7 @@ export default {
         titre: this.pub.titre,
         description: this.pub.description,
         userName: sessionStorage.getItem("userName"),
-        image: this.pub.image,
+        image: this.pub.image.split(" ").join("_"),
       };
       const fd = new FormData();
       fd.append("image", this.pub.file);
