@@ -102,6 +102,7 @@ exports.updateArticle = (req, res, next) => {
       if (data) {
         res.send({
           message: "News was updated successfully.",
+          data,
         });
       } else {
         res.send({

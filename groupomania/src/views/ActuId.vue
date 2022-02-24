@@ -26,6 +26,8 @@
         <div>
           <label for="description">Nouvelle description </label><br />
           <input type="text" id="description" required v-model="actu.description" name="description" /><br />
+          <label for="image">Modifier l'image : </label>
+          <input type="file" id="image" name="image" @change="addImage" /><br />
           <button @click="updatePub">Mettre à jour</button>
         </div>
       </div>
@@ -77,8 +79,15 @@ export default {
     modifyPub() {
       document.getElementById("update").style.display = "initial";
     },
+    /* fonction to update image */
+    addImage(event) {
+      this.actu.image = event.target.files[0].name;
+      this.actu.file = event.target.files[0];
+      console.log(this.actu.file);
+    },
     /* fonction to update news */
     updatePub() {
+      console.log(this.actu.file);
       const id = document.getElementById("routeNumber").innerHTML;
       const userName = sessionStorage.getItem("userName");
       let dataUp = {
