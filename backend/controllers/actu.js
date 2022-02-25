@@ -1,6 +1,7 @@
 //const fs = require("fs");
 const db = require("../models");
 const Actu = db.actu;
+const Comment = db.comment;
 const sequelize = require("sequelize");
 const Op = db.Sequelize.Op;
 const bcrypt = require("bcrypt");
@@ -122,6 +123,54 @@ exports.updateArticle = (req, res, next) => {
     .catch((err) => {
       res.status(500).send({
         message: "Error updating News with id=" + id,
+      });
+    });
+};
+
+exports.publish = (req, res, next) => {
+  // Validate request
+  if (!req.body.titre || !req.body.description) {
+    res.status(400).send({
+      message: "Remplir le formulaire!",
+    });
+    return;
+  }
+  const publication = req.body.image
+    ? {
+        ...req.body,
+        image: `${req.protocol}://${req.get("host")}/images/${req.body.image}`,
+      }
+    : { ...req.body };
+
+  console.log(publication.image);
+  // Save pub in the database
+  Actu.create(publication)
+    .then((data) => {
+      res.status(200).send(data);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: err.message,
+      });
+    });
+};
+
+exports.comment = (req, res, next) => {
+  // Validate request
+  if (!req.body.text) {
+    res.status(400).send({
+      message: "Remplir le formulaire!",
+    });
+    return;
+  }
+  // Save pub in the database
+  Comment.create(req.body)
+    .then((data) => {
+      res.status(200).send(data);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: err.message,
       });
     });
 };

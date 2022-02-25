@@ -25,6 +25,10 @@ class DataService {
     return http.post("/pub", data, config);
   }
 
+  pubComment(comment) {
+    return http.post("/actu", comment, config);
+  }
+
   pubImage(image) {
     return http.post("/images", image, config);
   }

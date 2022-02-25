@@ -16,6 +16,11 @@
             <img :src="`${item.image}`" />
           </div>
         </router-link>
+        <button @click="addComment">Ajouter un commentaire</button><br />
+        <div class="comment" id="commentDiv">
+          <input type="text" id="commentText" required v-model="comment.text" name="commentText" /><br />
+          <button @click="pubComment">Publier votre commentaire</button><br />
+        </div>
       </li>
     </ul>
   </div>
@@ -29,6 +34,7 @@ export default {
   data() {
     return {
       actu: {},
+      comment: {},
     };
   },
   /* display all news */
@@ -41,6 +47,27 @@ export default {
       .catch((e) => {
         console.log(e);
       });
+  },
+  methods: {
+    /* fonction to show comment input*/
+    addComment() {
+      document.getElementById("commentDiv").style.display = "initial";
+    },
+    /* fonction to publish comment */
+    pubComment() {
+      let comment = {
+        text: this.comment.text,
+        userName: sessionStorage.getItem("userName"),
+        pubId: this.actu.id,
+      };
+      DataService.pubComment(comment)
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    },
   },
 };
 </script>
@@ -74,5 +101,9 @@ export default {
 
 a {
   background-color: dodgerblue;
+}
+
+.comment {
+  display: none;
 }
 </style>

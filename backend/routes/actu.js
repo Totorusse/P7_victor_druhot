@@ -12,6 +12,7 @@ router.delete("/actu/:id", auth, multer, actuCtrl.deleteArticle);
 router.put("/actu/:id", auth, multer, actuCtrl.updateArticle);
 router.post("/pub", auth, multer, actuCtrl.publish);
 router.post("/images", auth, multer);
+router.post("/actu", auth, actuCtrl.comment);
 router.get("/images", auth, multer);
 
 module.exports = router;
