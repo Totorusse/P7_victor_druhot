@@ -12,13 +12,21 @@
           <h4>{{ item.titre }}</h4>
           <p class="userName">(Créé par {{ item.userName }})</p>
           <p>{{ item.description }}</p>
+          <p>{{ item.id }}</p>
           <div v-if="item.image">
             <img :src="`${item.image}`" />
           </div>
         </router-link>
         <button @click="addComment">Ajouter un commentaire</button><br />
         <div class="comment" id="commentDiv">
-          <input type="text" id="commentText" required v-model="comment.text" name="commentText" /><br />
+          <input
+            type="text"
+            id="commentText"
+            required
+            v-model="comment.text"
+            :data-id="`${item.id}`"
+            name="commentText"
+          /><br />
           <button @click="pubComment">Publier votre commentaire</button><br />
         </div>
       </li>
@@ -55,10 +63,11 @@ export default {
     },
     /* fonction to publish comment */
     pubComment() {
+      let actuId = document.getElementById("commentText");
       let comment = {
         text: this.comment.text,
         userName: sessionStorage.getItem("userName"),
-        pubId: this.actu.id,
+        pubId: actuId.dataset.id,
       };
       DataService.pubComment(comment)
         .then((response) => {

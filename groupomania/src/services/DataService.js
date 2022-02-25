@@ -39,9 +39,5 @@ class DataService {
   delete(id, dataDel) {
     return http.delete(`/actu/${id}`, { data: { dataDel }, headers: { Authorization: `Bearer ${token}` } });
   }
-
-  findByTitle(title) {
-    return http.get(`/tutorials?title=${title}`, config);
-  }
 }
 export default new DataService();

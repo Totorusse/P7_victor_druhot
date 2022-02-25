@@ -20,6 +20,19 @@ exports.getAllArticles = (req, res, next) => {
     });
 };
 
+exports.getAllComments = (req, res, next) => {
+  console.log("test");
+  Comment.findAll()
+    .then((comments) => {
+      res.status(200).send(comments);
+    })
+    .catch((error) => {
+      res.status(400)({
+        error,
+      });
+    });
+};
+
 exports.publish = (req, res, next) => {
   // Validate request
   if (!req.body.titre || !req.body.description) {
