@@ -8,7 +8,7 @@
     </div>
     <div>
       <label for="psw">Mot de passe</label>
-      <input type="text" id="psw" required v-model="user.psw" name="psw" />
+      <input type="password" id="psw" required v-model="user.psw" name="psw" />
       <button @click="checkUser">Se connecter</button>
     </div>
     <router-link to="/sign" class="retour">Pas encore inscrit ?</router-link>
