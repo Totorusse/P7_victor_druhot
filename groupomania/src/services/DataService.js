@@ -10,6 +10,10 @@ class DataService {
     return http.get("/actu", config);
   }
 
+  getAllComments(id) {
+    return http.get(`/actu/${id}/comment`, config);
+  }
+
   get(id) {
     return http.get(`/actu/${id}`, config);
   }

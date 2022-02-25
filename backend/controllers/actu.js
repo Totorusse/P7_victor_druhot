@@ -21,8 +21,12 @@ exports.getAllArticles = (req, res, next) => {
 };
 
 exports.getAllComments = (req, res, next) => {
-  console.log("test");
-  Comment.findAll()
+  console.log(req.params.id);
+  Comment.findAll({
+    where: {
+      pubId: req.params.id,
+    },
+  })
     .then((comments) => {
       res.status(200).send(comments);
     })

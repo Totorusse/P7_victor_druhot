@@ -29,7 +29,9 @@
           /><br />
           <button @click="pubComment">Publier votre commentaire</button><br />
         </div>
+        <router-link :to="`/actu/${item.id}/comment`" class="link">Voir les commentaires </router-link>
       </li>
+      <li></li>
     </ul>
   </div>
 </template>

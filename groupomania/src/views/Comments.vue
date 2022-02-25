@@ -1,0 +1,90 @@
+<template>
+  <div>
+    <h1>Commentaires</h1>
+    <!-- To get Id from URL -->
+    <h1 id="routeNumber" class="routeNumber">{{ $route.params.id }}</h1>
+    <hr />
+  </div>
+  <div>
+    <router-link to="/actu" class="publish">Retour à l'actu</router-link>
+    <ul class="list">
+      <li class="list__item" v-for="item in comment" :key="item">
+        <h4>{{ item.text }}</h4>
+        <p class="userName">(Créé par {{ item.userName }})</p>
+        <p>{{ item.description }}</p>
+      </li>
+      <li></li>
+    </ul>
+  </div>
+</template>
+
+<script>
+import DataService from "../services/DataService";
+
+export default {
+  name: "Actu",
+  data() {
+    return {
+      comment: {},
+    };
+  },
+  /* display all news */
+  mounted() {
+    const id = document.getElementById("routeNumber").innerHTML;
+    DataService.getAllComments(id)
+      .then((response) => {
+        this.comment = response.data;
+        console.log(response.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  },
+  methods: {
+    /* fonction to show comment input*/
+    addComment() {
+      document.getElementById("commentDiv").style.display = "initial";
+    },
+  },
+};
+</script>
+
+<style scoped>
+/* Set  style for view only */
+.list__item {
+  border: solid;
+  border-color: black;
+  padding: 0;
+  margin-top: 4px;
+  list-style-type: none;
+  background-color: dodgerblue;
+}
+
+.list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.publish {
+  width: 100%;
+  border-radius: 20px;
+  background-color: #ffd7d7;
+}
+
+.userName {
+  font-size: 10px;
+}
+
+a {
+  background-color: dodgerblue;
+}
+
+.comment {
+  display: none;
+}
+
+.routeNumber {
+  display: none;
+}
+</style>
