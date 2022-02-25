@@ -83,19 +83,22 @@ export default {
     /* display form to modify */
     modifyPub() {
       document.getElementById("update").style.display = "initial";
-      this.actu.file = "";
+      this.actu.file = {};
+      this.actu.file.name = {};
+      localStorage.removeItem("image");
     },
     /* fonction to update image */
     addImage(event) {
       this.actu.image = event.target.files[0].name;
       this.actu.file = event.target.files[0];
-      console.log(this.actu.file);
+      let modifiedName = this.actu.image.split(" ").join("_");
+      localStorage.setItem("image", modifiedName);
     },
     /* fonction to update news */
     updatePub() {
       const id = document.getElementById("routeNumber").innerHTML;
       const userName = sessionStorage.getItem("userName");
-
+      const storedImage = localStorage.getItem("image");
       const fd = new FormData();
       fd.append("image", this.actu.file);
       /* request to post image in back */
@@ -106,22 +109,41 @@ export default {
         .catch((e) => {
           console.log(e);
         });
-      let dataUp = {
-        titre: this.actu.titre,
-        description: this.actu.description,
-        userName: userName,
-        file: this.actu.file.name,
-      };
-      console.log(dataUp);
-      /* request to update */
-      DataService.update(id, dataUp)
-        .then((response) => {
-          console.log(response.data);
-          router.push("/actu");
-        })
-        .catch((e) => {
-          console.log(e);
-        });
+
+      if (storedImage) {
+        let dataUp = {
+          titre: this.actu.titre,
+          description: this.actu.description,
+          userName: userName,
+          file: storedImage,
+        };
+        console.log(dataUp);
+        /* request to update */
+        DataService.update(id, dataUp)
+          .then((response) => {
+            console.log(response.data);
+            router.push("/actu");
+          })
+          .catch((e) => {
+            console.log(e);
+          });
+      } else {
+        let dataUp = {
+          titre: this.actu.titre,
+          description: this.actu.description,
+          userName: userName,
+        };
+        console.log(dataUp);
+        /* request to update */
+        DataService.update(id, dataUp)
+          .then((response) => {
+            console.log(response.data);
+            router.push("/actu");
+          })
+          .catch((e) => {
+            console.log(e);
+          });
+      }
     },
   },
 };
