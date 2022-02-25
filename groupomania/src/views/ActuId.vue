@@ -109,41 +109,28 @@ export default {
         .catch((e) => {
           console.log(e);
         });
-
-      if (storedImage) {
-        let dataUp = {
-          titre: this.actu.titre,
-          description: this.actu.description,
-          userName: userName,
-          file: storedImage,
-        };
-        console.log(dataUp);
-        /* request to update */
-        DataService.update(id, dataUp)
-          .then((response) => {
-            console.log(response.data);
-            router.push("/actu");
-          })
-          .catch((e) => {
-            console.log(e);
-          });
-      } else {
-        let dataUp = {
-          titre: this.actu.titre,
-          description: this.actu.description,
-          userName: userName,
-        };
-        console.log(dataUp);
-        /* request to update */
-        DataService.update(id, dataUp)
-          .then((response) => {
-            console.log(response.data);
-            router.push("/actu");
-          })
-          .catch((e) => {
-            console.log(e);
-          });
-      }
+      /* check if image in form */
+      let dataUp = storedImage
+        ? {
+            titre: this.actu.titre,
+            description: this.actu.description,
+            userName: userName,
+            file: storedImage,
+          }
+        : {
+            titre: this.actu.titre,
+            description: this.actu.description,
+            userName: userName,
+          };
+      /* request to update */
+      DataService.update(id, dataUp)
+        .then((response) => {
+          console.log(response.data);
+          router.push("/actu");
+        })
+        .catch((e) => {
+          console.log(e);
+        });
     },
   },
 };
