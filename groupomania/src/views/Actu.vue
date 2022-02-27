@@ -31,7 +31,6 @@
         </div>
         <router-link :to="`/actu/${item.id}/comment`" class="link">Voir les commentaires </router-link>
       </li>
-      <li></li>
     </ul>
   </div>
 </template>
@@ -60,16 +59,22 @@ export default {
   },
   methods: {
     /* fonction to show comment input*/
-    addComment() {
-      document.getElementById("commentDiv").style.display = "initial";
+    addComment(event) {
+      let target = event.target;
+      let commentDiv = target.nextSibling.nextSibling;
+
+      commentDiv.style.display = "initial";
     },
     /* fonction to publish comment */
-    pubComment() {
-      let actuId = document.getElementById("commentText");
+    pubComment(event) {
+      let target = event.target;
+      let commentDiv = target.closest("div");
+      let input = commentDiv.querySelector("input");
+
       let comment = {
-        text: this.comment.text,
+        text: input.value,
         userName: sessionStorage.getItem("userName"),
-        pubId: actuId.dataset.id,
+        pubId: input.dataset.id,
       };
       DataService.pubComment(comment)
         .then((response) => {
