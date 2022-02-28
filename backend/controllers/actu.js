@@ -16,7 +16,6 @@ exports.getAllArticles = (req, res, next) => {
 };
 
 exports.getAllComments = (req, res, next) => {
-  console.log(req.params.id);
   Comment.findAll({
     where: {
       pubId: req.params.id,
@@ -28,6 +27,22 @@ exports.getAllComments = (req, res, next) => {
     .catch((error) => {
       res.status(400)({
         error,
+      });
+    });
+};
+
+exports.getMyProfile = (req, res, next) => {
+  Actu.findAll({
+    where: {
+      userName: req.query.user,
+    },
+  })
+    .then((allActu) => {
+      res.status(200).send(allActu);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        err,
       });
     });
 };

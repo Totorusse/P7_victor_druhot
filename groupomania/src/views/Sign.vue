@@ -5,7 +5,7 @@
     <hr />
 
     <div>
-      <label for="email">Email</label>
+      <label for="email">Nom d'utilisateur</label>
       <input type="text" id="email" required v-model="user.email" name="email" />
     </div>
     <div>

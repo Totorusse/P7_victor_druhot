@@ -6,6 +6,7 @@ import Actu from "../views/Actu.vue";
 import ActuId from "../views/ActuId.vue";
 import Pub from "../views/Pub.vue";
 import Comments from "../views/Comments.vue";
+import Profile from "../views/Profile.vue";
 
 const routes = [
   {
@@ -37,6 +38,11 @@ const routes = [
     path: "/actu/:id/comment",
     name: "comments",
     component: Comments,
+  },
+  {
+    path: "/profile",
+    name: "profile",
+    component: Profile,
   },
   {
     path: "/pub",

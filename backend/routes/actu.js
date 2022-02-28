@@ -9,6 +9,7 @@ const actuCtrl = require("../controllers/actu");
 router.get("/actu", auth, multer, actuCtrl.getAllArticles);
 router.get("/actu/:id", auth, multer, actuCtrl.getOneArticle);
 router.get("/actu/:id/comment", auth, multer, actuCtrl.getAllComments);
+router.get("/profile", auth, multer, actuCtrl.getMyProfile);
 router.delete("/actu/:id", auth, multer, actuCtrl.deleteArticle);
 router.put("/actu/:id", auth, multer, actuCtrl.updateArticle);
 router.post("/pub", auth, multer, actuCtrl.publish);

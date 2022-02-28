@@ -2,6 +2,8 @@
   <div id="nav">
     <img src="./assets/logo.png" />
     <button @click="logOut">Se déconnecter</button>
+    <button @click="profile">Mon profil</button>
+
     <router-view />
   </div>
 </template>
@@ -19,6 +21,9 @@ export default {
       sessionStorage.setItem("token", "");
       router.push("/");
       window.setTimeout(this.delayedFunction, 500);
+    },
+    profile() {
+      router.push("/profile");
     },
   },
 };

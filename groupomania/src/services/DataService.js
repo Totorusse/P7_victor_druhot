@@ -10,6 +10,10 @@ class DataService {
     return http.get("/actu", config);
   }
 
+  getMyProfile(user) {
+    return http.get("/profile", { params: { user }, headers: { Authorization: `Bearer ${token}` } });
+  }
+
   getAllComments(id) {
     return http.get(`/actu/${id}/comment`, config);
   }
