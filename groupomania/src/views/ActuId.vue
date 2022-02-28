@@ -36,6 +36,8 @@
         </div>
       </div>
     </div>
+
+    <router-link :to="`/actu/${actu.id}/comment`" class="link">Voir les commentaires </router-link>
   </div>
 </template>
 
