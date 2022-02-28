@@ -11,4 +11,5 @@ db.sequelize = sequelize;
 db.user = require("./User.js")(sequelize, Sequelize);
 db.actu = require("./Actu.js")(sequelize, Sequelize);
 db.comment = require("./Comment.js")(sequelize, Sequelize);
+db.likenumber = require("./Like.js")(sequelize, Sequelize);
 module.exports = db;

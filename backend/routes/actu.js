@@ -12,6 +12,7 @@ router.get("/actu/:id/comment", auth, multer, actuCtrl.getAllComments);
 router.get("/profile", auth, multer, actuCtrl.getMyProfile);
 router.delete("/actu/:id", auth, multer, actuCtrl.deleteArticle);
 router.put("/actu/:id", auth, multer, actuCtrl.updateArticle);
+router.post("/actu", auth, multer, actuCtrl.like);
 router.post("/pub", auth, multer, actuCtrl.publish);
 router.post("/images", auth, multer);
 router.post("/actu", auth, actuCtrl.comment);

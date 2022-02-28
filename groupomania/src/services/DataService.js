@@ -25,6 +25,10 @@ class DataService {
     return http.post("/sign", data, config);
   }
 
+  like(number) {
+    return http.post("/actu", number, config);
+  }
+
   log(data) {
     return http.post("/login", data);
   }

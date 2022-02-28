@@ -7,7 +7,7 @@
     <router-link to="/pub" class="publish">Publier une actu</router-link>
     <h4>Toute l'actualité</h4>
     <ul class="list">
-      <li class="list__item" v-for="item in actu" :key="item">
+      <li class="list__item" v-for="item in actu" :key="item" :data-id="`${item.id}`">
         <router-link :to="`/actu/${item.id}`" class="link">
           <h4>{{ item.titre }}</h4>
           <p class="userName">(Créé par {{ item.userName }})</p>
@@ -16,6 +16,7 @@
             <img :src="`${item.image}`" />
           </div>
         </router-link>
+        <button @click="like">J'aime</button><button @click="dislike">Je n'aime pas</button><br />
         <button @click="addComment">Ajouter un commentaire</button><br />
         <div class="comment" id="commentDiv">
           <input
@@ -61,7 +62,6 @@ export default {
     addComment(event) {
       let target = event.target;
       let commentDiv = target.nextSibling.nextSibling;
-
       commentDiv.style.display = "initial";
     },
     /* fonction to publish comment */
@@ -78,6 +78,23 @@ export default {
       DataService.pubComment(comment)
         .then((response) => {
           console.log(response.data);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    },
+    /* fonction to like comment */
+    like(event) {
+      let target = event.target;
+      let likeLi = target.closest("li");
+      let number = { value: 1, userName: sessionStorage.getItem("userName"), actuId: likeLi.dataset.id };
+      DataService.like(number)
+        .then((response) => {
+          console.log(response.data);
+        })
+        .then(() => {
+          target.disabled = "true";
+          target.style.color = "green";
         })
         .catch((e) => {
           console.log(e);

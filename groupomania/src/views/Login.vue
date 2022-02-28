@@ -10,6 +10,7 @@
       <label for="psw">Mot de passe</label>
       <input type="password" id="psw" required v-model="user.psw" name="psw" />
       <button @click="checkUser">Se connecter</button>
+      <p id="error"></p>
     </div>
     <router-link to="/sign" class="retour">Pas encore inscrit ?</router-link>
   </div>
@@ -51,6 +52,7 @@ export default {
         })
         .catch((e) => {
           console.log(e);
+          document.getElementById("error").innerHTML = e.response.data.message;
         });
     },
   },

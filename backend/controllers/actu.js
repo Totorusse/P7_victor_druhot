@@ -2,6 +2,7 @@
 const db = require("../models");
 const Actu = db.actu;
 const Comment = db.comment;
+const Likenumber = db.likenumber;
 
 exports.getAllArticles = (req, res, next) => {
   Actu.findAll()
@@ -47,24 +48,9 @@ exports.getMyProfile = (req, res, next) => {
     });
 };
 
-exports.publish = (req, res, next) => {
-  // Validate request
-  if (!req.body.titre || !req.body.description) {
-    res.status(400).send({
-      message: "Remplir le formulaire!",
-    });
-    return;
-  }
-  const publication = req.body.image
-    ? {
-        ...req.body,
-        image: `${req.protocol}://${req.get("host")}/images/${req.body.image}`,
-      }
-    : { ...req.body };
-
-  console.log(publication.image);
-  // Save pub in the database
-  Actu.create(publication)
+exports.like = (req, res, next) => {
+  console.log(req.body);
+  Likenumber.create(req.body)
     .then((data) => {
       res.status(200).send(data);
     })

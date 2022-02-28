@@ -46,7 +46,7 @@ exports.login = (req, res, next) => {
         .compare(req.body.psw, user.psw)
         .then((valid) => {
           if (!valid) {
-            return res.status(401).json({ error: "Mot de passe incorrect !" });
+            return res.status(401).send({ message: "Mot de passe erroné !" });
           }
           res.status(200).json({
             userId: user._id,
