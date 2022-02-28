@@ -12,6 +12,7 @@
       <label for="psw">Mot de passe</label>
       <input type="text" id="psw" required v-model="user.psw" name="psw" />
       <button @click="saveUser">S'inscrire</button>
+      <p id="error"></p>
       <router-link to="/login" class="retour">Déjà inscrit ?</router-link>
     </div>
   </div>
@@ -43,9 +44,10 @@ export default {
           this.user.id = response.data.id;
           console.log(response.data);
           sessionStorage.setItem("userName", response.data.email);
-          router.push("/actu");
+          router.push("/login");
         })
         .catch((e) => {
+          document.getElementById("error").innerHTML = e.response.data.message;
           console.log(e);
         });
     },

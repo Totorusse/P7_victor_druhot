@@ -28,9 +28,9 @@ exports.create = (req, res) => {
         res.send(data);
       });
     })
-    .catch((err) => {
+    .catch(() => {
       res.status(500).send({
-        message: err.message + " : Email already exists or wrong password",
+        message: "Utilisateur déjà existant !",
       });
     });
 };
