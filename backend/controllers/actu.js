@@ -5,6 +5,20 @@ const Comment = db.comment;
 const Likenumber = db.likenumber;
 
 exports.getAllArticles = (req, res, next) => {
+  Promise.all([Actu.findAll(), Comment.findAll()])
+    .then((actuAndComments) =>
+      res.send({
+        actuAndComments,
+      })
+    )
+    .catch((error) => {
+      res.status(400)({
+        error,
+      });
+    });
+};
+
+exports.test = (req, res, next) => {
   Actu.findAll()
     .then((allActu) => {
       res.status(200).send(allActu);

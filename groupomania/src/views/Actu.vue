@@ -30,6 +30,15 @@
           <button @click="pubComment">Publier votre commentaire</button><br />
         </div>
         <router-link :to="`/actu/${item.id}/comment`" class="link">Voir les commentaires </router-link>
+
+        <button @click="countComments">Commentaire</button>
+        <div class="commentsParent">
+          <div class="comments" id="comments" v-for="item2 in comment" :key="item2">
+            <div v-if="item2.pubId == item.id" class="commentsPar">
+              {{ item2.userName }} : {{ item2.text }}
+            </div>
+          </div>
+        </div>
       </li>
     </ul>
   </div>
@@ -46,12 +55,13 @@ export default {
       comment: {},
     };
   },
+
   /* display all news */
   mounted() {
     DataService.getAll()
       .then((response) => {
-        this.actu = response.data;
-        console.log(response.data);
+        this.actu = response.data.actuAndComments[0];
+        this.comment = response.data.actuAndComments[1];
       })
       .catch((e) => {
         console.log(e);
@@ -83,6 +93,17 @@ export default {
           console.log(e);
         });
     },
+    /* fonction to count et show comments */
+    countComments(comm) {
+      let comment = comm.target;
+      let comments = comment.nextElementSibling;
+      let numberComments = comments.getElementsByClassName("commentsPar").length;
+      comments.style.visibility = "initial";
+      comment.innerHTML = `Commentaires: ${numberComments}`;
+      console.log(comments);
+      console.log(numberComments);
+    },
+
     /* fonction to like comment */
     like(event) {
       let target = event.target;
@@ -137,5 +158,9 @@ a {
 
 .comment {
   display: none;
+}
+
+.commentsParent {
+  visibility: hidden;
 }
 </style>
