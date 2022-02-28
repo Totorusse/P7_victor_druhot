@@ -11,7 +11,6 @@
       <h4>{{ actu.titre }}</h4>
       <p class="userName">(Créé par {{ actu.userName }})</p>
       <p>{{ actu.description }}</p>
-      <p>{{ actu.image }}</p>
       <div v-if="actu.image">
         <img :src="`${actu.image}`" />
       </div>
