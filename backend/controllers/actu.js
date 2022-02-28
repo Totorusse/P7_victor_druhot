@@ -2,11 +2,6 @@
 const db = require("../models");
 const Actu = db.actu;
 const Comment = db.comment;
-const sequelize = require("sequelize");
-const Op = db.Sequelize.Op;
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const { user } = require("../models");
 
 exports.getAllArticles = (req, res, next) => {
   Actu.findAll()
