@@ -102,4 +102,10 @@ button:hover {
   background-color: white;
   color: blue;
 }
+
+/* big red error */
+#error {
+  color: red;
+  font-size: 24px;
+}
 </style>
