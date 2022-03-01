@@ -28,8 +28,8 @@ export default {
       comment: {},
     };
   },
-  /* display all news */
   mounted() {
+    /* display all news */
     const id = document.getElementById("routeNumber").innerHTML;
     DataService.getAllComments(id)
       .then((response) => {

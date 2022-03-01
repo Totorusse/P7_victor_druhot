@@ -56,8 +56,8 @@ export default {
     };
   },
 
-  /* display all news */
   mounted() {
+    /* display all news */
     DataService.getAll()
       .then((response) => {
         this.actu = response.data.actuAndComments[0];

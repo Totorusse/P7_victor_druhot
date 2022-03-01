@@ -40,13 +40,13 @@ exports.login = (req, res, next) => {
   User.findOne({ where: { email: req.body.email } })
     .then((user) => {
       if (!user) {
-        return res.status(500).send({ message: "Utilisateur non trouvé !" });
+        return res.status(500).send({ message: "Utilisateur ou mot de passe erroné !" });
       }
       bcrypt
         .compare(req.body.psw, user.psw)
         .then((valid) => {
           if (!valid) {
-            return res.status(401).send({ message: "Mot de passe erroné !" });
+            return res.status(401).send({ message: "Utilisateur ou mot de passe erroné !" });
           }
           res.status(200).json({
             userId: user._id,
