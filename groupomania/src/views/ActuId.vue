@@ -23,10 +23,12 @@
 
     <div class="block__update" id="update">
       <div class="update">
+
         <div>
           <label for="titre">Nouveau titre</label><br />
           <input type="text" class="form-control" id="titre" required v-model="actu.titre" name="titre" />
         </div>
+
         <div>
           <label for="description">Nouvelle description </label><br />
           <input type="text" id="description" required v-model="actu.description" name="description" /><br />
@@ -34,9 +36,11 @@
           <input type="file" id="image" name="image" @change="addImage" /><br />
           <button @click="updatePub">Mettre à jour</button>
         </div>
-      </div>
-    </div>
 
+      </div>
+
+    </div>
+    
     <router-link :to="`/actu/${actu.id}/comment`" class="link">Voir les commentaires </router-link>
   </div>
 </template>

@@ -29,9 +29,9 @@
           /><br />
           <button @click="pubComment">Publier votre commentaire</button><br />
         </div>
-        <router-link :to="`/actu/${item.id}/comment`" class="link">Voir les commentaires </router-link>
+        <router-link :to="`/actu/${item.id}/comment`" class="link">Commentaires </router-link>
 
-        <button @click="countComments">Commentaire</button>
+        <button @click="countComments">Voir les commentaires</button>
         <div class="commentsParent">
           <div class="comments" id="comments" v-for="item2 in comment" :key="item2">
             <div v-if="item2.pubId == item.id" class="commentsPar">
@@ -55,7 +55,6 @@ export default {
       comment: {},
     };
   },
-
   mounted() {
     /* display all news */
     DataService.getAll()

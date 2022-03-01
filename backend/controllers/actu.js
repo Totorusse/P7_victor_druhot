@@ -120,6 +120,32 @@ exports.deleteArticle = (req, res, next) => {
     });
 };
 
+exports.deleteComment = (req, res, next) => {
+  const id = req.body.dataDel.id;
+  const userName = req.body.dataDel.userName;
+
+  Comment.destroy({
+    // Validate request : need to be the creator to update
+    where: { id: id, userName: userName },
+  })
+    .then((data) => {
+      if (data) {
+        res.send({
+          message: "Comment was deleted successfully!",
+        });
+      } else {
+        res.send({
+          message: "Cannot delete Comment",
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Could not delete News with id=" + id,
+      });
+    });
+};
+
 exports.updateArticle = (req, res, next) => {
   const id = req.params.id;
   const userName = req.body.userName;
@@ -140,6 +166,34 @@ exports.updateArticle = (req, res, next) => {
         res.send({
           message: "News was updated successfully.",
           actuObject,
+        });
+      } else {
+        res.send({
+          message: `Cannot update News with id=${id}. Maybe News was not found or req.body is empty!`,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Error updating News with id=" + id,
+      });
+    });
+};
+
+exports.updateComment = (req, res, next) => {
+  const id = req.body.id;
+  const userName = req.body.userName;
+  const commentObject = { ...req.body };
+
+  Comment.update(commentObject, {
+    // Validate request : need to be the creator to update
+    where: { id: id, userName: userName },
+  })
+    .then((data) => {
+      if (data) {
+        res.send({
+          message: "News was updated successfully.",
+          commentObject,
         });
       } else {
         res.send({

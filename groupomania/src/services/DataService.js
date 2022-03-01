@@ -48,8 +48,17 @@ class DataService {
   update(id, data) {
     return http.put(`/actu/${id}`, data, config);
   }
+
+  updateComment(id, data) {
+    return http.put(`/actu/${id}/comment`, data, config);
+  }
+
   delete(id, dataDel) {
     return http.delete(`/actu/${id}`, { data: { dataDel }, headers: { Authorization: `Bearer ${token}` } });
+  }
+
+  deleteComment(dataDel) {
+    return http.delete("/comment", { data: { dataDel }, headers: { Authorization: `Bearer ${token}` } });
   }
 }
 export default new DataService();
