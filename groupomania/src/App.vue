@@ -16,9 +16,7 @@ export default {
   name: "App",
   /* function to hide buttons */
   mounted() {
-    console.log(router.currentRoute);
     if (router.currentRoute.value.name == "Home") {
-      console.log("ok");
       document.getElementById("hidden").style.display = "none";
     }
   },

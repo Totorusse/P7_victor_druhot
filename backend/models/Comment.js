@@ -12,6 +12,9 @@ module.exports = (sequelize, Sequelize) => {
     pubId: {
       type: Sequelize.INTEGER,
     },
+    date: {
+      type: Sequelize.INTEGER,
+    },
   });
   return Comment;
 };

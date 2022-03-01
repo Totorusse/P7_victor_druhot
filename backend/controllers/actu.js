@@ -5,7 +5,10 @@ const Comment = db.comment;
 const Likenumber = db.likenumber;
 
 exports.getAllArticles = (req, res, next) => {
-  Promise.all([Actu.findAll({ order: [["id", "DESC"]], limit: 10 }), Comment.findAll()])
+  Promise.all([
+    Actu.findAll({ order: [["id", "DESC"]], limit: 10 }),
+    Comment.findAll({ order: [["id", "DESC"]], limit: 10 }),
+  ])
     .then((actuAndComments) =>
       res.send({
         actuAndComments,
@@ -35,6 +38,8 @@ exports.getAllComments = (req, res, next) => {
     where: {
       pubId: req.params.id,
     },
+    order: [["id", "DESC"]],
+    limit: 10,
   })
     .then((comments) => {
       res.status(200).send(comments);
