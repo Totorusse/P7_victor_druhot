@@ -5,7 +5,7 @@ const Comment = db.comment;
 const Likenumber = db.likenumber;
 
 exports.getAllArticles = (req, res, next) => {
-  Promise.all([Actu.findAll(), Comment.findAll()])
+  Promise.all([Actu.findAll({ order: [["id", "DESC"]] }), Comment.findAll()])
     .then((actuAndComments) =>
       res.send({
         actuAndComments,
