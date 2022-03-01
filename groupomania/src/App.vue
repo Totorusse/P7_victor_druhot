@@ -1,9 +1,10 @@
 <template>
   <div id="nav">
     <img src="./assets/logo.png" />
-    <button @click="logOut">Se déconnecter</button>
-    <button @click="profile">Mon profil</button>
-
+    <div id="hidden">
+      <button @click="logOut">Se déconnecter</button>
+      <button @click="profile">Mon profil</button>
+    </div>
     <router-view />
   </div>
 </template>
@@ -13,6 +14,14 @@ import router from "./router/index";
 
 export default {
   name: "App",
+  /* function to hide buttons */
+  mounted() {
+    console.log(router.currentRoute);
+    if (router.currentRoute.value.name == "Home") {
+      console.log("ok");
+      document.getElementById("hidden").style.display = "none";
+    }
+  },
   methods: {
     delayedFunction() {
       location.reload();
@@ -70,5 +79,9 @@ a:hover {
 /* Set  size for the images */
 img {
   width: 50%;
+}
+
+#button__hidden {
+  display: initial;
 }
 </style>

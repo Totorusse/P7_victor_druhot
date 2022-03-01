@@ -6,8 +6,17 @@
 </template>
 
 <script>
+import router from "../router/index";
+
 export default {
   name: "accueil",
+  //fonction to hide buttons
+  mounted() {
+    if (router.currentRoute.value.name == "Home") {
+      console.log("ok");
+      document.getElementById("hidden").style.display = "none";
+    }
+  },
 };
 </script>
 

@@ -31,6 +31,13 @@ export default {
       },
     };
   },
+  //fonction to hide buttons
+  mounted() {
+    if (router.currentRoute.value.name == "login") {
+      console.log("ok");
+      document.getElementById("hidden").style.display = "none";
+    }
+  },
   methods: {
     delayedFunction() {
       location.reload();
@@ -43,7 +50,6 @@ export default {
       DataService.log(data)
         .then((response) => {
           if (response.data.token) {
-            console.log(response.data);
             sessionStorage.setItem("token", response.data.token);
             sessionStorage.setItem("userName", data.email);
             router.push("/actu");
