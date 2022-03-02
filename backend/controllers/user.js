@@ -1,5 +1,6 @@
 const db = require("../models");
 const User = db.user;
+const Actu = db.actu;
 const sequelize = require("sequelize");
 const Op = db.Sequelize.Op;
 const bcrypt = require("bcrypt");
@@ -56,4 +57,33 @@ exports.login = (req, res, next) => {
         .catch((error) => res.status(500).json({ error }));
     })
     .catch((error) => res.status(500).json({ error }));
+};
+
+exports.deleteProfile = (req, res, next) => {
+  const user = req.body.user;
+
+  Promise.all([
+    User.destroy({
+      where: { email: user },
+    }),
+    Actu.destroy({
+      where: { userName: user },
+    }),
+  ])
+    .then((data) => {
+      if (data) {
+        res.send({
+          message: "User was deleted successfully!",
+        });
+      } else {
+        res.send({
+          message: "Cannot delete User",
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Could not delete User ",
+      });
+    });
 };

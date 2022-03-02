@@ -49,7 +49,7 @@ export default {
       if (confirm("Voulez-vous vraiment supprimer votre compte ?") == true) {
         console.log("ok");
         let user = sessionStorage.getItem("userName");
-        DataService.DeleteAccount(user)
+        DataService.deleteAccount(user)
           .then((response) => {
             console.log(response);
           })
