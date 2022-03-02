@@ -10,7 +10,9 @@
     <ul class="list">
       <li class="list__item" v-for="item in comment" :key="item" :data-id="`${item.id}`">
         <h4>{{ item.text }}</h4>
-        <p class="userName">(Créé par {{ item.userName }} le {{ item.createdAt }})</p>
+        <p class="userName">
+          (Créé par {{ item.userName }} le <span class="date">{{ item.createdAt }})</span>
+        </p>
         <p>{{ item.description }}</p>
 
         <div class="buttons" v-if="item.userName == userSession">
@@ -49,8 +51,14 @@ export default {
     DataService.getAllComments(id)
       .then((response) => {
         this.comment = response.data;
-        console.log(response.data);
       })
+      .then(() => {
+        /* keep only date */
+        for (let i in this.comment) {
+          this.comment[i].createdAt = this.comment[i].createdAt.split("T").shift();
+        }
+      })
+
       .catch((e) => {
         console.log(e);
       });

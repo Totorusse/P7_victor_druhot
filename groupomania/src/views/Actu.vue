@@ -10,7 +10,9 @@
       <li class="list__item" v-for="item in actu" :key="item" :data-id="`${item.id}`">
         <router-link :to="`/actu/${item.id}`" class="link">
           <h4>{{ item.titre }}</h4>
-          <p class="userName">(Créé par {{ item.userName }} le {{ item.createdAt }})</p>
+          <p class="userName">
+            (Créé par {{ item.userName }} le <span class="date">{{ item.createdAt }})</span>
+          </p>
           <p>{{ item.description }}</p>
           <div v-if="item.image">
             <img :src="`${item.image}`" />
@@ -56,12 +58,17 @@ export default {
     };
   },
   mounted() {
-    console.log(this.actu[0]);
     /* display all news */
     DataService.getAll()
       .then((response) => {
         this.actu = response.data.actuAndComments[0];
         this.comment = response.data.actuAndComments[1];
+      })
+      .then(() => {
+        /* keep only date */
+        for (let i in this.actu) {
+          this.actu[i].createdAt = this.actu[i].createdAt.split("T").shift();
+        }
       })
       .catch((e) => {
         console.log(e);

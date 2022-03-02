@@ -9,7 +9,7 @@
     <router-link to="/actu" class="publish">Retour à l'actu</router-link>
     <div class="bloc__actu">
       <h4>{{ actu.titre }}</h4>
-      <p class="userName">(Créé par {{ actu.userName }})</p>
+      <p class="userName">(Créé par {{ actu.userName }} le {{ actu.createdAt }})</p>
       <p>{{ actu.description }}</p>
       <div v-if="actu.image">
         <img :src="`${actu.image}`" />
@@ -23,7 +23,6 @@
 
     <div class="block__update" id="update">
       <div class="update">
-
         <div>
           <label for="titre">Nouveau titre</label><br />
           <input type="text" class="form-control" id="titre" required v-model="actu.titre" name="titre" />
@@ -36,11 +35,9 @@
           <input type="file" id="image" name="image" @change="addImage" /><br />
           <button @click="updatePub">Mettre à jour</button>
         </div>
-
       </div>
-
     </div>
-    
+
     <router-link :to="`/actu/${actu.id}/comment`" class="link">Voir les commentaires </router-link>
   </div>
 </template>
@@ -64,6 +61,11 @@ export default {
         this.actu = response.data;
         console.log(response.data);
       })
+      .then(() => {
+        /* keep only date */
+        this.actu.createdAt = this.actu.createdAt.split("T").shift();
+      })
+
       .catch((e) => {
         console.log(e);
       });
