@@ -107,7 +107,6 @@ export default {
     countComments(comm) {
       let comment = comm.target;
       let comments = comment.nextElementSibling;
-      console.log(comments);
       let numberComments = comments.getElementsByClassName("commentsPar").length;
       comment.innerHTML = `Nombre de commentaire: ${numberComments}`;
     },
@@ -131,8 +130,6 @@ export default {
     },
   },
 };
-
-console.log(document.getElementsByClassName("commentsPar"));
 </script>
 
 <style scoped>
