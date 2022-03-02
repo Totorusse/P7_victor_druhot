@@ -10,7 +10,7 @@
     </div>
     <div>
       <label for="psw">Mot de passe</label>
-      <input type="text" id="psw" required v-model="user.psw" name="psw" />
+      <input type="password" id="psw" required v-model="user.psw" name="psw" />
       <button @click="saveUser">S'inscrire</button>
       <p id="error"></p>
       <router-link to="/login" class="retour">Déjà inscrit ?</router-link>
