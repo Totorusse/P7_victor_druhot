@@ -24,6 +24,7 @@
 
 <script>
 import DataService from "../services/DataService";
+import router from "../router/index";
 
 export default {
   name: "Actu",
@@ -44,14 +45,22 @@ export default {
       });
   },
   methods: {
+    /* fonction to reload page*/
+    delayedFunction() {
+      location.reload();
+    },
     /* fonction to delete account*/
     DelAccount() {
       if (confirm("Voulez-vous vraiment supprimer votre compte ?") == true) {
-        console.log("ok");
         let user = sessionStorage.getItem("userName");
         DataService.deleteAccount(user)
           .then((response) => {
             console.log(response);
+          })
+          .then(() => {
+            sessionStorage.setItem("token", "");
+            router.push("/");
+            window.setTimeout(this.delayedFunction, 500);
           })
           .catch((e) => {
             console.log(e);
