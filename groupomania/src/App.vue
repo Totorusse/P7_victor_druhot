@@ -3,7 +3,7 @@
     <img src="./assets/logo.png" />
     <div id="hidden">
       <button @click="logOut">Se déconnecter</button>
-      <button @click="profile">Mon profil</button>
+      <button @click="profile">Mon profil ({{ userSession }})</button>
     </div>
     <router-view />
   </div>
@@ -14,6 +14,12 @@ import router from "./router/index";
 
 export default {
   name: "App",
+  data() {
+    return {
+      userSession: sessionStorage.getItem("userName"),
+    };
+  },
+
   /* function to hide buttons */
   mounted() {
     if (router.currentRoute.value.name == "Home") {
