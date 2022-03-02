@@ -31,9 +31,9 @@
           /><br />
           <button @click="pubComment">Publier votre commentaire</button><br />
         </div>
-        <router-link :to="`/actu/${item.id}/comment`" class="link">Commentaires </router-link>
+        <router-link :to="`/actu/${item.id}/comment`" class="link">Tous les commentaires </router-link>
 
-        <button @click="countComments">Voir les commentaires</button>
+        <button @click="countComments">Voir le dernier commentaire</button>
         <div class="commentsParent">
           <div class="comments" id="comments" v-for="item2 in comment" :key="item2">
             <div v-if="item2.pubId == item.id" class="commentsPar">
@@ -68,6 +68,9 @@ export default {
         /* keep only date */
         for (let i in this.actu) {
           this.actu[i].createdAt = this.actu[i].createdAt.split("T").shift();
+        }
+        for (let j in this.comment) {
+          this.comment[j].createdAt = this.comment[j].createdAt.split("T").shift();
         }
       })
       .catch((e) => {
@@ -107,8 +110,6 @@ export default {
       let numberComments = comments.getElementsByClassName("commentsPar").length;
       comments.style.visibility = "initial";
       comment.innerHTML = `Commentaires: ${numberComments}`;
-      console.log(comments);
-      console.log(numberComments);
     },
 
     /* fonction to like comment */
