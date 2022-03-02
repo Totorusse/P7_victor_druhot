@@ -21,18 +21,6 @@ exports.getAllArticles = (req, res, next) => {
     });
 };
 
-exports.test = (req, res, next) => {
-  Actu.findAll()
-    .then((allActu) => {
-      res.status(200).send(allActu);
-    })
-    .catch((error) => {
-      res.status(400)({
-        error,
-      });
-    });
-};
-
 exports.getAllComments = (req, res, next) => {
   Comment.findAll({
     where: {
@@ -102,27 +90,51 @@ exports.getOneArticle = (req, res, next) => {
 exports.deleteArticle = (req, res, next) => {
   const id = req.params.id;
   const userName = req.body.dataDel.userName;
-  console.log(userName);
-  Actu.destroy({
-    // Validate request : need to be the creator to update
-    where: { id: id, userName: userName },
-  })
-    .then((data) => {
-      if (data) {
-        res.send({
-          message: "News was deleted successfully!",
-        });
-      } else {
-        res.send({
-          message: `Cannot delete News with id=${id}. Maybe News was not found!`,
-        });
-      }
+
+  if (userName == "admin") {
+    console.log("ok");
+    Actu.destroy({
+      // Validate request : need to be the creator to update
+      where: { id: id },
     })
-    .catch((err) => {
-      res.status(500).send({
-        message: "Could not delete News with id=" + id,
+      .then((data) => {
+        if (data) {
+          res.send({
+            message: "News was deleted successfully!",
+          });
+        } else {
+          res.send({
+            message: `Cannot delete News with id=${id}. Maybe News was not found!`,
+          });
+        }
+      })
+      .catch((err) => {
+        res.status(500).send({
+          message: "Could not delete News with id=" + id,
+        });
       });
-    });
+  } else {
+    Actu.destroy({
+      // Validate request : need to be the creator to update
+      where: { id: id, userName: userName },
+    })
+      .then((data) => {
+        if (data) {
+          res.send({
+            message: "News was deleted successfully!",
+          });
+        } else {
+          res.send({
+            message: `Cannot delete News with id=${id}. Maybe News was not found!`,
+          });
+        }
+      })
+      .catch((err) => {
+        res.status(500).send({
+          message: "Could not delete News with id=" + id,
+        });
+      });
+  }
 };
 
 exports.deleteComment = (req, res, next) => {
@@ -150,7 +162,6 @@ exports.deleteComment = (req, res, next) => {
       });
     });
 };
-
 
 exports.updateArticle = (req, res, next) => {
   const id = req.params.id;

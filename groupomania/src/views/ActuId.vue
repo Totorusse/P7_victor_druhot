@@ -15,7 +15,7 @@
         <img :src="`${actu.image}`" />
       </div>
 
-      <div class="buttons" v-if="actu.userName == userSession">
+      <div class="buttons" v-if="actu.userName == userSession || 'admin'">
         <button @click="deletePub">Supprimer</button>
         <button @click="modifyPub">Modifier</button>
       </div>

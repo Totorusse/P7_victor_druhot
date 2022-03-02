@@ -1,6 +1,7 @@
 const db = require("../models");
 const User = db.user;
 const Actu = db.actu;
+const Comment = db.comment;
 const sequelize = require("sequelize");
 const Op = db.Sequelize.Op;
 const bcrypt = require("bcrypt");
@@ -67,6 +68,9 @@ exports.deleteProfile = (req, res, next) => {
       where: { email: user },
     }),
     Actu.destroy({
+      where: { userName: user },
+    }),
+    Comment.destroy({
       where: { userName: user },
     }),
   ])
