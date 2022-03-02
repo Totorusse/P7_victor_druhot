@@ -10,7 +10,7 @@
       <li class="list__item" v-for="item in actu" :key="item" :data-id="`${item.id}`">
         <router-link :to="`/actu/${item.id}`" class="link">
           <h4>{{ item.titre }}</h4>
-          <p class="userName">(Créé par {{ item.userName }} le {{ item.date }})</p>
+          <p class="userName">(Créé par {{ item.userName }} le {{ item.createdAt }})</p>
           <p>{{ item.description }}</p>
           <div v-if="item.image">
             <img :src="`${item.image}`" />
@@ -35,7 +35,7 @@
         <div class="commentsParent">
           <div class="comments" id="comments" v-for="item2 in comment" :key="item2">
             <div v-if="item2.pubId == item.id" class="commentsPar">
-              {{ item2.userName }} (le {{ item2.date }}): {{ item2.text }}
+              {{ item2.userName }} (le {{ item2.createdAt }}): {{ item2.text }}
             </div>
           </div>
         </div>

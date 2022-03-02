@@ -60,5 +60,9 @@ class DataService {
   deleteComment(dataDel) {
     return http.delete("/comment", { data: { dataDel }, headers: { Authorization: `Bearer ${token}` } });
   }
+
+  deleteAccount(user) {
+    return http.delete("/profile", { data: { user }, headers: { Authorization: `Bearer ${token}` } });
+  }
 }
 export default new DataService();

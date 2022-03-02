@@ -10,7 +10,7 @@
     <ul class="list">
       <li class="list__item" v-for="item in comment" :key="item" :data-id="`${item.id}`">
         <h4>{{ item.text }}</h4>
-        <p class="userName">(Créé par {{ item.userName }} le {{ item.date }})</p>
+        <p class="userName">(Créé par {{ item.userName }} le {{ item.createdAt }})</p>
         <p>{{ item.description }}</p>
 
         <div class="buttons" v-if="item.userName == userSession">

@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1>Mon profil</h1>
+    <button @click="DelAccount">Supprimer mon compte</button>
     <hr />
   </div>
   <div>
@@ -41,6 +42,22 @@ export default {
       .catch((e) => {
         console.log(e);
       });
+  },
+  methods: {
+    /* fonction to delete account*/
+    DelAccount() {
+      if (confirm("Voulez-vous vraiment supprimer votre compte ?") == true) {
+        console.log("ok");
+        let user = sessionStorage.getItem("userName");
+        DataService.DeleteAccount(user)
+          .then((response) => {
+            console.log(response);
+          })
+          .catch((e) => {
+            console.log(e);
+          });
+      }
+    },
   },
 };
 </script>
