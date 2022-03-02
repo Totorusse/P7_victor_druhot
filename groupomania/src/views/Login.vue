@@ -34,7 +34,6 @@ export default {
   //fonction to hide buttons
   mounted() {
     if (router.currentRoute.value.name == "login") {
-      console.log("ok");
       document.getElementById("hidden").style.display = "none";
     }
   },
