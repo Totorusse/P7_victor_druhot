@@ -7,10 +7,12 @@
     <div>
       <label for="email">Nom d'utilisateur</label>
       <input type="text" id="email" required v-model="user.email" name="email" />
+      <p class="errorMessage"></p>
     </div>
     <div>
       <label for="psw">Mot de passe</label>
       <input type="password" id="psw" required v-model="user.psw" name="psw" />
+      <p class="errorMessage"></p>
       <button @click="saveUser">S'inscrire</button>
       <p id="error"></p>
       <router-link to="/login" class="retour">Déjà inscrit ?</router-link>
@@ -51,12 +53,39 @@ export default {
           console.log(e);
         });
     },
+    //fonction to validate inputs
+    validation(champ) {
+      let target = champ.target;
+      let valeur = target.value;
+      let titreChamp = target.id;
+      let messageErreur = target.nextElementSibling;
+      const masques = {
+        email: /^[a-z0-9_-]{4,15}$/g,
+        psw: /^([a-z0-9_\-#?!@$ %^&*]).{3,}$/g,
+      };
+      const erreur = {
+        email: "Veuillez saisir un champ correct (minimum 4 caractères alphanumérique)",
+        psw: "Veuillez saisir un champ correct (minimum 4 caractères)",
+      };
+      for (let i in masques) {
+        if (i == titreChamp) {
+          if (valeur.match(masques[i]) != null) {
+            messageErreur.innerHTML = "";
+          } else {
+            valeur = "";
+            messageErreur.innerHTML = erreur[i];
+          }
+        }
+      }
+    },
   },
   //fonction to hide buttons
   mounted() {
     if (router.currentRoute.value.name == "sign") {
       document.getElementById("hidden").style.display = "none";
     }
+    let coordonnees = document.querySelectorAll("input");
+    coordonnees.forEach((x) => x.addEventListener("change", this.validation));
   },
 };
 </script>
