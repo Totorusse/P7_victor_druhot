@@ -1,12 +1,14 @@
 <template>
-  <div id="nav">
-    <img src="./assets/logo.png" />
-    <div id="hidden">
-      <button @click="logOut">Se déconnecter</button>
-      <button @click="profile">Mon profil ({{ userSession }})</button>
+  <div id="main">
+    <div id="nav">
+      <img id="logo" src="./assets/logo.png" />
+      <div id="hidden">
+        <button @click="profile" class="nav__button">Mon profil ({{ userSession }})</button><br />
+        <button @click="logOut" class="nav__button">Se déconnecter</button>
+      </div>
     </div>
-    <router-view />
   </div>
+  <div id="router"><router-view /></div>
 </template>
 
 <script>
@@ -49,9 +51,10 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  max-width: 900px;
+  color: white;
+  background-color: #122542;
   margin: auto;
+  max-width: 900px;
 }
 
 /* Set a style for  links */
@@ -75,6 +78,26 @@ a:hover {
   opacity: 0.8;
 }
 
+/* Set a style for  buttons */
+/* Set a style for  buttons */
+button {
+  width: 100%;
+  padding: 12px 12px;
+  margin: 8px 8px 0 0;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  text-decoration: none;
+  background-color: #ffd7d7;
+  color: black;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+body {
+  background-color: #122542;
+}
+
 /* Add padding to containers */
 .container {
   padding: 16px;
@@ -82,10 +105,52 @@ a:hover {
 
 /* Set  size for the images */
 img {
-  width: 50%;
+  width: 150px;
 }
 
-#button__hidden {
-  display: initial;
+#hidden {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 25%;
+}
+#logo {
+  width: 50%;
+  height: 100%;
+}
+
+#nav {
+  position: fixed;
+  top: 0;
+  background-color: white;
+  z-index: 1;
+  width: 100%;
+  max-width: 900px;
+  height: 80px;
+  padding-bottom: 20px;
+}
+
+.nav__button {
+  position: relative;
+  right: 10px;
+  max-width: 125px;
+}
+#router {
+  margin-top: 120px;
+}
+
+@media screen and (max-width: 600px) {
+  #logo {
+    position: absolute;
+    left: 15px;
+    top: 25px;
+    height: 80px;
+  }
+  #nav {
+    height: 125px;
+  }
+  #router {
+    margin-top: 155px;
+  }
 }
 </style>

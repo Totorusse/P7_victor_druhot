@@ -1,8 +1,6 @@
 <template>
-  <div>
-    <h1>Actu</h1>
-    <hr />
-  </div>
+  <h1>Actu</h1>
+  <hr />
   <div>
     <router-link to="/pub" class="publish">Publier une actu</router-link>
     <h4>Toute l'actualité</h4>
@@ -127,6 +125,7 @@ export default {
       let target = event.target;
       let likeLi = target.closest("li");
       let number = { value: 1, userName: sessionStorage.getItem("userName"), actuId: likeLi.dataset.id };
+
       DataService.like(number)
         .then((response) => {
           console.log(response.data);
