@@ -32,7 +32,7 @@
           <button @click="pubComment">Publier votre commentaire</button><br />
         </div>
 
-        <router-link :to="`/actu/${item.id}/comment`" class="link" id="link">
+        <router-link :to="`/actu/${item.id}`" class="link" id="link">
           <button @click="countComments" class="numberComment"></button>
           <div class="commentsParent">
             <div class="comments" id="comments" v-for="item2 in comment" :key="item2">

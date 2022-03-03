@@ -70,7 +70,16 @@ exports.like = (req, res, next) => {
 
 exports.getOneArticle = (req, res, next) => {
   const id = req.params.id;
-  Actu.findByPk(id)
+  Promise.all([
+    Actu.findByPk(id),
+    Comment.findAll({
+      where: {
+        pubId: id,
+      },
+      order: [["id", "DESC"]],
+      limit: 10,
+    }),
+  ])
     .then((data) => {
       if (data) {
         res.send(data);

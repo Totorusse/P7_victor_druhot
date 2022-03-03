@@ -58,7 +58,6 @@ export default {
           this.comment[i].createdAt = this.comment[i].createdAt.split("T").shift();
         }
       })
-
       .catch((e) => {
         console.log(e);
       });

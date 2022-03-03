@@ -38,7 +38,26 @@
       </div>
     </div>
 
-    <router-link :to="`/actu/${actu.id}/comment`" class="link">Voir les commentaires </router-link>
+    <ul class="comment__list">
+      <li class="comment__list__item" v-for="item in comments" :key="item">
+        <router-link :to="`/actu/${actu.id}/comment`" class="link">
+          <h4>{{ item.text }}</h4>
+          <p class="userName">
+            (Créé par {{ item.userName }} le <span class="date">{{ item.createdAt }})</span>
+          </p>
+
+          <div class="block__update" id="update">
+            <div class="update">
+              <div>
+                <label for="description">Nouveau commentaire </label><br />
+                <input type="text" id="description" required v-model="comment" name="description" />
+                <button @click="updateComment">Mettre à jour</button>
+              </div>
+            </div>
+          </div></router-link
+        >
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -51,6 +70,7 @@ export default {
   data() {
     return {
       actu: {},
+      comments: {},
       userSession: sessionStorage.getItem("userName"),
     };
   },
@@ -58,14 +78,17 @@ export default {
     const id = document.getElementById("routeNumber").innerHTML;
     DataService.get(id)
       .then((response) => {
-        this.actu = response.data;
+        this.actu = response.data[0];
+        this.comments = response.data[1];
         console.log(response.data);
       })
       .then(() => {
-        /* keep only date */
+        /* Change date format */
         this.actu.createdAt = this.actu.createdAt.split("T").shift();
+        for (let i in this.comments) {
+          this.comments[i].createdAt = this.comments[i].createdAt.split("T").shift();
+        }
       })
-
       .catch((e) => {
         console.log(e);
       });
@@ -155,7 +178,7 @@ export default {
   background-color: dodgerblue;
 }
 
-.list {
+.comment__list__item {
   list-style-type: none;
   padding: 0;
   margin: 0;
