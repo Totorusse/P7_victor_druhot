@@ -92,9 +92,7 @@ exports.deleteArticle = (req, res, next) => {
   const userName = req.body.dataDel.userName;
 
   if (userName == "admin") {
-    console.log("ok");
     Actu.destroy({
-      // Validate request : need to be the creator to update
       where: { id: id },
     })
       .then((data) => {
@@ -141,26 +139,48 @@ exports.deleteComment = (req, res, next) => {
   const id = req.body.dataDel.id;
   const userName = req.body.dataDel.userName;
 
-  Comment.destroy({
-    // Validate request : need to be the creator to update
-    where: { id: id, userName: userName },
-  })
-    .then((data) => {
-      if (data) {
-        res.send({
-          message: "Comment was deleted successfully!",
-        });
-      } else {
-        res.send({
-          message: "Cannot delete Comment",
-        });
-      }
+  if (userName == "admin") {
+    Comment.destroy({
+      where: { id: id },
     })
-    .catch((err) => {
-      res.status(500).send({
-        message: "Could not delete News with id=" + id,
+      .then((data) => {
+        if (data) {
+          res.send({
+            message: "Comment was deleted successfully!",
+          });
+        } else {
+          res.send({
+            message: "Cannot delete Comment",
+          });
+        }
+      })
+      .catch((err) => {
+        res.status(500).send({
+          message: "Could not delete News with id=" + id,
+        });
       });
-    });
+  } else {
+    Comment.destroy({
+      // Validate request : need to be the creator to update
+      where: { id: id, userName: userName },
+    })
+      .then((data) => {
+        if (data) {
+          res.send({
+            message: "Comment was deleted successfully!",
+          });
+        } else {
+          res.send({
+            message: "Cannot delete Comment",
+          });
+        }
+      })
+      .catch((err) => {
+        res.status(500).send({
+          message: "Could not delete News with id=" + id,
+        });
+      });
+  }
 };
 
 exports.updateArticle = (req, res, next) => {

@@ -15,7 +15,7 @@
         </p>
         <p>{{ item.description }}</p>
 
-        <div class="buttons" v-if="item.userName == userSession">
+        <div class="buttons" v-if="item.userName == userSession || userSession == 'admin'">
           <button @click="deleteComment">Supprimer</button>
           <button @click="modifyComment">Modifier</button>
         </div>

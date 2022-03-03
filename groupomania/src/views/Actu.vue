@@ -40,7 +40,7 @@
             </div>
           </div>
         </div>
-        <router-link :to="`/actu/${item.id}/comment`" class="link">Voir les commentaires </router-link>
+        <router-link :to="`/actu/${item.id}/comment`" class="link" id="link">Voir les commentaires </router-link>
       </li>
     </ul>
   </div>
