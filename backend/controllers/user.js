@@ -60,6 +60,7 @@ exports.login = (req, res, next) => {
     .catch((error) => res.status(500).json({ error }));
 };
 
+// Delete user from the database.
 exports.deleteProfile = (req, res, next) => {
   const user = req.body.user;
 

@@ -32,15 +32,16 @@
           <button @click="pubComment">Publier votre commentaire</button><br />
         </div>
 
-        <button @click="countComments">Nombre de commentaires</button>
-        <div class="commentsParent">
-          <div class="comments" id="comments" v-for="item2 in comment" :key="item2">
-            <div v-if="item2.pubId == item.id" class="commentsPar">
-              {{ item2.userName }} (le {{ item2.createdAt }}): {{ item2.text }}
+        <router-link :to="`/actu/${item.id}/comment`" class="link" id="link">
+          <button @click="countComments" class="numberComment"></button>
+          <div class="commentsParent">
+            <div class="comments" id="comments" v-for="item2 in comment" :key="item2">
+              <p v-if="item2.pubId == item.id" class="commentsPar">
+                {{ item2.userName }} (le {{ item2.createdAt }}): {{ item2.text }}
+              </p>
             </div>
           </div>
-        </div>
-        <router-link :to="`/actu/${item.id}/comment`" class="link" id="link">Voir les commentaires </router-link>
+        </router-link>
       </li>
     </ul>
   </div>
@@ -57,6 +58,7 @@ export default {
       comment: {},
     };
   },
+
   mounted() {
     /* display all news */
     DataService.getAll()
@@ -73,10 +75,15 @@ export default {
           this.comment[j].createdAt = this.comment[j].createdAt.split("T").shift();
         }
       })
+      .then(() => {
+        /* count number of comments */
+        this.countComments();
+      })
       .catch((e) => {
         console.log(e);
       });
   },
+
   methods: {
     /* fonction to show comment input*/
     addComment(event) {
@@ -98,17 +105,21 @@ export default {
       DataService.pubComment(comment)
         .then((response) => {
           console.log(response.data);
+          location.reload();
         })
         .catch((e) => {
           console.log(e);
         });
     },
     /* fonction to count et show comments */
-    countComments(comm) {
-      let comment = comm.target;
-      let comments = comment.nextElementSibling;
-      let numberComments = comments.getElementsByClassName("commentsPar").length;
-      comment.innerHTML = `Nombre de commentaire: ${numberComments}`;
+    countComments() {
+      let numberComments = document.getElementsByClassName("commentsParent");
+      let length = numberComments.length;
+      let numberInner = document.getElementsByClassName("numberComment");
+      for (let i = 0; i < length; i++) {
+        let number = numberComments[i].querySelectorAll("p").length;
+        numberInner[i].innerHTML = `Voir les commentaires : ${number}`;
+      }
     },
 
     /* fonction to like comment */
