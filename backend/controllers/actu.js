@@ -194,27 +194,50 @@ exports.updateArticle = (req, res, next) => {
     : { ...req.body };
   console.log(actuObject);
 
-  Actu.update(actuObject, {
-    // Validate request : need to be the creator to update
-    where: { id: id, userName: userName },
-  })
-    .then((data) => {
-      if (data) {
-        res.send({
-          message: "News was updated successfully.",
-          actuObject,
-        });
-      } else {
-        res.send({
-          message: `Cannot update News with id=${id}. Maybe News was not found or req.body is empty!`,
-        });
-      }
+  if (userName == "admin") {
+    Actu.update(actuObject, {
+      where: { id: id },
     })
-    .catch((err) => {
-      res.status(500).send({
-        message: "Error updating News with id=" + id,
+      .then((data) => {
+        if (data) {
+          res.send({
+            message: "News was updated successfully.",
+            actuObject,
+          });
+        } else {
+          res.send({
+            message: `Cannot update News with id=${id}. Maybe News was not found or req.body is empty!`,
+          });
+        }
+      })
+      .catch((err) => {
+        res.status(500).send({
+          message: "Error updating News with id=" + id,
+        });
       });
-    });
+  } else {
+    Actu.update(actuObject, {
+      // Validate request : need to be the creator to update
+      where: { id: id, userName: userName },
+    })
+      .then((data) => {
+        if (data) {
+          res.send({
+            message: "News was updated successfully.",
+            actuObject,
+          });
+        } else {
+          res.send({
+            message: `Cannot update News with id=${id}. Maybe News was not found or req.body is empty!`,
+          });
+        }
+      })
+      .catch((err) => {
+        res.status(500).send({
+          message: "Error updating News with id=" + id,
+        });
+      });
+  }
 };
 
 exports.updateComment = (req, res, next) => {
@@ -222,27 +245,50 @@ exports.updateComment = (req, res, next) => {
   const userName = req.body.userName;
   const commentObject = { ...req.body };
 
-  Comment.update(commentObject, {
-    // Validate request : need to be the creator to update
-    where: { id: id, userName: userName },
-  })
-    .then((data) => {
-      if (data) {
-        res.send({
-          message: "News was updated successfully.",
-          commentObject,
-        });
-      } else {
-        res.send({
-          message: `Cannot update News with id=${id}. Maybe News was not found or req.body is empty!`,
-        });
-      }
+  if (userName == "admin") {
+    Comment.update(commentObject, {
+      where: { id: id },
     })
-    .catch((err) => {
-      res.status(500).send({
-        message: "Error updating News with id=" + id,
+      .then((data) => {
+        if (data) {
+          res.send({
+            message: "News was updated successfully.",
+            commentObject,
+          });
+        } else {
+          res.send({
+            message: `Cannot update News with id=${id}. Maybe News was not found or req.body is empty!`,
+          });
+        }
+      })
+      .catch((err) => {
+        res.status(500).send({
+          message: "Error updating News with id=" + id,
+        });
       });
-    });
+  } else {
+    Comment.update(commentObject, {
+      // Validate request : need to be the creator to update
+      where: { id: id, userName: userName },
+    })
+      .then((data) => {
+        if (data) {
+          res.send({
+            message: "News was updated successfully.",
+            commentObject,
+          });
+        } else {
+          res.send({
+            message: `Cannot update News with id=${id}. Maybe News was not found or req.body is empty!`,
+          });
+        }
+      })
+      .catch((err) => {
+        res.status(500).send({
+          message: "Error updating News with id=" + id,
+        });
+      });
+  }
 };
 
 exports.publish = (req, res, next) => {
