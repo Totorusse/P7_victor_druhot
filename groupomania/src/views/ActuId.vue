@@ -28,7 +28,7 @@
         </div>
 
         <div>
-          <label for="description">Nouvelle description </label><br />
+          <label for="description">Nouvelle description</label><br />
           <input type="text" id="description" required v-model="actu.description" name="description" /><br />
           <label for="image">Modifier l'image : </label>
           <input type="file" id="image" name="image" @change="addImage" /><br />
@@ -200,6 +200,13 @@ a {
   border-radius: 8px;
 }
 
+#description {
+  width: 80%;
+}
+
+#titre {
+  width: 30%;
+}
 .update {
   margin-top: 15px;
   padding: 10px;

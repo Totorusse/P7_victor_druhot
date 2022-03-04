@@ -148,6 +148,10 @@ img {
 }
 
 @media screen and (max-width: 600px) {
+  button {
+    width: 55%;
+  }
+
   #hidden {
     position: absolute;
     top: px;

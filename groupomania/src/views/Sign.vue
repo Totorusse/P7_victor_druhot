@@ -60,8 +60,8 @@ export default {
       let titreChamp = target.id;
       let messageErreur = target.nextElementSibling;
       const masques = {
-        email: /^[a-z0-9_-]{4,15}$/g,
-        psw: /^([a-z0-9_\-#?!@$ %^&*]).{3,}$/g,
+        email: /^[a-zA-Z0-9_-]{4,15}$/g,
+        psw: /^([a-zA-Z0-9_\-#?!@$ %^&*]).{3,}$/g,
       };
       const erreur = {
         email: "Veuillez saisir un champ correct (minimum 4 caractères alphanumérique)",

@@ -118,7 +118,6 @@ export default {
         numberInner[i].innerHTML = `Voir les commentaires : ${number}`;
       }
     },
-
   },
 };
 </script>
@@ -144,7 +143,8 @@ a {
 }
 
 #commentText {
-  width: 80%;
+  width: 70%;
+  border: solid;
 }
 
 img {
