@@ -7,14 +7,15 @@
   </div>
   <div>
     <router-link to="/actu" class="publish">Retour à l'actu</router-link>
-    <div class="bloc__actu">
+    <div class="bloc__actu" :data-id="`${actu.id}`">
       <h1 class="titre">{{ actu.titre }}</h1>
       <p class="userName">(Créé par {{ actu.userName }} le {{ actu.createdAt }})</p>
       <div v-if="actu.image">
         <img :src="`${actu.image}`" />
       </div>
       <p>{{ actu.description }}</p>
-
+      <button @click="like" class="buttons">J'aime</button
+      ><button @click="dislike" class="buttons">Je n'aime pas</button><br />
       <div class="buttons" v-if="actu.userName == userSession || userSession == 'admin'">
         <button @click="deletePub">Supprimer</button>
         <button @click="modifyPub">Modifier</button>
@@ -72,6 +73,8 @@ export default {
       actu: {},
       comments: {},
       userSession: sessionStorage.getItem("userName"),
+      likeNumber: {},
+      totalLike: {},
     };
   },
   mounted() {
@@ -80,7 +83,9 @@ export default {
       .then((response) => {
         this.actu = response.data[0];
         this.comments = response.data[1];
+        this.totalLike = response.data[2];
         console.log(response.data);
+        console.log(this.totalLike);
       })
       .then(() => {
         /* Change date format */
@@ -158,6 +163,59 @@ export default {
           console.log(response.data);
           router.push("/actu");
         })
+        .catch((e) => {
+          console.log(e);
+        });
+    },
+    /* fonction to like comment */
+    like(event) {
+      let target = event.target;
+      let likeLi = target.closest("div");
+      let actuId = likeLi.dataset.id;
+      let nextTarget = target.nextSibling;
+
+      let value = this.likeNumber == 1 ? 0 : 1;
+      let color = value == 1 ? "green" : "black";
+      let able = value == 1 ? "true" : "";
+      let opacity = value == 1 ? 0.5 : 1;
+      target.style.color = color;
+      nextTarget.disabled = able;
+      nextTarget.style.opacity = opacity;
+
+      this.likeNumber = value;
+
+      let number = { value: value, userName: sessionStorage.getItem("userName"), actuId: actuId };
+      DataService.like(actuId, number)
+        .then((response) => {
+          console.log(response.data);
+        })
+        .then(() => {})
+        .catch((e) => {
+          console.log(e);
+        });
+    },
+    /* fonction to dislike comment */
+    dislike(event) {
+      let target = event.target;
+      let likeLi = target.closest("div");
+      let actuId = likeLi.dataset.id;
+      let previousTarget = target.previousSibling;
+
+      let value = this.likeNumber == -1 ? 0 : -1;
+      let color = value == -1 ? "red" : "black";
+      let able = value == -1 ? "true" : "";
+      let opacity = value == -1 ? 0.5 : 1;
+      target.style.color = color;
+      previousTarget.disabled = able;
+      previousTarget.style.opacity = opacity;
+
+      this.likeNumber = value;
+      let number = { value: value, userName: sessionStorage.getItem("userName"), actuId: actuId };
+      DataService.like(actuId, number)
+        .then((response) => {
+          console.log(response.data);
+        })
+        .then(() => {})
         .catch((e) => {
           console.log(e);
         });

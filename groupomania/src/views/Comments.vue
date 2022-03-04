@@ -132,6 +132,7 @@ export default {
 
 <style scoped>
 /* Set  style for view only */
+
 a {
   background-color: dodgerblue;
 }
