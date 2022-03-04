@@ -25,10 +25,6 @@ class DataService {
     return http.post("/sign", data, config);
   }
 
-  like(id, data) {
-    return http.post(`/actu/${id}`, data, config);
-  }
-
   log(data) {
     return http.post("/login", data);
   }

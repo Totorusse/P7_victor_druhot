@@ -14,7 +14,6 @@ router.delete("/actu/:id", auth, multer, actuCtrl.deleteArticle);
 router.delete("/comment", auth, actuCtrl.deleteComment);
 router.put("/actu/:id", auth, multer, actuCtrl.updateArticle);
 router.put("/actu/:id/comment", auth, actuCtrl.updateComment);
-router.post("/actu/:id", auth, multer, actuCtrl.like);
 router.post("/pub", auth, multer, actuCtrl.publish);
 router.post("/images", auth, multer);
 router.post("/actu", auth, actuCtrl.comment);

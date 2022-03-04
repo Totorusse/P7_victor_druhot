@@ -2,7 +2,6 @@
 const db = require("../models");
 const Actu = db.actu;
 const Comment = db.comment;
-const Likenumber = db.likenumber;
 
 exports.getAllArticles = (req, res, next) => {
   Promise.all([
@@ -55,45 +54,6 @@ exports.getMyProfile = (req, res, next) => {
     });
 };
 
-exports.like = (req, res, next) => {
-  console.log(req.body);
-  let liked = req.body.value;
-  const commentObject = { ...req.body };
-
-  switch (liked) {
-    case -1:
-      Likenumber.create(req.body)
-        .then((data) => {
-          res.status(200).send(data);
-        })
-        .catch((err) => {
-          res.status(500).send({
-            message: err.message,
-          });
-        });
-      break;
-
-    case 0:
-      Likenumber.destroy({
-        where: { actuId: req.body.actuId, userName: req.body.userName },
-      })
-        .then(() => res.status(200).json({ message: "Pas d'avis sur l'actu !" }))
-        .catch((error) => res.status(400).json({ error }));
-      break;
-
-    case 1:
-      Likenumber.create(req.body)
-        .then((data) => {
-          res.status(200).send(data);
-        })
-        .catch((err) => {
-          res.status(500).send({
-            message: err.message,
-          });
-        });
-      break;
-  }
-};
 
 exports.getOneArticle = (req, res, next) => {
   const id = req.params.id;
@@ -105,11 +65,6 @@ exports.getOneArticle = (req, res, next) => {
       },
       order: [["id", "DESC"]],
       limit: 10,
-    }),
-    Likenumber.findAll({
-      where: {
-        actuId: id,
-      },
     }),
   ])
     .then((data) => {
