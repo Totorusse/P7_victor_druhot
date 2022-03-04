@@ -17,7 +17,7 @@
           </div>
         </router-link>
         <button @click="like">J'aime</button><button @click="dislike">Je n'aime pas</button><br />
-        <button @click="addComment">Ajouter un commentaire</button><br />
+        <button @click="addComment" id="addComm">Ajouter un commentaire</button><br />
         <div class="comment" id="commentDiv">
           <input
             type="text"
@@ -173,11 +173,21 @@ a {
   background-color: dodgerblue;
 }
 
+#addComm {
+  margin-bottom: 15px;
+}
+
 .comment {
   display: none;
+  height: 50px;
+  border-radius: 20px;
 }
 
 .commentsParent {
   display: none;
+}
+
+#commentText {
+  width: 80%;
 }
 </style>

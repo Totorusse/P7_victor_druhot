@@ -7,11 +7,11 @@
   <div>
     <label for="titre">Titre de la publication</label>
     <input type="text" class="form-control" id="titre" required v-model="pub.titre" name="titre" />
-    <label for="description">description</label>
+    <label for="description">Description</label>
     <input type="text" id="description" required v-model="pub.description" name="description" />
     <label for="image">Ajouter une image : </label>
     <input type="file" id="image" name="image" @change="addImage" />
-    <button @click="publier">Publier</button>
+    <button @click="publier" id="pub">Publier</button>
     <router-link to="/actu" class="retour">Retour à l'actu</router-link>
   </div>
 </template>
@@ -75,15 +75,20 @@ input[type="text"],
 input[type="password"] {
   width: 100%;
   padding: 12px 20px;
-  margin: 8px 0;
+  margin: 30px 0;
   display: inline-block;
   border: 1px solid #ccc;
   box-sizing: border-box;
 }
 
+/* Image input margin */
+input[type="file"] {
+  margin: 20px;
+}
+
 /* Set a style for  button */
 button {
-  background-color: #24e71d;
+  background-color: #ffd7d7;
   color: rgb(0, 0, 0);
   padding: 14px 20px;
   margin: 8px 0;
@@ -98,12 +103,27 @@ button:hover {
   opacity: 0.8;
 }
 
+/* space after hr */
+hr {
+  margin-bottom: 40px;
+}
+
+/* label size */
+label {
+  font-size: 20px;
+  margin: 20px;
+}
+
+/* pub size */
+#pub {
+  font-size: 20px;
+}
+
 /* Small size for return button */
 .retour {
-  width: 50%;
+  width: 25%;
   font-size: 12px;
-  line-height: 1px;
   background-color: white;
-  color: blue;
+  color: black;
 }
 </style>

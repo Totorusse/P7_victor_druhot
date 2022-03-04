@@ -48,8 +48,6 @@ export default {
 /* Set  style for the whole app */
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: white;
   background-color: #122542;
@@ -81,7 +79,7 @@ a:hover {
 /* Set a style for  buttons */
 /* Set a style for  buttons */
 button {
-  width: 100%;
+  width: 25%;
   padding: 12px 12px;
   margin: 8px 8px 0 0;
   border: 1px solid #ccc;
@@ -92,15 +90,12 @@ button {
   border: none;
   border-radius: 20px;
   cursor: pointer;
+  overflow: hidden;
 }
 
+/* Add bg color */
 body {
   background-color: #122542;
-}
-
-/* Add padding to containers */
-.container {
-  padding: 16px;
 }
 
 /* Set  size for the images */
@@ -108,17 +103,21 @@ img {
   width: 150px;
 }
 
+/* Set  position of top buttons */
 #hidden {
   position: absolute;
   top: 0;
-  right: 0;
-  width: 25%;
+  right: 0px;
+  width: 150px;
 }
+
+/* Set  size for logo */
 #logo {
   width: 50%;
   height: 100%;
 }
 
+/* Set  position of nav */
 #nav {
   position: fixed;
   top: 0;
@@ -130,10 +129,12 @@ img {
   padding-bottom: 20px;
 }
 
+/* Set  position of nav button*/
 .nav__button {
   position: relative;
   right: 10px;
   max-width: 125px;
+  width: 100%;
 }
 #router {
   margin-top: 120px;
