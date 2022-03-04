@@ -12,7 +12,7 @@
       <input type="password" id="psw" required v-model="user.psw" name="psw" />
       <p class="errorMessage"></p>
 
-      <button @click="checkUser">Se connecter</button>
+      <button @click="checkUser" id="log">Se connecter</button>
       <p id="error"></p>
     </div>
     <router-link to="/sign" class="retour">Pas encore inscrit ?</router-link>
@@ -100,7 +100,7 @@ input[type="text"],
 input[type="password"] {
   width: 100%;
   padding: 12px 20px;
-  margin: 8px 0;
+  margin: 30px 0;
   display: inline-block;
   border: 1px solid #ccc;
   box-sizing: border-box;
@@ -108,7 +108,7 @@ input[type="password"] {
 
 /* Set a style for  button */
 button {
-  background-color: #24e71d;
+  background-color: #ffd7d7;
   color: rgb(0, 0, 0);
   padding: 14px 20px;
   margin: 8px 0;
@@ -123,13 +123,24 @@ button:hover {
   opacity: 0.8;
 }
 
+/* label size */
+label {
+  font-size: 20px;
+  margin: 20px;
+}
+
+/* log size */
+#log {
+  font-size: 20px;
+}
+
 /* Small size for return button */
 .retour {
-  width: 50%;
+  margin-top: 25px;
+  width: 25%;
   font-size: 12px;
-  line-height: 1px;
   background-color: white;
-  color: blue;
+  color: black;
 }
 
 /* big red error */
