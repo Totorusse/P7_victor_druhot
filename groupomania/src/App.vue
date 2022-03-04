@@ -116,28 +116,29 @@ img {
 #logo {
   width: 50%;
   height: 100%;
+  max-height: 500px;
+  object-fit: contain;
 }
 
 /* Set  position of nav */
 #nav {
   position: fixed;
   top: 0;
+  left: 0;
   background-color: white;
   z-index: 1;
   width: 100%;
-  max-width: 900px;
   height: 80px;
   padding-bottom: 20px;
   border: solid;
   border-color: #122542;
-
   margin: auto;
 }
 
 /* Set  position of nav button*/
 .nav__button {
   position: relative;
-  right: 10px;
+  right: 15px;
   max-width: 125px;
   width: 100%;
 }
@@ -146,6 +147,13 @@ img {
 }
 
 @media screen and (max-width: 600px) {
+  #hidden {
+    position: absolute;
+    top: px;
+    right: 0px;
+    width: 150px;
+  }
+
   #logo {
     position: absolute;
     left: 15px;
