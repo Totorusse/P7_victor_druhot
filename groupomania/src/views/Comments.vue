@@ -24,7 +24,13 @@
           <div class="update">
             <div>
               <label for="description">Nouveau commentaire </label><br />
-              <input type="text" id="description" required v-model="comment.description" name="description" />
+              <input
+                type="text"
+                id="description"
+                required
+                v-model="comment.description"
+                name="description"
+              /><br />
               <button @click="updateComment">Mettre à jour</button>
             </div>
           </div>
@@ -36,6 +42,7 @@
 
 <script>
 import DataService from "../services/DataService";
+import router from "../router/index";
 
 export default {
   name: "Actu",
@@ -113,6 +120,7 @@ export default {
       DataService.updateComment(idRoute, dataDel)
         .then((response) => {
           console.log(response.data);
+          router.push(`/actu/${idRoute}`);
         })
         .catch((e) => {
           console.log(e);
@@ -124,13 +132,35 @@ export default {
 
 <style scoped>
 /* Set  style for view only */
+a {
+  background-color: dodgerblue;
+}
+
+.block__update {
+  display: none;
+}
+
+.buttons {
+  margin-bottom: 15px;
+}
+
+.comment {
+  display: none;
+}
+
 .list__item {
+  list-style-type: none;
   border: solid;
   border-color: black;
-  padding: 0;
-  margin-top: 4px;
+  color: black;
   list-style-type: none;
-  background-color: dodgerblue;
+  background-color: white;
+  border-radius: 8px;
+}
+
+label {
+  font-size: 16px;
+  font-weight: bold;
 }
 
 .list {
@@ -149,14 +179,6 @@ export default {
   font-size: 10px;
 }
 
-a {
-  background-color: dodgerblue;
-}
-
-.comment {
-  display: none;
-}
-
 .routeNumber {
   display: none;
 }
@@ -165,10 +187,6 @@ a {
   padding: 10px;
   line-height: 30px;
   border: solid;
-}
-
-.block__update {
-  display: none;
 }
 
 .userName {

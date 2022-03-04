@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Actu</h1>
+    <h1>Actu : {{ actu.titre }}</h1>
     <!-- To get Id from URL -->
     <h1 id="routeNumber" class="routeNumber">{{ $route.params.id }}</h1>
     <hr />
@@ -8,12 +8,12 @@
   <div>
     <router-link to="/actu" class="publish">Retour à l'actu</router-link>
     <div class="bloc__actu">
-      <h4>{{ actu.titre }}</h4>
+      <h1 class="titre">{{ actu.titre }}</h1>
       <p class="userName">(Créé par {{ actu.userName }} le {{ actu.createdAt }})</p>
-      <p>{{ actu.description }}</p>
       <div v-if="actu.image">
         <img :src="`${actu.image}`" />
       </div>
+      <p>{{ actu.description }}</p>
 
       <div class="buttons" v-if="actu.userName == userSession || userSession == 'admin'">
         <button @click="deletePub">Supprimer</button>
@@ -168,18 +168,58 @@ export default {
 
 <style scoped>
 /* Set  style for view only */
+a {
+  background-color: white;
+}
 
-.list__item {
+.bloc__actu {
   border: solid;
   border-color: black;
-  padding: 0;
-  margin-top: 4px;
+  margin-top: 8px;
   list-style-type: none;
-  background-color: dodgerblue;
+  color: black;
+  background-color: white;
+  border-radius: 8px;
+}
+
+.buttons {
+  margin-bottom: 15px;
+}
+
+.comment__list {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 8px;
 }
 
 .comment__list__item {
   list-style-type: none;
+  border: solid;
+  border-color: black;
+  list-style-type: none;
+  background-color: white;
+  border-radius: 8px;
+}
+
+.update {
+  margin-top: 15px;
+  padding: 10px;
+  line-height: 30px;
+  border: solid;
+}
+
+.block__update {
+  display: none;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  max-height: 250px;
+  object-fit: contain;
+}
+
+.link {
   padding: 0;
   margin: 0;
 }
@@ -194,31 +234,7 @@ export default {
   display: none;
 }
 
-.bloc__actu {
-  border: solid;
-  border-color: black;
-  padding: 0;
-  margin-top: 4px;
-  list-style-type: none;
-  background-color: dodgerblue;
-  margin-bottom: 20px;
-}
-
-.update {
-  padding: 10px;
-  line-height: 30px;
-  border: solid;
-}
-
-.block__update {
-  display: none;
-}
-
 .userName {
   font-size: 10px;
-}
-
-a {
-  background-color: dodgerblue;
 }
 </style>

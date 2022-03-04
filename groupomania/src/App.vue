@@ -138,6 +138,7 @@ img {
 /* Set  position of nav button*/
 .nav__button {
   position: relative;
+  top: 10px;
   right: 15px;
   max-width: 125px;
   width: 100%;
@@ -157,14 +158,8 @@ img {
   #logo {
     position: absolute;
     left: 15px;
-    top: 25px;
+    top: 15px;
     height: 80px;
-  }
-  #nav {
-    height: 125px;
-  }
-  #router {
-    margin-top: 155px;
   }
 }
 </style>

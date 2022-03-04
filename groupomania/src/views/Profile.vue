@@ -6,7 +6,7 @@
   </div>
   <div>
     <router-link to="/actu" class="publish">Retour à l'actu</router-link>
-    <h4>Mes publications</h4>
+    <h1>Mes publications</h1>
     <ul class="list">
       <li class="list__item" v-for="item in actu" :key="item">
         <router-link :to="`/actu/${item.id}`" class="link">
@@ -74,18 +74,25 @@ export default {
 <style scoped>
 /* Set  style for view only */
 .list__item {
+  list-style-type: none;
   border: solid;
   border-color: black;
-  padding: 0;
-  margin-top: 4px;
   list-style-type: none;
-  background-color: dodgerblue;
+  background-color: white;
+  border-radius: 8px;
 }
 
 .list {
   list-style-type: none;
   padding: 0;
   margin: 0;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  max-height: 250px;
+  object-fit: contain;
 }
 
 .publish {
@@ -99,7 +106,7 @@ export default {
 }
 
 a {
-  background-color: dodgerblue;
+  background-color: white;
 }
 
 .comment {
