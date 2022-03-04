@@ -121,6 +121,7 @@ label {
 
 /* Small size for return button */
 .retour {
+  margin-top: 25px;
   width: 25%;
   font-size: 12px;
   background-color: white;

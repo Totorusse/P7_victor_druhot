@@ -53,6 +53,7 @@ export default {
   background-color: #122542;
   margin: auto;
   max-width: 900px;
+  box-sizing: border-box;
 }
 
 /* Set a style for  links */
@@ -80,7 +81,7 @@ a:hover {
 /* Set a style for  buttons */
 button {
   width: 25%;
-  padding: 12px 12px;
+  padding: 6px 6px;
   margin: 8px 8px 0 0;
   border: 1px solid #ccc;
   box-sizing: border-box;
@@ -127,6 +128,10 @@ img {
   max-width: 900px;
   height: 80px;
   padding-bottom: 20px;
+  border: solid;
+  border-color: #122542;
+
+  margin: auto;
 }
 
 /* Set  position of nav button*/

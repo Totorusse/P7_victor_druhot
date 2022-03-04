@@ -3,18 +3,18 @@
   <hr />
   <div>
     <router-link to="/pub" class="publish">Publier une actu</router-link>
-    <h4>Toute l'actualité</h4>
+    <h1>Toute l'actualité</h1>
     <ul class="list">
       <li class="list__item" v-for="item in actu" :key="item" :data-id="`${item.id}`">
         <router-link :to="`/actu/${item.id}`" class="link">
-          <h4>{{ item.titre }}</h4>
+          <h1 id="list__titre">{{ item.titre }}</h1>
           <p class="userName">
             (Créé par {{ item.userName }} le <span class="date">{{ item.createdAt }})</span>
           </p>
-          <p>{{ item.description }}</p>
-          <div v-if="item.image">
+          <div class="image" v-if="item.image">
             <img :src="`${item.image}`" />
           </div>
+          <p>{{ item.description }}</p>
         </router-link>
         <button @click="like">J'aime</button><button @click="dislike">Je n'aime pas</button><br />
         <button @click="addComment" id="addComm">Ajouter un commentaire</button><br />
@@ -144,33 +144,8 @@ export default {
 
 <style scoped>
 /* Set  style for view only */
-.list__item {
-  border: solid;
-  border-color: black;
-  padding: 0;
-  margin-top: 4px;
-  list-style-type: none;
-  background-color: dodgerblue;
-}
-
-.list {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
-.publish {
-  width: 100%;
-  border-radius: 20px;
-  background-color: #ffd7d7;
-}
-
-.userName {
-  font-size: 10px;
-}
-
 a {
-  background-color: dodgerblue;
+  background-color: white;
 }
 
 #addComm {
@@ -189,5 +164,42 @@ a {
 
 #commentText {
   width: 80%;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  max-height: 500px;
+  object-fit: contain;
+}
+
+.list__item {
+  border: solid;
+  border-color: black;
+  margin-top: 8px;
+  list-style-type: none;
+  background-color: white;
+  border-radius: 8px;
+}
+
+.list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#list__titre {
+  margin-top: -5px;
+}
+
+.publish {
+  width: 100%;
+  border-radius: 20px;
+  background-color: #ffd7d7;
+}
+
+.userName {
+  margin-top: -10px;
+  font-size: 12px;
 }
 </style>
