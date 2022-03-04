@@ -156,7 +156,6 @@ img {
 
 .list__item {
   border: solid;
-  border-color: black;
   margin-top: 8px;
   list-style-type: none;
   background-color: white;
