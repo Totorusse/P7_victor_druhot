@@ -12,10 +12,10 @@
         <router-link :to="`/actu/${item.id}`" class="link">
           <h4>{{ item.titre }}</h4>
           <p class="userName">(Créé par {{ item.userName }})</p>
-          <p>{{ item.description }}</p>
           <div v-if="item.image">
             <img :src="`${item.image}`" />
           </div>
+          <p>{{ item.description }}</p>
         </router-link>
       </li>
     </ul>
@@ -74,9 +74,8 @@ export default {
 <style scoped>
 /* Set  style for view only */
 .list__item {
-  list-style-type: none;
   border: solid;
-  border-color: black;
+  margin-top: 8px;
   list-style-type: none;
   background-color: white;
   border-radius: 8px;

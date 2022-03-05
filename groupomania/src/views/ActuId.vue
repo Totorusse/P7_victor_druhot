@@ -36,6 +36,7 @@
         </div>
       </div>
     </div>
+    <h1>Commentaires</h1>
 
     <ul class="comment__list">
       <li class="comment__list__item" v-for="item in comments" :key="item">
@@ -198,6 +199,11 @@ a {
   list-style-type: none;
   background-color: white;
   border-radius: 8px;
+  margin-bottom: 5px;
+}
+
+.comment__list__item h4 {
+  margin: 5px;
 }
 
 #description {

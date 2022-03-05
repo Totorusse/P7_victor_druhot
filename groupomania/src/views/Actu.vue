@@ -6,7 +6,7 @@
     <h1>Toute l'actualité</h1>
     <ul class="list">
       <li class="list__item" v-for="item in actu" :key="item" :data-id="`${item.id}`">
-        <router-link :to="`/actu/${item.id}`" class="link">
+        <router-link :to="`/actu/${item.id}`" class="link" id="pub__link">
           <h1 id="list__titre">{{ item.titre }}</h1>
           <p class="userName">
             (Créé par {{ item.userName }} le <span class="date">{{ item.createdAt }})</span>
@@ -14,7 +14,7 @@
           <div class="image" v-if="item.image">
             <img :src="`${item.image}`" />
           </div>
-          <p>{{ item.description }}</p>
+          <p class="description__text">{{ item.description }}</p>
         </router-link>
         <button @click="addComment" id="addComm">Ajouter un commentaire</button><br />
         <div class="comment" id="commentDiv">
@@ -25,11 +25,12 @@
             v-model="comment.text"
             :data-id="`${item.id}`"
             name="commentText"
+            placeholder="Que pensez-vous de ma publication ?"
           /><br />
           <button @click="pubComment">Publier votre commentaire</button><br />
         </div>
 
-        <router-link :to="`/actu/${item.id}`" class="link" id="link">
+        <router-link :to="`/actu/${item.id}`" class="link" id="comment__link">
           <button @click="countComments" class="numberComment"></button>
           <div class="commentsParent">
             <div class="comments" id="comments" v-for="item2 in comment" :key="item2">
@@ -87,6 +88,7 @@ export default {
       let target = event.target;
       let commentDiv = target.nextSibling.nextSibling;
       commentDiv.style.display = "initial";
+      target.style.display = "none";
     },
     /* fonction to publish comment */
     pubComment(event) {
@@ -128,10 +130,6 @@ a {
   background-color: white;
 }
 
-#addComm {
-  margin-bottom: 15px;
-}
-
 .comment {
   display: none;
   height: 50px;
@@ -142,9 +140,21 @@ a {
   display: none;
 }
 
+#comment__link {
+  padding: 0;
+  margin: 0 0 5px 0;
+}
+
 #commentText {
   width: 70%;
   border: solid;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.description__text {
+  margin: 5px 0 0 0;
+  font-weight: bold;
 }
 
 img {
@@ -176,6 +186,10 @@ img {
   width: 100%;
   border-radius: 20px;
   background-color: #ffd7d7;
+}
+
+#pub__link {
+  margin-bottom: 0;
 }
 
 .userName {
