@@ -39,11 +39,24 @@ exports.getAllComments = (req, res, next) => {
 };
 
 exports.getMyProfile = (req, res, next) => {
-  Actu.findAll({
-    where: {
-      userName: req.query.user,
-    },
-  })
+  Promise.all([
+    Actu.findAll(
+      {
+        where: {
+          userName: req.query.user,
+        },
+      },
+      { order: [["id", "DESC"]] }
+    ),
+    Comment.findAll(
+      {
+        where: {
+          userName: req.query.user,
+        },
+      },
+      { order: [["id", "DESC"]] }
+    ),
+  ])
     .then((allActu) => {
       res.status(200).send(allActu);
     })
