@@ -19,6 +19,16 @@
         </router-link>
       </li>
     </ul>
+
+    <h1>Mes commentaires</h1>
+    <ul class="list">
+      <li class="list__item" v-for="item2 in comments" :key="item2">
+        <router-link :to="`/actu/${item2.pubId}`" class="link">
+          <h4 class="comment">{{ item2.text }}</h4>
+          <p class="comment">Publication N°{{ item2.pubId }}</p>
+        </router-link>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -31,6 +41,7 @@ export default {
   data() {
     return {
       actu: {},
+      comments: {},
     };
   },
   /* display posted news */
@@ -38,7 +49,8 @@ export default {
     let user = sessionStorage.getItem("userName");
     DataService.getMyProfile(user)
       .then((response) => {
-        this.actu = response.data;
+        this.actu = response.data[0];
+        this.comments = response.data[1];
       })
       .catch((e) => {
         console.log(e);
@@ -73,11 +85,20 @@ export default {
 
 <style scoped>
 /* Set  style for view only */
+a {
+  background-color: white;
+}
+
+.comment {
+  margin: 0;
+}
+
 .list__item {
   border: solid;
   margin-top: 8px;
   list-style-type: none;
   background-color: white;
+  color: black;
   border-radius: 8px;
 }
 
@@ -102,13 +123,5 @@ img {
 
 .userName {
   font-size: 10px;
-}
-
-a {
-  background-color: white;
-}
-
-.comment {
-  display: none;
 }
 </style>

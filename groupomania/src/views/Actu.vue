@@ -154,7 +154,7 @@ a {
 
 .description__text {
   margin: 5px 0 0 0;
-  font-weight: bold;
+  font-size: 18px;
 }
 
 img {
