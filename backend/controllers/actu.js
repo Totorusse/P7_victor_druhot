@@ -6,7 +6,7 @@ const Comment = db.comment;
 exports.getAllArticles = (req, res, next) => {
   Promise.all([
     Actu.findAll({ order: [["id", "DESC"]], limit: 10 }),
-    Comment.findAll({ order: [["id", "DESC"]], limit: 10 }),
+    Comment.findAll({ order: [["id", "DESC"]]}),
   ])
     .then((actuAndComments) =>
       res.send({
