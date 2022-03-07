@@ -48,9 +48,9 @@ export default {
           sessionStorage.setItem("userName", response.data.email);
           router.push("/login");
         })
-        .catch((e) => {
-          document.getElementById("error").innerHTML = e.response.data.message;
-          console.log(e);
+        .catch((err) => {
+          document.getElementById("error").innerHTML = err.response.data.message;
+          console.log(err);
         });
     },
     //fonction to validate inputs
@@ -61,7 +61,7 @@ export default {
       let messageErreur = target.nextElementSibling;
       const masques = {
         email: /^[a-zA-Z0-9_-]{4,15}$/g,
-        psw: /^([a-zA-Z0-9_\-#?!@$ %^&*]).{3,}$/g,
+        psw: /^[a-zA-Z0-9_\-#?!@$ %^&*]{4,15}$/g,
       };
       const erreur = {
         email: "Veuillez saisir un champ correct (minimum 4 caractères alphanumérique)",
@@ -72,7 +72,7 @@ export default {
           if (valeur.match(masques[i]) != null) {
             messageErreur.innerHTML = "";
           } else {
-            valeur = "";
+            this.user.email = "";
             messageErreur.innerHTML = erreur[i];
           }
         }

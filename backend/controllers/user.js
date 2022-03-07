@@ -9,32 +9,33 @@ const jwt = require("jsonwebtoken");
 
 // Create and Save a new user
 exports.create = (req, res) => {
-  // Validate request
-  if (!req.body.email || !req.body.psw) {
-    res.status(400).send({
-      message: "Remplir le formulaire!",
+  try {
+    // Validate request
+    if (!req.body.email || !req.body.psw) {
+      res.status(400).send({
+        message: "Remplir le formulaire!",
+      });
+      return;
+    }
+    User.findOne({ where: { email: req.body.email } }).then((user) => {
+      if (user) {
+        return res.status(500).send({ message: "Utilisateur ou mot de passe erroné !" });
+      }
+      bcrypt.hash(req.body.psw, 10).then((hash) => {
+        // Create a user
+        const user = {
+          email: req.body.email,
+          psw: hash,
+        };
+        // Save user in the database
+        User.create(user).then((data) => {
+          res.send(data);
+        });
+      });
     });
-    return;
+  } catch (err) {
+    res.status(500).json({ error });
   }
-  // Create a user
-  // Hash password
-  bcrypt
-    .hash(req.body.psw, 10)
-    .then((hash) => {
-      const user = {
-        email: req.body.email,
-        psw: hash,
-      };
-      // Save user in the database
-      User.create(user).then((data) => {
-        res.send(data);
-      });
-    })
-    .catch(() => {
-      res.status(500).send({
-        message: "Utilisateur déjà existant !",
-      });
-    });
 };
 
 // Retrieve user from the database.
@@ -52,7 +53,7 @@ exports.login = (req, res, next) => {
           }
           res.status(200).json({
             userId: user._id,
-            token: jwt.sign({ userId: user._id }, "RANDOM_TOKEN_SECRET", { expiresIn: "24h" }),
+            token: jwt.sign({ userId: user._id }, "RANDOM_TOKEN_SECRET", { expiresIn: "2h" }),
           });
         })
         .catch((error) => res.status(500).json({ error }));

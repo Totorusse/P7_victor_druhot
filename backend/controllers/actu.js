@@ -314,8 +314,6 @@ exports.publish = (req, res, next) => {
         image: `${req.protocol}://${req.get("host")}/images/${req.body.image}`,
       }
     : { ...req.body };
-
-  console.log(publication.image);
   // Save pub in the database
   Actu.create(publication)
     .then((data) => {
