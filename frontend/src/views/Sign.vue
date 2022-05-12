@@ -46,10 +46,10 @@ export default {
           this.user.id = response.data.id;
           console.log(response.data);
           sessionStorage.setItem("userName", response.data.email);
-          router.push("/login");
+          router.push("/list-perso");
         })
         .catch((err) => {
-          document.getElementById("error").innerHTML = err.response.data.message;
+          document.getElementById("error").innerHTML = err;
           console.log(err);
         });
     },

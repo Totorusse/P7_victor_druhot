@@ -3,6 +3,8 @@ import Home from "../views/Home.vue";
 import Sign from "../views/Sign.vue";
 import Login from "../views/Login.vue";
 import Actu from "../views/Actu.vue";
+import ListPerso from "../views/List-perso.vue";
+import Stuff from "../views/Stuff.vue";
 import ActuId from "../views/ActuId.vue";
 import Pub from "../views/Pub.vue";
 import Comments from "../views/Comments.vue";
@@ -28,6 +30,16 @@ const routes = [
     path: "/actu",
     name: "actu",
     component: Actu,
+  },
+  {
+    path: "/list-perso",
+    name: "list-pers",
+    component: ListPerso,
+  },
+  {
+    path: "/stuff",
+    name: "stuff",
+    component: Stuff,
   },
   {
     path: "/actu/:id",

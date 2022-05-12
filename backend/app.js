@@ -2,6 +2,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const userRoutes = require("./routes/user");
 const actuRoutes = require("./routes/actu");
+const persoRoutes = require("./routes/perso");
+const stuffRoutes = require("./routes/stuff");
 const path = require("path");
 
 const app = express();
@@ -25,5 +27,7 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use("/images", express.static(path.join(__dirname, "images")));
 app.use("/", userRoutes);
 app.use("/", actuRoutes);
+app.use("/", persoRoutes);
+app.use("/", stuffRoutes);
 
 module.exports = app;

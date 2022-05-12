@@ -9,6 +9,16 @@ class DataService {
   getAll() {
     return http.get("/actu", config);
   }
+  getAllPerso() {
+    return http.get("/list-perso", config);
+  }
+  getAllInfo() {
+    return http.get("/stuff", config);
+  }
+
+  persoChoosed(idPerso) {
+    return http.post("/list-perso", idPerso, config);
+  }
 
   getMyProfile(user) {
     return http.get("/profile", { params: { user }, headers: { Authorization: `Bearer ${token}` } });

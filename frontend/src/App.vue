@@ -80,13 +80,11 @@ a:hover {
 /* Set a style for  buttons */
 /* Set a style for  buttons */
 button {
-  width: 25%;
   padding: 6px 6px;
   margin: 8px 8px 0 0;
   border: 1px solid #ccc;
   box-sizing: border-box;
   text-decoration: none;
-  background-color: #ffd7d7;
   color: black;
   border: none;
   border-radius: 20px;

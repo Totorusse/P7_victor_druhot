@@ -38,6 +38,36 @@ exports.create = (req, res) => {
   }
 };
 
+// Put chosen character in DB
+exports.choosePerso = (req, res, next) => {
+  const obj = req.body;
+  console.log(obj);
+  User.update(
+    { heros: obj.heros },
+    {
+      where: {
+        email: obj.email,
+      },
+    }
+  )
+    .then((data) => {
+      if (data) {
+        res.send({
+          message: "Heros choisi !",
+        });
+      } else {
+        res.send({
+          message: `Erreur survenue!`,
+        });
+      }
+    })
+    .catch(() => {
+      res.status(500).send({
+        message: "Error updating",
+      });
+    });
+};
+
 // Retrieve user from the database.
 exports.login = (req, res, next) => {
   User.findOne({ where: { email: req.body.email } })
