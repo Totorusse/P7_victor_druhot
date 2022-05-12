@@ -6,5 +6,5 @@ const multer = require("../middleware/multer-config");
 
 const persoCtrl = require("../controllers/perso");
 
-router.get("/list-perso", auth, multer, persoCtrl.getAllPerso);
+router.get("/stuff", auth, multer, persoCtrl.getAllInfo);
 module.exports = router;

@@ -46,7 +46,7 @@ export default {
           this.user.id = response.data.id;
           console.log(response.data);
           sessionStorage.setItem("userName", response.data.email);
-          router.push("/list-perso");
+          router.push("/login");
         })
         .catch((err) => {
           document.getElementById("error").innerHTML = err;

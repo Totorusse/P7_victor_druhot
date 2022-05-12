@@ -12,8 +12,8 @@ class DataService {
   getAllPerso() {
     return http.get("/list-perso", config);
   }
-  getAllInfo() {
-    return http.get("/stuff", config);
+  getAllInfo(userSession) {
+    return http.get("/stuff", { params: { userSession }, headers: { Authorization: `Bearer ${token}` } });
   }
 
   persoChoosed(idPerso) {

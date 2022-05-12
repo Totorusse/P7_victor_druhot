@@ -1,7 +1,8 @@
 <template>
-  <h1>Mon stuff</h1>
+  <h1>Mon perso : {{ heros }}</h1>
   <hr />
   <div>
+    <div>{{ herosDescr }}</div>
     <ul class="list">
       <li class="list__item" v-for="item in actu" :key="item" :data-id="`${item.id}`">
         <router-link :to="`/actu/${item.id}`" class="link" id="pub__link">
@@ -52,14 +53,20 @@ export default {
     return {
       actu: {},
       comment: {},
+      userSession: sessionStorage.getItem("userName"),
+      heros: {},
+      herosDescr: {},
     };
   },
 
   mounted() {
+    let userSession = sessionStorage.getItem("userName");
     /* display all news */
-    DataService.getAllInfo()
+    DataService.getAllInfo(userSession)
       .then((response) => {
-        this.actu = response.data.stuff[0];
+        this.heros = response.data[0][0].heros;
+        this.herosDescr = response.data[1];
+        console.log(response.data[1]);
       })
       .catch((e) => {
         console.log(e);

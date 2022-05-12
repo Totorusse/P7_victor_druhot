@@ -1,6 +1,7 @@
 //const fs = require("fs");
 const db = require("../models");
 const Perso = db.perso;
+const User = db.user;
 
 exports.getAllPerso = (req, res, next) => {
   Promise.all([Perso.findAll()])
@@ -16,23 +17,23 @@ exports.getAllPerso = (req, res, next) => {
     });
 };
 
-
-
-exports.getAllComments = (req, res, next) => {
-  Comment.findAll({
-    where: {
-      pubId: req.params.id,
-    },
-    order: [["id", "DESC"]],
-    limit: 10,
-  })
-    .then((comments) => {
-      res.status(200).send(comments);
+exports.getAllInfo = (req, res, next) => {
+  let userName = req.query.userSession;
+  console.log(userName);
+  Promise.all([
+    User.findAll({
+      attributes: ["heros"],
+      where: {
+        email: userName,
+      },
+    }),
+    Perso.findAll(),
+  ])
+    .then((user) => {
+      res.status(200).send(user);
     })
     .catch((error) => {
-      res.status(400)({
-        error,
-      });
+      res.status(400).send(error);
     });
 };
 
