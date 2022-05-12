@@ -5,9 +5,7 @@ const auth = require("../middleware/auth");
 const multer = require("../middleware/multer-config");
 
 const actuCtrl = require("../controllers/actu");
-const stuffCtrl = require("../controllers/stuff");
 
-router.get("/actu", auth, multer, stuffCtrl.getAllArticles);
 router.get("/actu/:id", auth, multer, actuCtrl.getOneArticle);
 router.get("/actu/:id/comment", auth, multer, actuCtrl.getAllComments);
 router.get("/profile", auth, multer, actuCtrl.getMyProfile);
