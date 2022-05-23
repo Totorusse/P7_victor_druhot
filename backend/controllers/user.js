@@ -122,3 +122,21 @@ exports.deleteProfile = (req, res, next) => {
       });
     });
 };
+
+exports.getAllUsers = (req, res, next) => {
+  Promise.all([
+    User.findAll({
+      attributes: ["email"],
+    }),
+  ])
+    .then((users) =>
+      res.send({
+        users,
+      })
+    )
+    .catch((error) => {
+      res.status(400)({
+        error,
+      });
+    });
+};

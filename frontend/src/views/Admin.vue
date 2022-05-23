@@ -2,16 +2,11 @@
   <h1>Jesus powa</h1>
   <hr />
   <div>
+    Liste des joueurs
     <ul class="list">
-      <li class="list__item" v-for="item in perso" :key="item" :data-id="`${item.nom}`">
-        <h1 id="list__titre">{{ item.nom }}</h1>
-        <div class="image" v-if="item.image">
-          <img :src="`${item.image}`" />
-        </div>
-        <p class="description__text">
-          Description : {{ item.description }} <br />Element : {{ item.element }}
-        </p>
-        <button @click="choosePerso" id="choosePerso">Choisir ce personnage</button><br />
+      <li class="list__item" v-for="item in users" :key="item" :data-id="`${item.email}`">
+        <h1 id="list__titre">{{ item.email }}</h1>
+        <button @click="choosePerso" id="choosePerso">Attribuer un personnage</button><br />
       </li>
     </ul>
   </div>
@@ -25,16 +20,15 @@ export default {
   name: "perso",
   data() {
     return {
-      perso: {},
-      comment: {},
+      users: {},
     };
   },
 
   mounted() {
     /* display all news */
-    DataService.getAllPerso()
+    DataService.getAllUsers()
       .then((response) => {
-        this.perso = response.data.perso[0];
+        this.users = response.data.users[0];
       })
       .catch((e) => {
         console.log(e);

@@ -9,6 +9,9 @@ class DataService {
   getAll() {
     return http.get("/actu", config);
   }
+  getAllUsers() {
+    return http.get("/admin", config);
+  }
   getAllPerso() {
     return http.get("/list-perso", config);
   }
