@@ -126,7 +126,7 @@ exports.deleteProfile = (req, res, next) => {
 exports.getAllUsers = (req, res, next) => {
   Promise.all([
     User.findAll({
-      attributes: ["email"],
+      attributes: ["email", "heros"],
     }),
   ])
     .then((users) =>

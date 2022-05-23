@@ -6,7 +6,17 @@
     <ul class="list">
       <li class="list__item" v-for="item in users" :key="item" :data-id="`${item.email}`">
         <h1 id="list__titre">{{ item.email }}</h1>
-        <button @click="choosePerso" id="choosePerso">Attribuer un personnage</button><br />
+        <p>Heros : {{ item.heros }}</p>
+        <div class="herosDiv">
+          <label for="heros">Choisir un héros</label><br /><br />
+          <select id="`${item.email}`">
+            <option value="abbie-lothyne">abbie-lothyne</option>
+            <option value="blenir-sunrion">blenir-sunrion</option>
+            <option value="drumlin">drumlin</option>
+            <option value="erdo">erdo</option></select
+          ><br /><br />
+          <button @click="choosePerso" id="choosePerso">Attribuer le héros</button><br />
+        </div>
       </li>
     </ul>
   </div>
@@ -14,7 +24,6 @@
 
 <script>
 import DataService from "../services/DataService";
-import router from "../router/index";
 
 export default {
   name: "perso",
@@ -39,31 +48,23 @@ export default {
     /* fonction to choose character*/
     choosePerso(event) {
       let target = event.target;
-      let nomPerso = target.closest("li");
-      let idPerso = nomPerso.dataset.id;
+      let user = target.closest("li");
+      let idPerso = user.dataset.id;
+      /*let herosDiv = target.closest("div");*/
+      let heros = document.getElementById(`marchePas`);
       let dataPerso = {
-        email: sessionStorage.getItem("userName"),
-        heros: idPerso,
+        user: idPerso,
+        heros: heros,
       };
+      console.log(heros);
 
       DataService.persoChoosed(dataPerso)
         .then((response) => {
           console.log(response.data);
-          router.push("/stuff");
         })
         .catch((e) => {
           console.log(e);
         });
-    },
-    /* fonction to count et show comments */
-    countComments() {
-      let numberComments = document.getElementsByClassName("commentsParent");
-      let length = numberComments.length;
-      let numberInner = document.getElementsByClassName("numberComment");
-      for (let i = 0; i < length; i++) {
-        let number = numberComments[i].querySelectorAll("p").length;
-        numberInner[i].innerHTML = `Voir les commentaires : ${number}`;
-      }
     },
   },
 };
