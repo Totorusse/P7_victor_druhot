@@ -81,7 +81,7 @@ exports.login = (req, res, next) => {
             return res.status(401).send({ message: "Utilisateur ou mot de passe erroné !" });
           }
           res.status(200).json({
-            userId: user._id,
+            admin: user.isAdmin,
             token: jwt.sign({ userId: user._id }, "RANDOM_TOKEN_SECRET", { expiresIn: "2h" }),
           });
         })

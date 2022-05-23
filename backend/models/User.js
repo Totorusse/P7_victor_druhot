@@ -6,6 +6,9 @@ module.exports = (sequelize, Sequelize) => {
     psw: {
       type: Sequelize.STRING,
     },
+    isAdmin: {
+      type: Sequelize.BOOLEAN,
+    },
     heros: {
       type: Sequelize.STRING,
     },
