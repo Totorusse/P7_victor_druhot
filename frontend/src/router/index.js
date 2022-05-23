@@ -9,6 +9,7 @@ import ActuId from "../views/ActuId.vue";
 import Pub from "../views/Pub.vue";
 import Comments from "../views/Comments.vue";
 import Profile from "../views/Profile.vue";
+import Admin from "../views/Admin.vue";
 
 const routes = [
   {
@@ -30,6 +31,11 @@ const routes = [
     path: "/actu",
     name: "actu",
     component: Actu,
+  },
+  {
+    path: "/admin",
+    name: "admin",
+    component: Admin,
   },
   {
     path: "/list-perso",
