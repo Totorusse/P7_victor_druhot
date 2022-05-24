@@ -60,6 +60,7 @@ export default {
       DataService.persoChoosed(dataPerso)
         .then((response) => {
           console.log(response.data);
+          location.reload();
         })
         .catch((e) => {
           console.log(e);

@@ -20,7 +20,7 @@ class DataService {
   }
 
   persoChoosed(idPerso) {
-    return http.post("/list-perso", idPerso, config);
+    return http.post("/admin", idPerso, config);
   }
 
   getMyProfile(user) {

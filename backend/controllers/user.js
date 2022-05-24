@@ -45,7 +45,7 @@ exports.choosePerso = (req, res, next) => {
     { heros: obj.heros },
     {
       where: {
-        email: obj.email,
+        email: obj.user,
       },
     }
   )
