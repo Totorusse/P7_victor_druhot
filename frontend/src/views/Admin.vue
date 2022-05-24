@@ -9,12 +9,12 @@
         <p>Heros : {{ item.heros }}</p>
         <div class="herosDiv">
           <label for="heros">Choisir un héros</label><br /><br />
-          <select id="`${item.email}`">
+          <select>
             <option value="abbie-lothyne">abbie-lothyne</option>
             <option value="blenir-sunrion">blenir-sunrion</option>
             <option value="drumlin">drumlin</option>
-            <option value="erdo">erdo</option></select
-          ><br /><br />
+            <option value="erdo">erdo</option>
+          </select>
           <button @click="choosePerso" id="choosePerso">Attribuer le héros</button><br />
         </div>
       </li>
@@ -50,13 +50,12 @@ export default {
       let target = event.target;
       let user = target.closest("li");
       let idPerso = user.dataset.id;
-      /*let herosDiv = target.closest("div");*/
-      let heros = document.getElementById(`marchePas`);
+      let heros = target.previousElementSibling.value;
       let dataPerso = {
         user: idPerso,
         heros: heros,
       };
-      console.log(heros);
+      console.log(idPerso);
 
       DataService.persoChoosed(dataPerso)
         .then((response) => {
