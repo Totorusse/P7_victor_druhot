@@ -85,7 +85,7 @@ export default {
               router.push("/admin");
               window.setTimeout(this.delayedFunction, 500);
             } else {
-              router.push("/list-perso");
+              router.push("/perso");
               window.setTimeout(this.delayedFunction, 500);
             }
           }

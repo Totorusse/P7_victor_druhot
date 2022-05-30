@@ -17,6 +17,26 @@ exports.getAllPerso = (req, res, next) => {
     });
 };
 
+exports.getPersoCode = (req, res, next) => {
+  Promise.all([
+    Perso.findAll({
+      where: {
+        code: req.body.code,
+      },
+    }),
+  ])
+    .then((perso) =>
+      res.send({
+        perso,
+      })
+    )
+    .catch((error) => {
+      res.status(400)({
+        error,
+      });
+    });
+};
+
 exports.getAllInfo = (req, res, next) => {
   let userName = req.query.userSession;
   console.log(userName);

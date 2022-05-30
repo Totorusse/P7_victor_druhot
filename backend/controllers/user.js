@@ -52,7 +52,7 @@ exports.choosePerso = (req, res, next) => {
     .then((data) => {
       if (data) {
         res.send({
-          message: "Heros choisi !",
+          message: "Heros oooo !",
         });
       } else {
         res.send({

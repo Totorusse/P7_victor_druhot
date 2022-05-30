@@ -19,10 +19,12 @@ class DataService {
     return http.get("/stuff", { params: { userSession }, headers: { Authorization: `Bearer ${token}` } });
   }
 
-  persoChoosed(idPerso) {
-    return http.post("/admin", idPerso, config);
+  persoCode(code) {
+    return http.post("/perso", code, config);
   }
-
+  persoChoosed(idPerso) {
+    return http.post("/persoChoosed", idPerso, config);
+  }
   getMyProfile(user) {
     return http.get("/profile", { params: { user }, headers: { Authorization: `Bearer ${token}` } });
   }

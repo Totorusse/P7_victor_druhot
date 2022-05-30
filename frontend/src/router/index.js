@@ -4,6 +4,7 @@ import Sign from "../views/Sign.vue";
 import Login from "../views/Login.vue";
 import Actu from "../views/Actu.vue";
 import ListPerso from "../views/List-perso.vue";
+import Perso from "../views/Perso.vue";
 import Stuff from "../views/Stuff.vue";
 import ActuId from "../views/ActuId.vue";
 import Pub from "../views/Pub.vue";
@@ -41,6 +42,11 @@ const routes = [
     path: "/list-perso",
     name: "list-pers",
     component: ListPerso,
+  },
+  {
+    path: "/perso",
+    name: "perso",
+    component: Perso,
   },
   {
     path: "/stuff",
