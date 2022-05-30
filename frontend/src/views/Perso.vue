@@ -8,7 +8,10 @@
       </button>
     </form>
     <div class="perso-chosen">
-      Perso : {{ perso }}
+      Perso : {{ perso.nom }}
+      <div class="image" v-if="perso.image">
+        <img :src="`${perso.image}`" />
+      </div>
       <span class="select"><button @click="choosePerso" id="choose">Sélectionner</button></span>
     </div>
   </div>
@@ -30,21 +33,24 @@ export default {
 
   methods: {
     /* fonction to send code for character*/
+
     sendCode() {
       let codeValue = document.getElementById("code").value;
       let code = { code: codeValue };
       DataService.persoCode(code)
         .then((response) => {
-          this.perso = response.data.perso[0][0].nom;
-          window.history.pushState("object or string", "Title", "/persoChoosed");
+          this.perso.nom = response.data.perso[0][0].nom;
+          this.perso.image = response.data.perso[0][0].image;
         })
         .catch((e) => {
           console.log(e);
         });
     } /* fonction to choose character*/,
     choosePerso() {
+      let idPerso = sessionStorage.getItem("userName");
       let dataPerso = {
         heros: this.perso,
+        user: idPerso,
       };
 
       DataService.persoChoosed(dataPerso)

@@ -2,6 +2,7 @@
   <div id="main">
     <div id="nav">
       <img id="logo" src="./assets/logo.png" />
+
       <div id="hidden">
         <button @click="profile" class="nav__button">Mon profil ({{ userSession }})</button><br />
         <button @click="logOut" class="nav__button">Se déconnecter</button>
