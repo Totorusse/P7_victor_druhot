@@ -1,5 +1,11 @@
 <template>
   <h1>Mon perso : {{ heros }}</h1>
+  <div id="user-nav">
+    <button @click="story" class="story-button">Chroniques</button>
+    <button @click="stat" class="stat-button">Statistiques</button>
+    <button @click="stuff" class="stuff-button">Inventaire</button>
+  </div>
+
   <hr />
   <div>
     <div>{{ herosDescr }}</div>
@@ -74,13 +80,6 @@ export default {
   },
 
   methods: {
-    /* fonction to show comment input*/
-    addComment(event) {
-      let target = event.target;
-      let commentDiv = target.nextSibling.nextSibling;
-      commentDiv.style.display = "initial";
-      target.style.display = "none";
-    },
     /* fonction to publish comment */
     pubComment(event) {
       let target = event.target;
