@@ -19,7 +19,7 @@
 
 <script>
 import DataService from "../services/DataService";
-//import router from "../router/index";
+import router from "../router/index";
 
 export default {
   name: "perso",
@@ -56,7 +56,7 @@ export default {
       DataService.persoChoosed(dataPerso)
         .then((response) => {
           console.log(response.data);
-          // router.push("/stuff");
+          router.push("/stuff");
         })
         .catch((e) => {
           console.log(e);
