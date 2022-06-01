@@ -6,6 +6,8 @@ import Actu from "../views/Actu.vue";
 import ListPerso from "../views/List-perso.vue";
 import Perso from "../views/Perso.vue";
 import Stuff from "../views/Stuff.vue";
+import Story from "../views/Story.vue";
+import Stat from "../views/Stat.vue";
 import ActuId from "../views/ActuId.vue";
 import Pub from "../views/Pub.vue";
 import Comments from "../views/Comments.vue";
@@ -52,6 +54,16 @@ const routes = [
     path: "/stuff",
     name: "stuff",
     component: Stuff,
+  },
+  {
+    path: "/story",
+    name: "story",
+    component: Story,
+  },
+  {
+    path: "/stat",
+    name: "stat",
+    component: Stat,
   },
   {
     path: "/actu/:id",

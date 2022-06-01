@@ -1,5 +1,6 @@
 <template>
   <h1>{{ heros }}</h1>
+
   <div id="user-nav">
     <button @click="story" class="story-button">Chroniques</button>
     <button @click="stat" class="stat-button">Statistiques</button>

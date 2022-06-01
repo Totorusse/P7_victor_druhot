@@ -56,7 +56,7 @@ export default {
       DataService.persoChoosed(dataPerso)
         .then((response) => {
           console.log(response.data);
-          router.push("/stuff");
+          router.push("/story");
         })
         .catch((e) => {
           console.log(e);
