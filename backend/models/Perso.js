@@ -12,6 +12,30 @@ module.exports = (sequelize, Sequelize) => {
     element: {
       type: Sequelize.STRING,
     },
+    stat1: {
+      type: Sequelize.STRING,
+    },
+    stat2: {
+      type: Sequelize.STRING,
+    },
+    stat3: {
+      type: Sequelize.STRING,
+    },
+    stat4: {
+      type: Sequelize.STRING,
+    },
+    stat5: {
+      type: Sequelize.STRING,
+    },
+    stat6: {
+      type: Sequelize.STRING,
+    },
+    stat7: {
+      type: Sequelize.STRING,
+    },
+    stat8: {
+      type: Sequelize.STRING,
+    },
     image: {
       type: Sequelize.STRING,
     },

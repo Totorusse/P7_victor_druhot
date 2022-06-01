@@ -44,9 +44,6 @@ export default {
         this.heros = response.data[0][0].heros;
         this.herosDescr = response.data[1];
       })
-      .then(() => {
-        console.log(this.heros);
-      })
       .catch((e) => {
         console.log(e);
       });
