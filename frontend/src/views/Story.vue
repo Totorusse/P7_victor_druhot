@@ -9,10 +9,9 @@
 
   <hr />
 
-  <div>{{ herosDescr }}</div>
   <ul class="list">
-    <li class="list-item" v-for="item in herosDescr" :key="item">
-      {{ item }}
+    <li class="list-item" v-for="h in filteredHeros" :key="h">
+      {{ h }}
     </li>
   </ul>
 </template>
@@ -27,10 +26,17 @@ export default {
     return {
       userSession: sessionStorage.getItem("userName"),
       heros: {},
-      herosDescr: {},
+      herosDescr: [],
+      numbers: [1, 2, 3, 4, 5],
     };
   },
-
+  computed: {
+    filteredHeros: function () {
+      return this.numbers.filter(function (number) {
+        return number >= 3;
+      });
+    },
+  },
   mounted() {
     let userSession = sessionStorage.getItem("userName");
     /* display all news */
@@ -38,7 +44,9 @@ export default {
       .then((response) => {
         this.heros = response.data[0][0].heros;
         this.herosDescr = response.data[1];
-        console.log(response.data[1]);
+      })
+      .then(() => {
+        console.log(this.herosDescr);
       })
       .catch((e) => {
         console.log(e);
