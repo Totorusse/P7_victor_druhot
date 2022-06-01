@@ -7,7 +7,6 @@
   </div>
 
   <hr />
-  <div>{{ herosDescr }}</div>
   <ul class="list">
     <li class="list-item" v-for="item in herosDescr" :key="item">
       {{ item }}
