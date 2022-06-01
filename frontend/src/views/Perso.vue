@@ -52,10 +52,10 @@ export default {
         heros: this.perso,
         user: idPerso,
       };
+      sessionStorage.setItem("userHeros", this.perso.nom);
 
       DataService.persoChoosed(dataPerso)
-        .then((response) => {
-          console.log(response.data);
+        .then(() => {
           router.push("/story");
         })
         .catch((e) => {

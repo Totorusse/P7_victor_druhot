@@ -27,13 +27,13 @@ export default {
       userSession: sessionStorage.getItem("userName"),
       heros: {},
       herosDescr: [],
-      numbers: [1, 2, 3, 4, 5],
     };
   },
   computed: {
     filteredHeros: function () {
-      return this.numbers.filter(function (number) {
-        return number >= 3;
+      let test = "Drumlim";
+      return this.herosDescr.filter(function (herosTab) {
+        return herosTab.nom === test;
       });
     },
   },
@@ -46,7 +46,7 @@ export default {
         this.herosDescr = response.data[1];
       })
       .then(() => {
-        console.log(this.herosDescr);
+        console.log(this.heros);
       })
       .catch((e) => {
         console.log(e);
