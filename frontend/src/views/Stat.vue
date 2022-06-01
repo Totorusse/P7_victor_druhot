@@ -8,8 +8,14 @@
 
   <hr />
   <ul class="list">
-    <li class="list-item" v-for="h in filteredHeros" :key="h">{{ h.description }}</li>
-    <li class="list-item" v-for="h in filteredHeros" :key="h">{{ h.nom }}</li>
+    <li class="list-item" v-for="h in filteredHeros" :key="h">Force : {{ h.stat1 }}</li>
+    <li class="list-item" v-for="h in filteredHeros" :key="h">Force : {{ h.stat2 }}</li>
+    <li class="list-item" v-for="h in filteredHeros" :key="h">Force : {{ h.stat3 }}</li>
+    <li class="list-item" v-for="h in filteredHeros" :key="h">Force : {{ h.stat4 }}</li>
+    <li class="list-item" v-for="h in filteredHeros" :key="h">Force : {{ h.stat5 }}</li>
+    <li class="list-item" v-for="h in filteredHeros" :key="h">Force : {{ h.stat6 }}</li>
+    <li class="list-item" v-for="h in filteredHeros" :key="h">Force : {{ h.stat7 }}</li>
+    <li class="list-item" v-for="h in filteredHeros" :key="h">Force : {{ h.stat8 }}</li>
   </ul>
 </template>
 
