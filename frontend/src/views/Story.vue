@@ -10,9 +10,8 @@
   <hr />
 
   <ul class="list">
-    <li class="list-item" v-for="h in filteredHeros" :key="h">
-      {{ h }}
-    </li>
+    <li class="list-item" v-for="h in filteredHeros" :key="h">{{ h.description }}</li>
+    <li class="list-item" v-for="h in filteredHeros" :key="h">{{ h.nom }}</li>
   </ul>
 </template>
 
@@ -31,9 +30,9 @@ export default {
   },
   computed: {
     filteredHeros: function () {
-      let test = "Drumlim";
+      let userHeros = sessionStorage.getItem("userHeros");
       return this.herosDescr.filter(function (herosTab) {
-        return herosTab.nom === test;
+        return herosTab.nom === userHeros;
       });
     },
   },
