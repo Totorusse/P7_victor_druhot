@@ -58,8 +58,6 @@ export default {
   name: "Actu",
   data() {
     return {
-      actu: {},
-      comment: {},
       userSession: sessionStorage.getItem("userName"),
       heros: {},
       herosDescr: {},
@@ -81,26 +79,6 @@ export default {
   },
 
   methods: {
-    /* fonction to publish comment */
-    pubComment(event) {
-      let target = event.target;
-      let commentDiv = target.closest("div");
-      let input = commentDiv.querySelector("input");
-
-      let comment = {
-        text: input.value,
-        userName: sessionStorage.getItem("userName"),
-        pubId: input.dataset.id,
-      };
-      DataService.pubComment(comment)
-        .then((response) => {
-          console.log(response.data);
-          location.reload();
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    },
     story() {
       router.push("/story");
     },
