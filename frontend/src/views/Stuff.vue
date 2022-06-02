@@ -16,6 +16,32 @@
   </div>
   <div class="item-bloc" id="mainG">Main gauche</div>
   <div class="item-bloc" id="mainD">Main droite</div>
+  <div class="slots">
+    <div class="rang1">
+      <div id="slot1">slot1</div>
+      <div id="slot2">Slot2</div>
+      <div id="slot3">Slot3</div>
+      <div id="slot4">Slot4</div>
+    </div>
+    <div class="rang2">
+      <div id="slot5">slot5</div>
+      <div id="slot6">slot6</div>
+      <div id="slot7">slot7</div>
+      <div id="slot8">slot8</div>
+    </div>
+    <div class="rang3">
+      <div id="slot9">Slot 9</div>
+      <div id="slot10">Slot</div>
+      <div id="slot11">Slot</div>
+      <div id="slot12">Slot</div>
+    </div>
+    <div class="rang4">
+      <div id="slot13">Slot</div>
+      <div id="slot14">Slot</div>
+      <div id="slot15">Slot</div>
+      <div id="slot16">Slot</div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -131,5 +157,31 @@ a {
   display: inline-block;
   margin: 15px;
   padding: 15px;
+}
+.slots {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+}
+.rang1,
+.rang2,
+.rang3,
+.rang4 {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+.rang1 > div,
+.rang2 > div,
+.rang3 > div,
+.rang4 > div {
+  display: flex;
+  gap: 5px;
+  width: 100px;
+  height: 100px;
+  border: solid white;
+  justify-content: center;
+  align-items: center;
 }
 </style>

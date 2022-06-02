@@ -14,6 +14,7 @@ exports.getAllInfo = (req, res, next) => {
       },
     }),
     Perso.findAll(),
+    User.findAll(),
   ])
     .then((user) => {
       res.status(200).send(user);
@@ -49,7 +50,7 @@ exports.itemPut = (req, res, next) => {
   const obj = req.body;
   console.log(obj);
   User.update(
-    { Slot5: obj.itemPut },
+    { Slot1: obj.itemPut },
     {
       where: {
         email: obj.user,
