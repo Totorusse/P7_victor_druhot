@@ -108,21 +108,39 @@ export default {
     /* fonction to add item in stuff*/
     putItem() {
       let idPerso = sessionStorage.getItem("userName");
-
       for (let slot in this.slots) {
-        console.log(slot);
+        if (this.slots[slot] == null) {
+          this.slots[slot] = this.item.nom;
+          let dataItems = {
+            Slot1: this.slots.Slot1,
+            Slot2: this.slots.Slot2,
+            Slot3: this.slots.Slot3,
+            Slot4: this.slots.Slot4,
+            Slot5: this.slots.Slot5,
+            Slot6: this.slots.Slot6,
+            Slot7: this.slots.Slot7,
+            Slot8: this.slots.Slot8,
+            Slot9: this.slots.Slot9,
+            Slot10: this.slots.Slot10,
+            Slot11: this.slots.Slot11,
+            Slot12: this.slots.Slot12,
+            Slot13: this.slots.Slot13,
+            Slot14: this.slots.Slot14,
+            Slot15: this.slots.Slot15,
+            Slot16: this.slots.Slot16,
+            user: idPerso,
+          };
+          DataService.putItem(dataItems)
+            .then((response) => {
+              console.log(response.data);
+            })
+            .catch((e) => {
+              console.log(e);
+            });
+
+          return;
+        }
       }
-      let dataItems = {
-        itemPut: this.item.nom,
-        user: idPerso,
-      };
-      DataService.putItem(dataItems)
-        .then((response) => {
-          console.log(response.data);
-        })
-        .catch((e) => {
-          console.log(e);
-        });
     },
 
     /* fonction to close item selection*/
