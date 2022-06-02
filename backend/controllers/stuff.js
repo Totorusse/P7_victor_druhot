@@ -43,3 +43,33 @@ exports.getItemCode = (req, res, next) => {
       });
     });
 };
+
+// Put item  in character DB
+exports.itemPut = (req, res, next) => {
+  const obj = req.body;
+  console.log(obj);
+  User.update(
+    { mainG: obj.itemPut },
+    {
+      where: {
+        email: obj.user,
+      },
+    }
+  )
+    .then((data) => {
+      if (data) {
+        res.send({
+          message: "Objet ajouté !",
+        });
+      } else {
+        res.send({
+          message: `Erreur survenue!`,
+        });
+      }
+    })
+    .catch(() => {
+      res.status(500).send({
+        message: "Error updating",
+      });
+    });
+};

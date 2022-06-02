@@ -12,6 +12,12 @@ module.exports = (sequelize, Sequelize) => {
     heros: {
       type: Sequelize.STRING,
     },
+    mainG: {
+      type: Sequelize.STRING,
+    },
+    mainD: {
+      type: Sequelize.STRING,
+    },
   });
   return User;
 };

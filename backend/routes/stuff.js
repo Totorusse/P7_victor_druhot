@@ -8,4 +8,6 @@ const stuffCtrl = require("../controllers/stuff");
 
 router.get("/stuff", auth, multer, stuffCtrl.getAllInfo);
 router.post("/stuff", auth, multer, stuffCtrl.getItemCode);
+router.put("/stuff", auth, multer, stuffCtrl.itemPut);
+
 module.exports = router;

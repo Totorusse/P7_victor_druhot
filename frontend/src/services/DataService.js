@@ -28,6 +28,10 @@ class DataService {
   itemCode(code) {
     return http.post("/stuff", code, config);
   }
+  putItem(item) {
+    return http.put("/stuff", item, config);
+  }
+
   getMyProfile(user) {
     return http.get("/profile", { params: { user }, headers: { Authorization: `Bearer ${token}` } });
   }

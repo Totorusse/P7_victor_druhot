@@ -10,7 +10,12 @@
   <form class="code">
     <input type="text" placeholder="Code" id="code" /><button @click="sendCode" id="sendCode">Ajouter</button>
   </form>
-  <div id="item">{{ item }}</div>
+  <div id="item">
+    {{ item }}
+    <div id="selectItem"><button @click="putItem" id="putItem">Equiper</button></div>
+  </div>
+  <div class="item-bloc" id="mainG">Main gauche</div>
+  <div class="item-bloc" id="mainD">Main droite</div>
 </template>
 
 <script>
@@ -63,13 +68,30 @@ export default {
           console.log(response.data.item[0][0]);
           this.item.nom = response.data.item[0][0].nom;
           this.item.type = response.data.item[0][0].type;
-
+          this.item.id = response.data.item[0][0].id;
           //this.item.image = response.data.item[0][0].image;
         })
         .catch((e) => {
           console.log(e);
         });
     },
+    /* fonction to add item in stuff*/
+    putItem() {
+      let idPerso = sessionStorage.getItem("userName");
+      let dataItem = {
+        itemPut: this.item.nom,
+        user: idPerso,
+      };
+
+      DataService.putItem(dataItem)
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    },
+
     story() {
       router.push("/story");
     },
@@ -102,5 +124,12 @@ a {
   list-style-type: none;
   padding: 0;
   margin: 0;
+}
+
+.item-bloc {
+  border: solid white;
+  display: inline-block;
+  margin: 15px;
+  padding: 15px;
 }
 </style>
