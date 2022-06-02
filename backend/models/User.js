@@ -18,6 +18,18 @@ module.exports = (sequelize, Sequelize) => {
     mainD: {
       type: Sequelize.STRING,
     },
+    Slot1: {
+      type: Sequelize.STRING,
+    },
+    Slot2: {
+      type: Sequelize.STRING,
+    },
+    Slot3: {
+      type: Sequelize.STRING,
+    },
+    Slot4: {
+      type: Sequelize.STRING,
+    },
   });
   return User;
 };

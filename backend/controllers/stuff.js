@@ -44,12 +44,12 @@ exports.getItemCode = (req, res, next) => {
     });
 };
 
-// Put item  in character DB
+// Put item  in character empty slot
 exports.itemPut = (req, res, next) => {
   const obj = req.body;
   console.log(obj);
   User.update(
-    { mainG: obj.itemPut },
+    { Slot1: obj.itemPut },
     {
       where: {
         email: obj.user,
