@@ -14,7 +14,12 @@ exports.getAllInfo = (req, res, next) => {
       },
     }),
     Perso.findAll(),
-    User.findAll(),
+    User.findAll({
+      attributes: { exclude: ["psw"] },
+      where: {
+        email: userName,
+      },
+    }),
   ])
     .then((user) => {
       res.status(200).send(user);
@@ -50,7 +55,7 @@ exports.itemPut = (req, res, next) => {
   const obj = req.body;
   console.log(obj);
   User.update(
-    { Slot1: obj.itemPut },
+    { Slot2: obj.itemPut, Slot3: obj.itemPut },
     {
       where: {
         email: obj.user,

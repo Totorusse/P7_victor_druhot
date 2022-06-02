@@ -111,7 +111,6 @@ export default {
         itemPut: this.item.nom,
         user: idPerso,
       };
-
       DataService.putItem(dataItem)
         .then((response) => {
           console.log(response.data);
