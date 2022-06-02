@@ -10,11 +10,7 @@
   <form class="code">
     <input type="text" placeholder="Code" id="code" /><button @click="sendCode" id="sendCode">Ajouter</button>
   </form>
-
-  <ul class="list">
-    <li class="list-item" v-for="h in filteredHeros" :key="h">{{ h.description }}</li>
-    <li class="list-item" v-for="h in filteredHeros" :key="h">{{ h.nom }}</li>
-  </ul>
+  <div id="item">{{ item }}</div>
 </template>
 
 <script>
@@ -28,6 +24,7 @@ export default {
       userSession: sessionStorage.getItem("userName"),
       heros: {},
       herosDescr: [],
+      item: {},
     };
   },
   computed: {
@@ -40,13 +37,14 @@ export default {
   },
 
   mounted() {
+    let seeItem = document.getElementById("item");
+    seeItem.style.display = "none";
     let userSession = sessionStorage.getItem("userName");
     /* display all news */
     DataService.getAllInfo(userSession)
       .then((response) => {
         this.heros = response.data[0][0].heros;
         this.herosDescr = response.data[1];
-        console.log(response.data[1]);
       })
       .catch((e) => {
         console.log(e);
@@ -58,10 +56,15 @@ export default {
     sendCode() {
       let codeValue = document.getElementById("code").value;
       let code = { code: codeValue };
+      let seeItem = document.getElementById("item");
       DataService.itemCode(code)
         .then((response) => {
-          this.perso.nom = response.data.perso[0][0].nom;
-          this.perso.image = response.data.perso[0][0].image;
+          seeItem.style.display = "initial";
+          console.log(response.data.item[0][0]);
+          this.item.nom = response.data.item[0][0].nom;
+          this.item.type = response.data.item[0][0].type;
+
+          //this.item.image = response.data.item[0][0].image;
         })
         .catch((e) => {
           console.log(e);

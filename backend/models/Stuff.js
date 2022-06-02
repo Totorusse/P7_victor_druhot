@@ -3,7 +3,10 @@ module.exports = (sequelize, Sequelize) => {
     code: {
       type: Sequelize.STRING,
     },
-    arme: {
+    nom: {
+      type: Sequelize.STRING,
+    },
+    type: {
       type: Sequelize.STRING,
     },
   });
