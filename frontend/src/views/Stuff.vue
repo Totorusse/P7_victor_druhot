@@ -21,28 +21,28 @@
   <div class="item-bloc" id="mainD">Main droite</div>
   <div class="slots">
     <div class="rang1">
-      <div id="slot1">slot1</div>
-      <div id="slot2">Slot2</div>
-      <div id="slot3">Slot3</div>
-      <div id="slot4">Slot4</div>
+      <div id="slot1">{{ slots[0].Slot1 }}</div>
+      <div id="slot2">{{ slots[0].Slot2 }}</div>
+      <div id="slot3">{{ slots[0].Slot3 }}</div>
+      <div id="slot4">{{ slots[0].Slot4 }}</div>
     </div>
     <div class="rang2">
-      <div id="slot5">slot5</div>
-      <div id="slot6">slot6</div>
-      <div id="slot7">slot7</div>
-      <div id="slot8">slot8</div>
+      <div id="slot5">{{ slots[0].Slot5 }}</div>
+      <div id="slot6">{{ slots[0].Slot6 }}</div>
+      <div id="slot7">{{ slots[0].Slot7 }}</div>
+      <div id="slot8">{{ slots[0].Slot8 }}</div>
     </div>
     <div class="rang3">
-      <div id="slot9">Slot 9</div>
-      <div id="slot10">Slot</div>
-      <div id="slot11">Slot</div>
-      <div id="slot12">Slot</div>
+      <div id="slot9">{{ slots[0].Slot9 }}</div>
+      <div id="slot10">{{ slots[0].Slot10 }}</div>
+      <div id="slot11">{{ slots[0].Slot11 }}</div>
+      <div id="slot12">{{ slots[0].Slot12 }}</div>
     </div>
     <div class="rang4">
-      <div id="slot13">Slot</div>
-      <div id="slot14">Slot</div>
-      <div id="slot15">Slot</div>
-      <div id="slot16">Slot</div>
+      <div id="slot13">{{ slots[0].Slot13 }}</div>
+      <div id="slot14">{{ slots[0].Slot14 }}</div>
+      <div id="slot15">{{ slots[0].Slot15 }}</div>
+      <div id="slot16">{{ slots[0].Slot16 }}</div>
     </div>
   </div>
 </template>
@@ -59,6 +59,7 @@ export default {
       heros: {},
       herosDescr: [],
       item: {},
+      slots: {},
     };
   },
   computed: {
@@ -79,6 +80,7 @@ export default {
       .then((response) => {
         this.heros = response.data[0][0].heros;
         this.herosDescr = response.data[1];
+        this.slots = response.data[2];
       })
       .catch((e) => {
         console.log(e);
