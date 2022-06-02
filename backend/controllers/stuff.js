@@ -49,7 +49,7 @@ exports.itemPut = (req, res, next) => {
   const obj = req.body;
   console.log(obj);
   User.update(
-    { Slot1: obj.itemPut },
+    { Slot5: obj.itemPut },
     {
       where: {
         email: obj.user,
