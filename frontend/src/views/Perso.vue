@@ -33,7 +33,6 @@ export default {
 
   methods: {
     /* fonction to send code for character*/
-
     sendCode() {
       let codeValue = document.getElementById("code").value;
       let code = { code: codeValue };
@@ -45,8 +44,8 @@ export default {
         .catch((e) => {
           console.log(e);
         });
-    } /* fonction to choose character*/,
-    choosePerso() {
+    },
+    /* fonction to choose character*/ choosePerso() {
       let idPerso = sessionStorage.getItem("userName");
       let dataPerso = {
         heros: this.perso,

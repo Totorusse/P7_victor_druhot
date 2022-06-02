@@ -25,7 +25,9 @@ class DataService {
   persoChoosed(idPerso) {
     return http.put("/perso", idPerso, config);
   }
-
+  itemCode(code) {
+    return http.post("/stuff", code, config);
+  }
   getMyProfile(user) {
     return http.get("/profile", { params: { user }, headers: { Authorization: `Bearer ${token}` } });
   }

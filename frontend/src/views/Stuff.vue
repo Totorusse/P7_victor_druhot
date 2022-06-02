@@ -7,6 +7,10 @@
   </div>
 
   <hr />
+  <form class="code">
+    <input type="text" placeholder="Code" id="code" /><button @click="sendCode" id="sendCode">Ajouter</button>
+  </form>
+
   <ul class="list">
     <li class="list-item" v-for="h in filteredHeros" :key="h">{{ h.description }}</li>
     <li class="list-item" v-for="h in filteredHeros" :key="h">{{ h.nom }}</li>
@@ -50,6 +54,19 @@ export default {
   },
 
   methods: {
+    /* fonction to send code for items*/
+    sendCode() {
+      let codeValue = document.getElementById("code").value;
+      let code = { code: codeValue };
+      DataService.itemCode(code)
+        .then((response) => {
+          this.perso.nom = response.data.perso[0][0].nom;
+          this.perso.image = response.data.perso[0][0].image;
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    },
     story() {
       router.push("/story");
     },
