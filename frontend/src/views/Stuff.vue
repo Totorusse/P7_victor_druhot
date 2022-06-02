@@ -14,7 +14,7 @@
     {{ item }}
     <div id="selectItem">
       <p>&Ecirc;tes-vous sûr de vouloir ajouter l'objet dans votre inventaire ?</p>
-      <button @click="putItem" id="putItem">Oui</button><button @click="putItem" id="putItem">Non</button>
+      <button @click="putItem" id="putItem">Oui</button><button @click="closeItem" id="closeItem">Non</button>
     </div>
   </div>
   <div class="item-bloc" id="mainG">Main gauche</div>
@@ -121,6 +121,11 @@ export default {
         });
     },
 
+    /* fonction to close item selection*/
+    closeItem() {
+      let seeItem = document.getElementById("item");
+      seeItem.style.display = "none";
+    },
     story() {
       router.push("/story");
     },
