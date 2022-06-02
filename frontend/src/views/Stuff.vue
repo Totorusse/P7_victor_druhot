@@ -12,7 +12,10 @@
   </form>
   <div id="item">
     {{ item }}
-    <div id="selectItem"><button @click="putItem" id="putItem">Equiper</button></div>
+    <div id="selectItem">
+      <p>&Ecirc;tes-vous sûr de vouloir ajouter l'objet dans votre inventaire ?</p>
+      <button @click="putItem" id="putItem">Oui</button><button @click="putItem" id="putItem">Non</button>
+    </div>
   </div>
   <div class="item-bloc" id="mainG">Main gauche</div>
   <div class="item-bloc" id="mainD">Main droite</div>
