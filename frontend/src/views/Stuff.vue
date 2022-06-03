@@ -109,6 +109,8 @@ export default {
     /* fonction to add item in stuff*/
     putItem() {
       let idPerso = sessionStorage.getItem("userName");
+      let seeItem = document.getElementById("item");
+
       if (this.item.isUsed == true) {
         alert("Objet déjà utilisé");
       } else {
@@ -141,7 +143,7 @@ export default {
                 console.log(response.data);
               })
               .then(() => {
-                location.reload;
+                seeItem.style.display = "none";
               })
               .catch((e) => {
                 console.log(e);
