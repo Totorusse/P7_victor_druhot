@@ -12,6 +12,9 @@ module.exports = (sequelize, Sequelize) => {
     isUsed: {
       type: Sequelize.BOOLEAN,
     },
+    slotSup: {
+      type: Sequelize.INTEGER,
+    },
   });
   return Stuff;
 };

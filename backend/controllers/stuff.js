@@ -37,6 +37,7 @@ exports.getAllInfo = (req, res, next) => {
         email: userName,
       },
     }),
+    Stuff.findAll(),
   ])
     .then((user) => {
       res.status(200).send(user);

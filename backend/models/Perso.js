@@ -39,6 +39,9 @@ module.exports = (sequelize, Sequelize) => {
     image: {
       type: Sequelize.STRING,
     },
+    slot: {
+      type: Sequelize.STRING,
+    },
   });
   return Perso;
 };
