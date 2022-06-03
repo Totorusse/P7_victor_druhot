@@ -9,6 +9,9 @@ module.exports = (sequelize, Sequelize) => {
     type: {
       type: Sequelize.STRING,
     },
+    isUsed: {
+      type: Sequelize.BOOLEAN,
+    },
   });
   return Stuff;
 };
