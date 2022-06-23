@@ -24,6 +24,8 @@
   <div>Heros slots : {{ herosDescrFiltered.slot }}</div>
   <div>Items+ : {{ slotSupSum }}</div>
   <div>Total slots : {{ slotSupSum + herosDescrFiltered.slot }}</div>
+  <div>Slots utilisés : {{ slotUsed }}</div>
+
   <div class="slots" id="slots">
     <div class="rang1">
       <div id="slot1">{{ slots.Slot1 }}</div>
@@ -68,6 +70,7 @@ export default {
       slots: {},
       stuffList: [],
       slotSupSum: 0,
+      slotUsed: 0,
     };
   },
   computed: {
@@ -92,19 +95,16 @@ export default {
         this.slots = response.data[2][0];
         this.stuffList = response.data[3];
       })
-
       .then(() => {
         /* new description tab filtered with right heros*/
         let herosDescr = this.herosDescr;
         let heros = this.heros;
         for (let x in herosDescr) {
           if (herosDescr[x].nom == heros) {
-            console.log(heros);
             this.herosDescrFiltered = herosDescr[x];
           }
         }
       })
-
       .then(() => {
         /* calc extra slots from stuff*/
         let stuffList = this.stuffList;
@@ -116,6 +116,17 @@ export default {
               slotSupSum += stuffList[x].slotSup;
               this.slotSupSum = slotSupSum;
             }
+          }
+        }
+      })
+      .then(() => {
+        /* calc number of slots used*/
+        let equipedStuff = this.slots;
+        let slotUsed = 0;
+        for (let x in equipedStuff) {
+          if (equipedStuff[x] != null && equipedStuff[x] != "") {
+            slotUsed += 1;
+            this.slotUsed = slotUsed;
           }
         }
       })
@@ -147,10 +158,16 @@ export default {
     putItem() {
       let idPerso = sessionStorage.getItem("userName");
       let seeItem = document.getElementById("item");
+      let testSlot = this.slotSupSum + this.herosDescrFiltered.slot;
+      console.log(testSlot);
 
       if (this.item.isUsed == true) {
         alert("Objet déjà utilisé");
+      } else if (this.slotUsed >= testSlot) {
+        alert("Inventaire plein");
       } else {
+        console.log(testSlot);
+
         for (let slot in this.slots) {
           if (this.slots[slot] == null) {
             this.slots[slot] = this.item.nom;
@@ -185,7 +202,6 @@ export default {
               .then(() => {
                 window.location.reload();
               })
-
               .catch((e) => {
                 console.log(e);
               });

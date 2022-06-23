@@ -3,6 +3,7 @@ const db = require("../models");
 const Perso = db.perso;
 const User = db.user;
 const Stuff = db.stuff;
+const { Op } = require("sequelize");
 
 exports.getAllInfo = (req, res, next) => {
   let userName = req.query.userSession;
