@@ -17,9 +17,8 @@
       <button @click="putItem" id="putItem">Oui</button><button @click="closeItem" id="closeItem">Non</button>
     </div>
   </div>
-  <div class="item-bloc" id="mainG">Main gauche</div>
-  <div class="item-bloc" id="mainD">Main droite</div>
-  <!-- <div v-for="h in filteredHeros" :key="h">Items Héros : {{ h.slot }}</div> -->
+  <div class="item-bloc" id="mainG">Main gauche : {{ mainG }}</div>
+  <div class="item-bloc" id="mainD">Main droite : {{ mainD }}</div>
   <div>Heros slots : {{ herosDescrFiltered.slot }}</div>
   <div>Items+ : {{ slotSupSum }}</div>
   <div>Total slots : {{ slotSupSum + herosDescrFiltered.slot }}</div>
@@ -103,6 +102,8 @@ export default {
   data() {
     return {
       userSession: sessionStorage.getItem("userName"),
+      mainG: {},
+      mainD: {},
       heros: {},
       herosDescr: [],
       herosDescrFiltered: [],
@@ -132,6 +133,8 @@ export default {
     DataService.getAllInfo(userSession)
       .then((response) => {
         this.heros = response.data[0][0].heros;
+        this.mainG = response.data[0][0].mainG;
+        this.mainD = response.data[0][0].mainD;
         this.herosDescr = response.data[1];
         this.slots = response.data[2][0];
         this.stuffList = response.data[3];

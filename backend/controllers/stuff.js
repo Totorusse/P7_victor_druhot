@@ -9,7 +9,7 @@ exports.getAllInfo = (req, res, next) => {
   let userName = req.query.userSession;
   Promise.all([
     User.findAll({
-      attributes: ["heros"],
+      attributes: ["heros", "mainG", "mainD"],
       where: {
         email: userName,
       },
