@@ -18,10 +18,12 @@
       <button @click="putItem" id="putItem">Oui</button><button @click="closeItem" id="closeItem">Non</button>
     </div>
   </div>
-  <div class="item-bloc" id="mainG">Main gauche{{ stuffList }}</div>
+  <div class="item-bloc" id="mainG">Main gauche</div>
   <div class="item-bloc" id="mainD">Main droite</div>
-  <div v-for="h in filteredHeros" :key="h">Max items : {{ h.slot }}</div>
-  <div v-for="i in filteredStuff" :key="i">Inventaire : {{ i }}</div>
+  <!-- <div v-for="h in filteredHeros" :key="h">Items Héros : {{ h.slot }}</div> -->
+  <div>Heros slots : {{ herosDescrFiltered.slot }}</div>
+  <div>Items+ : {{ slotSupSum }}</div>
+  <div>Total slots : {{ slotSupSum + herosDescrFiltered.slot }}</div>
   <div class="slots" id="slots">
     <div class="rang1">
       <div id="slot1">{{ slots.Slot1 }}</div>
@@ -61,9 +63,11 @@ export default {
       userSession: sessionStorage.getItem("userName"),
       heros: {},
       herosDescr: [],
+      herosDescrFiltered: [],
       item: {},
       slots: {},
       stuffList: [],
+      slotSupSum: 0,
     };
   },
   computed: {
@@ -72,16 +76,6 @@ export default {
       let userHeros = sessionStorage.getItem("userHeros");
       return this.herosDescr.filter(function (herosTab) {
         return herosTab.nom === userHeros;
-      });
-    } /* get stuff slotSup filtering stuff list with stuff in bag */,
-    filteredStuff: function () {
-      return this.stuffList.filter(function (stuffTab) {
-        for (let x in stuffTab) {
-          if (x) {
-            console.log(x);
-            return stuffTab;
-          }
-        }
       });
     },
   },
@@ -97,6 +91,33 @@ export default {
         this.herosDescr = response.data[1];
         this.slots = response.data[2][0];
         this.stuffList = response.data[3];
+      })
+
+      .then(() => {
+        /* new description tab filtered with right heros*/
+        let herosDescr = this.herosDescr;
+        let heros = this.heros;
+        for (let x in herosDescr) {
+          if (herosDescr[x].nom == heros) {
+            console.log(heros);
+            this.herosDescrFiltered = herosDescr[x];
+          }
+        }
+      })
+
+      .then(() => {
+        /* calc extra slots from stuff*/
+        let stuffList = this.stuffList;
+        let equipedStuff = this.slots;
+        let slotSupSum = this.slotSupSum;
+        for (let x in stuffList) {
+          for (let y in equipedStuff) {
+            if (equipedStuff[y] == stuffList[x].nom) {
+              slotSupSum += stuffList[x].slotSup;
+              this.slotSupSum = slotSupSum;
+            }
+          }
+        }
       })
       .catch((e) => {
         console.log(e);
@@ -161,6 +182,10 @@ export default {
               .then(() => {
                 seeItem.style.display = "none";
               })
+              .then(() => {
+                window.location.reload();
+              })
+
               .catch((e) => {
                 console.log(e);
               });
