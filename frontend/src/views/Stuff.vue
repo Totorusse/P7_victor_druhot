@@ -12,7 +12,6 @@
   </form>
   <div id="item">
     {{ item }}
-
     <div id="selectItem">
       <p>&Ecirc;tes-vous sûr de vouloir ajouter l'objet dans votre inventaire ?</p>
       <button @click="putItem" id="putItem">Oui</button><button @click="closeItem" id="closeItem">Non</button>
@@ -28,29 +27,70 @@
 
   <div class="slots" id="slots">
     <div class="rang1">
-      <div id="slot1">{{ slots.Slot1 }}</div>
-      <div id="slot2">{{ slots.Slot2 }}</div>
-      <div id="slot3">{{ slots.Slot3 }}</div>
-      <div id="slot4">{{ slots.Slot4 }}</div>
+      <button @click="showDetailsBloc">
+        <div id="slot1">{{ slots.Slot1 }}</div>
+      </button>
+      <button @click="showDetailsBloc">
+        <div id="slot2">{{ slots.Slot2 }}</div>
+      </button>
+      <button @click="showDetailsBloc">
+        <div id="slot3">{{ slots.Slot3 }}</div>
+      </button>
+      <button @click="showDetailsBloc">
+        <div id="slot4">{{ slots.Slot4 }}</div>
+      </button>
     </div>
     <div class="rang2">
-      <div id="slot5">{{ slots.Slot5 }}</div>
-      <div id="slot6">{{ slots.Slot6 }}</div>
-      <div id="slot7">{{ slots.Slot7 }}</div>
-      <div id="slot8">{{ slots.Slot8 }}</div>
+      <button @click="showDetailsBloc">
+        <div id="slot5">{{ slots.Slot5 }}</div>
+      </button>
+      <button @click="showDetailsBloc">
+        <div id="slot6">{{ slots.Slot6 }}</div>
+      </button>
+      <button @click="showDetailsBloc">
+        <div id="slot7">{{ slots.Slot7 }}</div>
+      </button>
+      <button @click="showDetailsBloc">
+        <div id="slot8">{{ slots.Slot8 }}</div>
+      </button>
     </div>
     <div class="rang3">
-      <div id="slot9">{{ slots.Slot9 }}</div>
-      <div id="slot10">{{ slots.Slot10 }}</div>
-      <div id="slot11">{{ slots.Slot11 }}</div>
-      <div id="slot12">{{ slots.Slot12 }}</div>
+      <button @click="showDetailsBloc">
+        <div id="slot9">{{ slots.Slot9 }}</div>
+      </button>
+      <button @click="showDetailsBloc">
+        <div id="slot10">{{ slots.Slot10 }}</div>
+      </button>
+      <button @click="showDetailsBloc">
+        <div id="slot11">{{ slots.Slot11 }}</div>
+      </button>
+      <button @click="showDetailsBloc">
+        <div id="slot12">{{ slots.Slot12 }}</div>
+      </button>
     </div>
     <div class="rang4">
-      <div id="slot13">{{ slots.Slot13 }}</div>
-      <div id="slot14">{{ slots.Slot14 }}</div>
-      <div id="slot15">{{ slots.Slot15 }}</div>
-      <div id="slot16">{{ slots.Slot16 }}</div>
+      <button @click="showDetailsBloc">
+        <div id="slot13">{{ slots.Slot13 }}</div>
+      </button>
+      <button @click="showDetailsBloc">
+        <div id="slot14">{{ slots.Slot14 }}</div>
+      </button>
+      <button @click="showDetailsBloc">
+        <div id="slot15">{{ slots.Slot15 }}</div>
+      </button>
+      <button @click="showDetailsBloc">
+        <div id="slot16">{{ slots.Slot16 }}</div>
+      </button>
     </div>
+  </div>
+  <div id="details" class="hidden">
+    <button @click="showDetails">Détails</button><button @click="equip">Equiper</button
+    ><button @click="give">Donner</button><button @click="drop">Jeter</button
+    ><button @click="closeDetailsBloc">X</button>
+  </div>
+  <div id="itemDetails" class="hidden">
+    <div>Image (A ajouter) ; Nom : {{ itemDetail.nom }} ; Type : {{ itemDetail.type }}</div>
+    <button @click="closeDetails">X</button>
   </div>
 </template>
 
@@ -67,6 +107,7 @@ export default {
       herosDescr: [],
       herosDescrFiltered: [],
       item: {},
+      itemDetail: {},
       slots: {},
       stuffList: [],
       slotSupSum: 0,
@@ -166,8 +207,6 @@ export default {
       } else if (this.slotUsed >= testSlot) {
         alert("Inventaire plein");
       } else {
-        console.log(testSlot);
-
         for (let slot in this.slots) {
           if (this.slots[slot] == null) {
             this.slots[slot] = this.item.nom;
@@ -211,7 +250,45 @@ export default {
         }
       }
     },
+    /* fonction to show detailsBloc*/
+    showDetailsBloc(e) {
+      let target = e.target.firstChild.innerHTML;
+      console.log(target);
+      sessionStorage.setItem("target", target);
+      document.getElementById("details").style.display = "initial";
+    },
+    /* fonction to close detailsBloc*/
+    closeDetailsBloc() {
+      document.getElementById("details").style.display = "none";
+    },
 
+    /* fonction to show item details*/
+    showDetails() {
+      console.log("yo");
+      document.getElementById("itemDetails").style.display = "initial";
+      let item = sessionStorage.getItem("target");
+      for (let x in this.stuffList) {
+        if (this.stuffList[x].nom == item) {
+          this.itemDetail = this.stuffList[x];
+        }
+      }
+    },
+    /* fonction to close detailsBloc*/
+    closeDetails() {
+      document.getElementById("itemDetails").style.display = "none";
+    },
+    /* fonction to equip item*/
+    equip() {
+      console.log("yo");
+    },
+    /* fonction to give item*/
+    give() {
+      console.log("yo");
+    },
+    /* fonction to drop item*/
+    drop() {
+      console.log("yo");
+    },
     /* fonction to close item selection*/
     closeItem() {
       let seeItem = document.getElementById("item");
@@ -235,7 +312,12 @@ export default {
 a {
   background-color: white;
 }
-
+.hidden {
+  display: none;
+}
+.visible {
+  display: initial;
+}
 .list-item {
   border: solid;
   margin-top: 8px;
@@ -271,10 +353,10 @@ a {
   justify-content: space-around;
   width: 100%;
 }
-.rang1 > div,
-.rang2 > div,
-.rang3 > div,
-.rang4 > div {
+.rang1 > button,
+.rang2 > button,
+.rang3 > button,
+.rang4 > button {
   display: flex;
   gap: 5px;
   width: 100px;
