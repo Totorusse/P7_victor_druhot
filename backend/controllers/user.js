@@ -90,6 +90,40 @@ exports.login = (req, res, next) => {
     .catch((error) => res.status(500).json({ error }));
 };
 
+// Put  item  in character hands
+exports.equipItem = (req, res, next) => {
+  const obj = req.body;
+  console.log(obj);
+  Promise.all([
+    User.update(
+      {
+        mainG: obj.item,
+      },
+      {
+        where: {
+          email: obj.user,
+        },
+      }
+    ),
+  ])
+    .then((data) => {
+      if (data) {
+        res.send({
+          message: "Objet équipé !",
+        });
+      } else {
+        res.send({
+          message: `Erreur survenue!`,
+        });
+      }
+    })
+    .catch(() => {
+      res.status(500).send({
+        message: "Error updating",
+      });
+    });
+};
+
 // Delete user from the database.
 exports.deleteProfile = (req, res, next) => {
   const user = req.body.user;

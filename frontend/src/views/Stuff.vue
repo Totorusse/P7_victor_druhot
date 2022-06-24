@@ -17,8 +17,12 @@
       <button @click="putItem" id="putItem">Oui</button><button @click="closeItem" id="closeItem">Non</button>
     </div>
   </div>
-  <div class="item-bloc" id="mainG">Main gauche : {{ mainG }}</div>
-  <div class="item-bloc" id="mainD">Main droite : {{ mainD }}</div>
+  <div class="item-bloc">
+    Main gauche : <span id="mainG">{{ mainG }}</span>
+  </div>
+  <div class="item-bloc">
+    Main droite :<span id="mainD">{{ mainD }}</span>
+  </div>
   <div>Heros slots : {{ herosDescrFiltered.slot }}</div>
   <div>Items+ : {{ slotSupSum }}</div>
   <div>Total slots : {{ slotSupSum + herosDescrFiltered.slot }}</div>
@@ -26,59 +30,59 @@
 
   <div class="slots" id="slots">
     <div class="rang1">
-      <button @click="showDetailsBloc">
-        <div id="slot1">{{ slots.Slot1 }}</div>
+      <button>
+        <div id="slot1" class="divButton" @click="showDetailsBloc">{{ slots.Slot1 }}</div>
       </button>
-      <button @click="showDetailsBloc">
-        <div id="slot2">{{ slots.Slot2 }}</div>
+      <button>
+        <div id="slot2" class="divButton" @click="showDetailsBloc">{{ slots.Slot2 }}</div>
       </button>
-      <button @click="showDetailsBloc">
-        <div id="slot3">{{ slots.Slot3 }}</div>
+      <button>
+        <div id="slot3" class="divButton" @click="showDetailsBloc">{{ slots.Slot3 }}</div>
       </button>
-      <button @click="showDetailsBloc">
-        <div id="slot4">{{ slots.Slot4 }}</div>
+      <button>
+        <div id="slot4" class="divButton" @click="showDetailsBloc">{{ slots.Slot4 }}</div>
       </button>
     </div>
     <div class="rang2">
-      <button @click="showDetailsBloc">
-        <div id="slot5">{{ slots.Slot5 }}</div>
+      <button>
+        <div id="slot5" class="divButton" @click="showDetailsBloc">{{ slots.Slot5 }}</div>
       </button>
-      <button @click="showDetailsBloc">
-        <div id="slot6">{{ slots.Slot6 }}</div>
+      <button>
+        <div id="slot6" class="divButton" @click="showDetailsBloc">{{ slots.Slot6 }}</div>
       </button>
-      <button @click="showDetailsBloc">
-        <div id="slot7">{{ slots.Slot7 }}</div>
+      <button>
+        <div id="slot7" class="divButton" @click="showDetailsBloc">{{ slots.Slot7 }}</div>
       </button>
-      <button @click="showDetailsBloc">
-        <div id="slot8">{{ slots.Slot8 }}</div>
+      <button>
+        <div id="slot8" class="divButton" @click="showDetailsBloc">{{ slots.Slot8 }}</div>
       </button>
     </div>
     <div class="rang3">
-      <button @click="showDetailsBloc">
-        <div id="slot9">{{ slots.Slot9 }}</div>
+      <button>
+        <div id="slot9" class="divButton" @click="showDetailsBloc">{{ slots.Slot9 }}</div>
       </button>
-      <button @click="showDetailsBloc">
-        <div id="slot10">{{ slots.Slot10 }}</div>
+      <button>
+        <div id="slot10" class="divButton" @click="showDetailsBloc">{{ slots.Slot10 }}</div>
       </button>
-      <button @click="showDetailsBloc">
-        <div id="slot11">{{ slots.Slot11 }}</div>
+      <button>
+        <div id="slot11" class="divButton" @click="showDetailsBloc">{{ slots.Slot11 }}</div>
       </button>
-      <button @click="showDetailsBloc">
-        <div id="slot12">{{ slots.Slot12 }}</div>
+      <button>
+        <div id="slot12" class="divButton" @click="showDetailsBloc">{{ slots.Slot12 }}</div>
       </button>
     </div>
     <div class="rang4">
-      <button @click="showDetailsBloc">
-        <div id="slot13">{{ slots.Slot13 }}</div>
+      <button>
+        <div id="slot13" class="divButton" @click="showDetailsBloc">{{ slots.Slot13 }}</div>
       </button>
-      <button @click="showDetailsBloc">
-        <div id="slot14">{{ slots.Slot14 }}</div>
+      <button>
+        <div id="slot14" class="divButton" @click="showDetailsBloc">{{ slots.Slot14 }}</div>
       </button>
-      <button @click="showDetailsBloc">
-        <div id="slot15">{{ slots.Slot15 }}</div>
+      <button>
+        <div id="slot15" class="divButton" @click="showDetailsBloc">{{ slots.Slot15 }}</div>
       </button>
-      <button @click="showDetailsBloc">
-        <div id="slot16">{{ slots.Slot16 }}</div>
+      <button>
+        <div id="slot16" class="divButton" @click="showDetailsBloc">{{ slots.Slot16 }}</div>
       </button>
     </div>
   </div>
@@ -255,7 +259,7 @@ export default {
     },
     /* fonction to show detailsBloc*/
     showDetailsBloc(e) {
-      let target = e.target.firstChild.innerHTML;
+      let target = e.target.innerHTML;
       console.log(target);
       sessionStorage.setItem("target", target);
       document.getElementById("details").style.display = "initial";
@@ -282,7 +286,41 @@ export default {
     },
     /* fonction to equip item*/
     equip() {
-      console.log("yo");
+      let mainG = document.getElementById("mainG").innerHTML;
+      console.log(mainG);
+      let mainD = document.getElementById("mainD").innerHTML;
+      console.log(mainD);
+      let idPerso = sessionStorage.getItem("userName");
+
+      let item = sessionStorage.getItem("target");
+      let dataItems = {
+        user: idPerso,
+        item: item,
+      };
+
+      //Gestion de l'équipement en fonction du type d'objet
+      for (let x in this.stuffList) {
+        if (this.stuffList[x].nom == item) {
+          console.log(this.stuffList[x].type);
+          if (this.stuffList[x].type == "objet") {
+            alert("Vous ne pouvez pas équiper cet objet malandrin");
+          } else if (this.stuffList[x].type == "arme2M" && (mainG || mainD)) {
+            alert("Veuillez laisser vos mains libres pour utiliser une arme à 2 mains");
+          } else {
+            if (window.confirm("Equiper?")) {
+              alert("ok");
+              DataService.equipItem(dataItems)
+                .then((response) => {
+                  console.log(response.data);
+                })
+                .catch((e) => {
+                  console.log(e);
+                });
+            }
+          }
+          console.log("FAUX");
+        }
+      }
     },
     /* fonction to give item*/
     give() {
@@ -314,6 +352,14 @@ export default {
 /* Set  style for view only */
 a {
   background-color: white;
+}
+.divButton {
+  border: solid;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .hidden {
   display: none;

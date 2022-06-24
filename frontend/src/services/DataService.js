@@ -6,6 +6,10 @@ const config = {
 };
 
 class DataService {
+  equipItem(item) {
+    return http.put("/stuff", item, config);
+  }
+
   getAll() {
     return http.get("/actu", config);
   }
