@@ -97,7 +97,8 @@ exports.equipItem = (req, res, next) => {
   Promise.all([
     User.update(
       {
-        mainG: obj.item,
+        mainG: obj.mainG,
+        mainD: obj.mainD,
         slot1: obj.slot1,
         slot2: obj.slot2,
         slot3: obj.slot3,

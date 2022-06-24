@@ -279,8 +279,10 @@ export default {
     } /* fonction to show equiped items*/,
     showEquipBloc(e) {
       let equipTarget = e.target.innerHTML;
-      console.log(equipTarget);
+      let main = e.target.id;
       sessionStorage.setItem("equipTarget", equipTarget);
+      sessionStorage.setItem("main", main);
+
       document.getElementById("equipDetails").style.display = "initial";
     },
     /* fonction to close detailsBloc*/
@@ -323,38 +325,11 @@ export default {
     /* fonction to equip item*/
     equip() {
       let mainG = document.getElementById("mainG").innerHTML;
-      console.log(mainG);
       let mainD = document.getElementById("mainD").innerHTML;
-      console.log(mainD);
       let idPerso = sessionStorage.getItem("userName");
 
       let item = sessionStorage.getItem("target");
       let slot = sessionStorage.getItem("slot");
-      for (let item in this.slots) {
-        if ((item = slot)) {
-          this.slots[item] = null;
-        }
-      }
-      let dataItems = {
-        slot1: this.slots.slot1,
-        slot2: this.slots.slot2,
-        slot3: this.slots.slot3,
-        slot4: this.slots.slot4,
-        slot5: this.slots.slot5,
-        slot6: this.slots.slot6,
-        slot7: this.slots.slot7,
-        slot8: this.slots.slot8,
-        slot9: this.slots.slot9,
-        slot10: this.slots.slot10,
-        slot11: this.slots.slot11,
-        slot12: this.slots.slot12,
-        slot13: this.slots.slot13,
-        slot14: this.slots.slot14,
-        slot15: this.slots.slot15,
-        slot16: this.slots.slot16,
-        user: idPerso,
-        item: item,
-      };
 
       //Gestion de l'équipement en fonction du type d'objet
       for (let x in this.stuffList) {
@@ -366,19 +341,103 @@ export default {
             alert("Veuillez laisser vos mains libres pour utiliser une arme à 2 mains");
           } else if (this.stuffList[x].type == "arme1M" && mainG && mainD) {
             alert("Veuillez laisser vos mains libres pour utiliser une arme à 2 mains");
-          } else {
+          } /*else if (this.itemDetail.type == "arme2M") {
+            alert("Vos 2 mains sont déjà prises !!!");
+          } Fonction seulement qd on clique sur détail car obj item MAJ a ce moment la*/ else {
             if (window.confirm("Equiper?")) {
-              alert("ok");
+              for (let item in this.slots) {
+                if ((item = slot)) {
+                  this.slots[item] = null;
+                }
+              }
+              let dataItems = {
+                slot1: this.slots.slot1,
+                slot2: this.slots.slot2,
+                slot3: this.slots.slot3,
+                slot4: this.slots.slot4,
+                slot5: this.slots.slot5,
+                slot6: this.slots.slot6,
+                slot7: this.slots.slot7,
+                slot8: this.slots.slot8,
+                slot9: this.slots.slot9,
+                slot10: this.slots.slot10,
+                slot11: this.slots.slot11,
+                slot12: this.slots.slot12,
+                slot13: this.slots.slot13,
+                slot14: this.slots.slot14,
+                slot15: this.slots.slot15,
+                slot16: this.slots.slot16,
+                user: idPerso,
+                mainG: item,
+                mainD: null, // à check
+              };
+
               DataService.equipItem(dataItems)
                 .then((response) => {
                   console.log(response.data);
                 })
+                .then(() => {
+                  window.location.reload();
+                })
+
                 .catch((e) => {
                   console.log(e);
                 });
             }
           }
           console.log("FAUX");
+        }
+      }
+    },
+    /* fonction to stock item*/
+    stock() {
+      let item = sessionStorage.getItem("equipTarget");
+      let main = sessionStorage.getItem("main");
+      let idPerso = sessionStorage.getItem("userName");
+
+      if (main == "mainG") {
+        this.mainG = null;
+      } else if (main == "mainD") {
+        this.mainD = null;
+      }
+      for (let slot in this.slots) {
+        if (this.slots[slot] == null) {
+          this.slots[slot] = item;
+          let dataItems = {
+            slot1: this.slots.slot1,
+            slot2: this.slots.slot2,
+            slot3: this.slots.slot3,
+            slot4: this.slots.slot4,
+            slot5: this.slots.slot5,
+            slot6: this.slots.slot6,
+            slot7: this.slots.slot7,
+            slot8: this.slots.slot8,
+            slot9: this.slots.slot9,
+            slot10: this.slots.slot10,
+            slot11: this.slots.slot11,
+            slot12: this.slots.slot12,
+            slot13: this.slots.slot13,
+            slot14: this.slots.slot14,
+            slot15: this.slots.slot15,
+            slot16: this.slots.slot16,
+            mainG: this.mainG,
+            mainD: this.mainD,
+            user: idPerso,
+            item: item,
+          };
+          DataService.equipItem(dataItems)
+            .then((response) => {
+              console.log(response.data);
+            })
+            .then(() => {
+              window.location.reload();
+            })
+
+            .catch((e) => {
+              console.log(e);
+            });
+
+          return;
         }
       }
     },
