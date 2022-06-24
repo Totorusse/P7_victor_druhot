@@ -228,22 +228,22 @@ export default {
           if (this.slots[slot] == null) {
             this.slots[slot] = this.item.nom;
             let dataItems = {
-              Slot1: this.slots.Slot1,
-              Slot2: this.slots.Slot2,
-              Slot3: this.slots.Slot3,
-              Slot4: this.slots.Slot4,
-              Slot5: this.slots.Slot5,
-              Slot6: this.slots.Slot6,
-              Slot7: this.slots.Slot7,
-              Slot8: this.slots.Slot8,
-              Slot9: this.slots.Slot9,
-              Slot10: this.slots.Slot10,
-              Slot11: this.slots.Slot11,
-              Slot12: this.slots.Slot12,
-              Slot13: this.slots.Slot13,
-              Slot14: this.slots.Slot14,
-              Slot15: this.slots.Slot15,
-              Slot16: this.slots.Slot16,
+              slot1: this.slots.Slot1,
+              slot2: this.slots.Slot2,
+              slot3: this.slots.Slot3,
+              slot4: this.slots.Slot4,
+              slot5: this.slots.Slot5,
+              slot6: this.slots.Slot6,
+              slot7: this.slots.Slot7,
+              slot8: this.slots.Slot8,
+              slot9: this.slots.Slot9,
+              slot10: this.slots.Slot10,
+              slot11: this.slots.Slot11,
+              slot12: this.slots.Slot12,
+              slot13: this.slots.Slot13,
+              slot14: this.slots.Slot14,
+              slot15: this.slots.Slot15,
+              slot16: this.slots.Slot16,
               user: idPerso,
               updatedSlot: this.item.nom,
               updatedSlotId: this.item.id,
@@ -271,8 +271,10 @@ export default {
     /* fonction to show detailsBloc*/
     showDetailsBloc(e) {
       let target = e.target.innerHTML;
-      console.log(target);
+      let slot = e.target.id;
+
       sessionStorage.setItem("target", target);
+      sessionStorage.setItem("slot", slot);
       document.getElementById("details").style.display = "initial";
     } /* fonction to show equiped items*/,
     showEquipBloc(e) {
@@ -327,9 +329,12 @@ export default {
       let idPerso = sessionStorage.getItem("userName");
 
       let item = sessionStorage.getItem("target");
+      let slot = sessionStorage.getItem("slot");
+
       let dataItems = {
         user: idPerso,
         item: item,
+        slot: slot,
       };
 
       //Gestion de l'équipement en fonction du type d'objet

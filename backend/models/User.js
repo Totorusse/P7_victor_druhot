@@ -18,52 +18,52 @@ module.exports = (sequelize, Sequelize) => {
     mainD: {
       type: Sequelize.STRING,
     },
-    Slot1: {
+    slot1: {
       type: Sequelize.STRING,
     },
-    Slot2: {
+    slot2: {
       type: Sequelize.STRING,
     },
-    Slot3: {
+    slot3: {
       type: Sequelize.STRING,
     },
-    Slot4: {
+    slot4: {
       type: Sequelize.STRING,
     },
-    Slot5: {
+    slot5: {
       type: Sequelize.STRING,
     },
-    Slot6: {
+    slot6: {
       type: Sequelize.STRING,
     },
-    Slot7: {
+    slot7: {
       type: Sequelize.STRING,
     },
-    Slot8: {
+    slot8: {
       type: Sequelize.STRING,
     },
-    Slot9: {
+    slot9: {
       type: Sequelize.STRING,
     },
-    Slot10: {
+    slot10: {
       type: Sequelize.STRING,
     },
-    Slot11: {
+    slot11: {
       type: Sequelize.STRING,
     },
-    Slot12: {
+    slot12: {
       type: Sequelize.STRING,
     },
-    Slot13: {
+    slot13: {
       type: Sequelize.STRING,
     },
-    Slot14: {
+    slot14: {
       type: Sequelize.STRING,
     },
-    Slot15: {
+    slot15: {
       type: Sequelize.STRING,
     },
-    Slot16: {
+    slot16: {
       type: Sequelize.STRING,
     },
   });
