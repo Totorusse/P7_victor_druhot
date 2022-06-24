@@ -18,11 +18,21 @@
     </div>
   </div>
   <div class="item-bloc">
-    Main gauche : <span id="mainG">{{ mainG }}</span>
+    Main gauche : <span id="mainG" @click="showEquipBloc">{{ mainG }}</span>
   </div>
   <div class="item-bloc">
-    Main droite :<span id="mainD">{{ mainD }}</span>
+    Main droite :<span id="mainD" @click="showEquipBloc">{{ mainD }}</span>
   </div>
+  <div id="equipDetails" class="hidden">
+    <button @click="showEquipDetails">Détails</button><button @click="stock">Stocker</button
+    ><button @click="give">Donner</button><button @click="drop">Jeter</button
+    ><button @click="closeEquipBloc">X</button>
+  </div>
+  <div id="equipItemDetails" class="hidden">
+    <div>Image (A ajouter) ; Nom : {{ itemDetail.nom }} ; Type : {{ itemDetail.type }}</div>
+    <button @click="closeEquipDetails">X</button>
+  </div>
+
   <div>Heros slots : {{ herosDescrFiltered.slot }}</div>
   <div>Items+ : {{ slotSupSum }}</div>
   <div>Total slots : {{ slotSupSum + herosDescrFiltered.slot }}</div>
@@ -264,17 +274,36 @@ export default {
       console.log(target);
       sessionStorage.setItem("target", target);
       document.getElementById("details").style.display = "initial";
+    } /* fonction to show equiped items*/,
+    showEquipBloc(e) {
+      let equipTarget = e.target.innerHTML;
+      console.log(equipTarget);
+      sessionStorage.setItem("equipTarget", equipTarget);
+      document.getElementById("equipDetails").style.display = "initial";
     },
     /* fonction to close detailsBloc*/
     closeDetailsBloc() {
       document.getElementById("details").style.display = "none";
     },
-
+    /* fonction to close equiped items*/
+    closeEquipBloc() {
+      document.getElementById("equipDetails").style.display = "none";
+    },
     /* fonction to show item details*/
     showDetails() {
-      console.log("yo");
       document.getElementById("itemDetails").style.display = "initial";
       let item = sessionStorage.getItem("target");
+      for (let x in this.stuffList) {
+        if (this.stuffList[x].nom == item) {
+          this.itemDetail = this.stuffList[x];
+        }
+      }
+    },
+    /* fonction to show item equiped*/
+    showEquipDetails() {
+      console.log("yo");
+      document.getElementById("equipItemDetails").style.display = "initial";
+      let item = sessionStorage.getItem("equipTarget");
       for (let x in this.stuffList) {
         if (this.stuffList[x].nom == item) {
           this.itemDetail = this.stuffList[x];
@@ -284,6 +313,10 @@ export default {
     /* fonction to close detailsBloc*/
     closeDetails() {
       document.getElementById("itemDetails").style.display = "none";
+    },
+    /* fonction to close equiped items*/
+    closeEquipDetails() {
+      document.getElementById("equipItemDetails").style.display = "none";
     },
     /* fonction to equip item*/
     equip() {

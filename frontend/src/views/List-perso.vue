@@ -61,16 +61,6 @@ export default {
           console.log(e);
         });
     },
-    /* fonction to count et show comments */
-    countComments() {
-      let numberComments = document.getElementsByClassName("commentsParent");
-      let length = numberComments.length;
-      let numberInner = document.getElementsByClassName("numberComment");
-      for (let i = 0; i < length; i++) {
-        let number = numberComments[i].querySelectorAll("p").length;
-        numberInner[i].innerHTML = `Voir les commentaires : ${number}`;
-      }
-    },
   },
 };
 </script>
