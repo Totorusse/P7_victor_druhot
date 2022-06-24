@@ -8,7 +8,7 @@ router.get("/admin", userCtrl.getAllUsers);
 router.post("/sign", userCtrl.create);
 router.post("/admin", userCtrl.choosePerso);
 router.put("/perso", userCtrl.choosePerso);
-router.put("/stuff", auth, userCtrl.equipItem);
+router.put("/stuff/item", auth, userCtrl.equipItem);
 router.post("/login", userCtrl.login);
 router.delete("/profile", auth, userCtrl.deleteProfile);
 

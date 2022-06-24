@@ -245,6 +245,7 @@ export default {
               .then(() => {
                 seeItem.style.display = "none";
               })
+
               .then(() => {
                 window.location.reload();
               })
@@ -305,6 +306,8 @@ export default {
           if (this.stuffList[x].type == "objet") {
             alert("Vous ne pouvez pas équiper cet objet malandrin");
           } else if (this.stuffList[x].type == "arme2M" && (mainG || mainD)) {
+            alert("Veuillez laisser vos mains libres pour utiliser une arme à 2 mains");
+          } else if (this.stuffList[x].type == "arme1M" && mainG && mainD) {
             alert("Veuillez laisser vos mains libres pour utiliser une arme à 2 mains");
           } else {
             if (window.confirm("Equiper?")) {

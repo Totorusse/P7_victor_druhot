@@ -6,10 +6,6 @@ const config = {
 };
 
 class DataService {
-  equipItem(item) {
-    return http.put("/stuff", item, config);
-  }
-
   getAll() {
     return http.get("/actu", config);
   }
@@ -35,7 +31,9 @@ class DataService {
   putItem(item) {
     return http.put("/stuff", item, config);
   }
-
+  equipItem(item) {
+    return http.put("/stuff/item", item, config);
+  }
   getMyProfile(user) {
     return http.get("/profile", { params: { user }, headers: { Authorization: `Bearer ${token}` } });
   }
@@ -44,9 +42,6 @@ class DataService {
     return http.get(`/actu/${id}/comment`, config);
   }
 
-  get(id) {
-    return http.get(`/actu/${id}`, config);
-  }
   create(data) {
     return http.post("/sign", data, config);
   }
@@ -55,24 +50,8 @@ class DataService {
     return http.post("/login", data);
   }
 
-  pub(data) {
-    return http.post("/pub", data, config);
-  }
-
-  pubComment(comment) {
-    return http.post("/actu", comment, config);
-  }
-
   pubImage(image) {
     return http.post("/images", image, config);
-  }
-
-  update(id, data) {
-    return http.put(`/actu/${id}`, data, config);
-  }
-
-  updateComment(id, data) {
-    return http.put(`/actu/${id}/comment`, data, config);
   }
 
   delete(id, dataDel) {
