@@ -330,11 +330,30 @@ export default {
 
       let item = sessionStorage.getItem("target");
       let slot = sessionStorage.getItem("slot");
-
+      for (let item in this.slots) {
+        if ((item = slot)) {
+          this.slots[item] = null;
+        }
+      }
       let dataItems = {
+        slot1: this.slots.slot1,
+        slot2: this.slots.slot2,
+        slot3: this.slots.slot3,
+        slot4: this.slots.slot4,
+        slot5: this.slots.slot5,
+        slot6: this.slots.slot6,
+        slot7: this.slots.slot7,
+        slot8: this.slots.slot8,
+        slot9: this.slots.slot9,
+        slot10: this.slots.slot10,
+        slot11: this.slots.slot11,
+        slot12: this.slots.slot12,
+        slot13: this.slots.slot13,
+        slot14: this.slots.slot14,
+        slot15: this.slots.slot15,
+        slot16: this.slots.slot16,
         user: idPerso,
         item: item,
-        slot: slot,
       };
 
       //Gestion de l'équipement en fonction du type d'objet
