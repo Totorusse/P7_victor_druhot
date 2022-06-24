@@ -41,58 +41,58 @@
   <div class="slots" id="slots">
     <div class="rang1">
       <button>
-        <div id="slot1" class="divButton" @click="showDetailsBloc">{{ slots.Slot1 }}</div>
+        <div id="slot1" class="divButton" @click="showDetailsBloc">{{ slots.slot1 }}</div>
       </button>
       <button>
-        <div id="slot2" class="divButton" @click="showDetailsBloc">{{ slots.Slot2 }}</div>
+        <div id="slot2" class="divButton" @click="showDetailsBloc">{{ slots.slot2 }}</div>
       </button>
       <button>
-        <div id="slot3" class="divButton" @click="showDetailsBloc">{{ slots.Slot3 }}</div>
+        <div id="slot3" class="divButton" @click="showDetailsBloc">{{ slots.slot3 }}</div>
       </button>
       <button>
-        <div id="slot4" class="divButton" @click="showDetailsBloc">{{ slots.Slot4 }}</div>
+        <div id="slot4" class="divButton" @click="showDetailsBloc">{{ slots.slot4 }}</div>
       </button>
     </div>
     <div class="rang2">
       <button>
-        <div id="slot5" class="divButton" @click="showDetailsBloc">{{ slots.Slot5 }}</div>
+        <div id="slot5" class="divButton" @click="showDetailsBloc">{{ slots.slot5 }}</div>
       </button>
       <button>
-        <div id="slot6" class="divButton" @click="showDetailsBloc">{{ slots.Slot6 }}</div>
+        <div id="slot6" class="divButton" @click="showDetailsBloc">{{ slots.slot6 }}</div>
       </button>
       <button>
-        <div id="slot7" class="divButton" @click="showDetailsBloc">{{ slots.Slot7 }}</div>
+        <div id="slot7" class="divButton" @click="showDetailsBloc">{{ slots.slot7 }}</div>
       </button>
       <button>
-        <div id="slot8" class="divButton" @click="showDetailsBloc">{{ slots.Slot8 }}</div>
+        <div id="slot8" class="divButton" @click="showDetailsBloc">{{ slots.slot8 }}</div>
       </button>
     </div>
     <div class="rang3">
       <button>
-        <div id="slot9" class="divButton" @click="showDetailsBloc">{{ slots.Slot9 }}</div>
+        <div id="slot9" class="divButton" @click="showDetailsBloc">{{ slots.slot9 }}</div>
       </button>
       <button>
-        <div id="slot10" class="divButton" @click="showDetailsBloc">{{ slots.Slot10 }}</div>
+        <div id="slot10" class="divButton" @click="showDetailsBloc">{{ slots.slot10 }}</div>
       </button>
       <button>
-        <div id="slot11" class="divButton" @click="showDetailsBloc">{{ slots.Slot11 }}</div>
+        <div id="slot11" class="divButton" @click="showDetailsBloc">{{ slots.slot11 }}</div>
       </button>
       <button>
-        <div id="slot12" class="divButton" @click="showDetailsBloc">{{ slots.Slot12 }}</div>
+        <div id="slot12" class="divButton" @click="showDetailsBloc">{{ slots.slot12 }}</div>
       </button>
     </div>
     <div class="rang4">
       <button>
-        <div id="slot13" class="divButton" @click="showDetailsBloc">{{ slots.Slot13 }}</div>
+        <div id="slot13" class="divButton" @click="showDetailsBloc">{{ slots.slot13 }}</div>
       </button>
       <button>
-        <div id="slot14" class="divButton" @click="showDetailsBloc">{{ slots.Slot14 }}</div>
+        <div id="slot14" class="divButton" @click="showDetailsBloc">{{ slots.slot14 }}</div>
       </button>
       <button>
-        <div id="slot15" class="divButton" @click="showDetailsBloc">{{ slots.Slot15 }}</div>
+        <div id="slot15" class="divButton" @click="showDetailsBloc">{{ slots.slot15 }}</div>
       </button>
       <button>
-        <div id="slot16" class="divButton" @click="showDetailsBloc">{{ slots.Slot16 }}</div>
+        <div id="slot16" class="divButton" @click="showDetailsBloc">{{ slots.slot16 }}</div>
       </button>
     </div>
   </div>
@@ -228,22 +228,22 @@ export default {
           if (this.slots[slot] == null) {
             this.slots[slot] = this.item.nom;
             let dataItems = {
-              slot1: this.slots.Slot1,
-              slot2: this.slots.Slot2,
-              slot3: this.slots.Slot3,
-              slot4: this.slots.Slot4,
-              slot5: this.slots.Slot5,
-              slot6: this.slots.Slot6,
-              slot7: this.slots.Slot7,
-              slot8: this.slots.Slot8,
-              slot9: this.slots.Slot9,
-              slot10: this.slots.Slot10,
-              slot11: this.slots.Slot11,
-              slot12: this.slots.Slot12,
-              slot13: this.slots.Slot13,
-              slot14: this.slots.Slot14,
-              slot15: this.slots.Slot15,
-              slot16: this.slots.Slot16,
+              slot1: this.slots.slot1,
+              slot2: this.slots.slot2,
+              slot3: this.slots.slot3,
+              slot4: this.slots.slot4,
+              slot5: this.slots.slot5,
+              slot6: this.slots.slot6,
+              slot7: this.slots.slot7,
+              slot8: this.slots.slot8,
+              slot9: this.slots.slot9,
+              slot10: this.slots.slot10,
+              slot11: this.slots.slot11,
+              slot12: this.slots.slot12,
+              slot13: this.slots.slot13,
+              slot14: this.slots.slot14,
+              slot15: this.slots.slot15,
+              slot16: this.slots.slot16,
               user: idPerso,
               updatedSlot: this.item.nom,
               updatedSlotId: this.item.id,
