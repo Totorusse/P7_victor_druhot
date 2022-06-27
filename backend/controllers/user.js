@@ -42,7 +42,7 @@ exports.choosePerso = (req, res, next) => {
   const obj = req.body;
   console.log(obj);
   User.update(
-    { heros: obj.heros.nom },
+    { heros: obj.heros.nom, isConnected: obj.isConnected },
     {
       where: {
         email: obj.user,

@@ -81,6 +81,7 @@ export default {
           if (response.data.token) {
             sessionStorage.setItem("token", response.data.token);
             sessionStorage.setItem("userName", data.email);
+            sessionStorage.setItem("isConnected", true);
             if (response.data.admin === true) {
               router.push("/admin");
               window.setTimeout(this.delayedFunction, 500);

@@ -45,11 +45,13 @@ export default {
           console.log(e);
         });
     },
-    /* fonction to choose character*/ choosePerso() {
+    /* fonction to choose character*/
+    choosePerso() {
       let idPerso = sessionStorage.getItem("userName");
       let dataPerso = {
         heros: this.perso,
         user: idPerso,
+        isConnected: true,
       };
       sessionStorage.setItem("userHeros", this.perso.nom);
 

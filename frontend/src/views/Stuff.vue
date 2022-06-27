@@ -383,7 +383,7 @@ export default {
             (this.mainGType == "arme2M" || this.mainDType == "arme2M")
           ) {
             alert("Vos 2 mains sont déjà prises !!!");
-          } else {
+          } else {       
             if (window.confirm("Equiper?")) {
               if (window.confirm("Main gauche? Sinon main droite")) {
                 mainG = item;

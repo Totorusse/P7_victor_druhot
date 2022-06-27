@@ -9,6 +9,9 @@ module.exports = (sequelize, Sequelize) => {
     isAdmin: {
       type: Sequelize.BOOLEAN,
     },
+    isConnected: {
+      type: Sequelize.BOOLEAN,
+    },
     heros: {
       type: Sequelize.STRING,
     },
