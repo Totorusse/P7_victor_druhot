@@ -443,50 +443,55 @@ export default {
       let item = sessionStorage.getItem("equipTarget");
       let main = sessionStorage.getItem("main");
       let idPerso = sessionStorage.getItem("userName");
+      let testSlot = this.slotSupSum + this.herosDescrFiltered.slot;
 
-      if (main == "mainG") {
-        this.mainG = null;
-        this.mainGType = null;
-      } else if (main == "mainD") {
-        this.mainD = null;
-        this.mainDType = null;
-      }
-      for (let slot in this.slots) {
-        if (this.slots[slot] == null) {
-          this.slots[slot] = item;
-          let dataItems = {
-            slot1: this.slots.slot1,
-            slot2: this.slots.slot2,
-            slot3: this.slots.slot3,
-            slot4: this.slots.slot4,
-            slot5: this.slots.slot5,
-            slot6: this.slots.slot6,
-            slot7: this.slots.slot7,
-            slot8: this.slots.slot8,
-            slot9: this.slots.slot9,
-            slot10: this.slots.slot10,
-            slot11: this.slots.slot11,
-            slot12: this.slots.slot12,
-            slot13: this.slots.slot13,
-            slot14: this.slots.slot14,
-            slot15: this.slots.slot15,
-            slot16: this.slots.slot16,
-            mainG: this.mainG,
-            mainD: this.mainD,
-            user: idPerso,
-            item: item,
-          };
-          DataService.equipItem(dataItems)
-            .then((response) => {
-              console.log(response.data);
-            })
-            .then(this.slotNumber)
-            .then(this.slotTotal)
+      if (this.slotUsed >= testSlot) {
+        alert("Veuillez laisser de la place dans le sac");
+      } else {
+        if (main == "mainG") {
+          this.mainG = null;
+          this.mainGType = null;
+        } else if (main == "mainD") {
+          this.mainD = null;
+          this.mainDType = null;
+        }
+        for (let slot in this.slots) {
+          if (this.slots[slot] == null) {
+            this.slots[slot] = item;
+            let dataItems = {
+              slot1: this.slots.slot1,
+              slot2: this.slots.slot2,
+              slot3: this.slots.slot3,
+              slot4: this.slots.slot4,
+              slot5: this.slots.slot5,
+              slot6: this.slots.slot6,
+              slot7: this.slots.slot7,
+              slot8: this.slots.slot8,
+              slot9: this.slots.slot9,
+              slot10: this.slots.slot10,
+              slot11: this.slots.slot11,
+              slot12: this.slots.slot12,
+              slot13: this.slots.slot13,
+              slot14: this.slots.slot14,
+              slot15: this.slots.slot15,
+              slot16: this.slots.slot16,
+              mainG: this.mainG,
+              mainD: this.mainD,
+              user: idPerso,
+              item: item,
+            };
+            DataService.equipItem(dataItems)
+              .then((response) => {
+                console.log(response.data);
+              })
+              .then(this.slotNumber)
+              .then(this.slotTotal)
 
-            .catch((e) => {
-              console.log(e);
-            });
-          return;
+              .catch((e) => {
+                console.log(e);
+              });
+            return;
+          }
         }
       }
     },
