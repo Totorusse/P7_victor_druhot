@@ -25,7 +25,7 @@
   </div>
   <div id="equipDetails" class="hidden">
     <button @click="showEquipDetails">Détails</button><button @click="stock">Stocker</button
-    ><button @click="give">Donner</button><button @click="dropFromHands">Jeter</button
+    ><button @click="showPlayers">Donner</button><button @click="dropFromHands">Jeter</button
     ><button @click="closeEquipBloc">X</button>
   </div>
   <div id="equipItemDetails" class="hidden">
@@ -98,12 +98,18 @@
   </div>
   <div id="details" class="hidden">
     <button @click="showDetails">Détails</button><button @click="equip">Equiper</button
-    ><button @click="give">Donner</button><button @click="dropFromBag">Jeter</button
+    ><button @click="showPlayers">Donner</button><button @click="dropFromBag">Jeter</button
     ><button @click="closeDetailsBloc">X</button>
   </div>
   <div id="itemDetails" class="hidden">
     <div>Image (A ajouter) ; Nom : {{ itemDetail.nom }} ; Type : {{ itemDetail.type }}</div>
     <button @click="closeDetails">X</button>
+  </div>
+  <div id="players" class="hidden">
+    <button v-for="players in connectedPlayers" :key="players" @click="give">
+      {{ players }}
+    </button>
+    <button @click="closePlayers">X</button>
   </div>
 </template>
 
@@ -116,6 +122,7 @@ export default {
   data() {
     return {
       userSession: sessionStorage.getItem("userName"),
+      connectedPlayers: {},
       mainG: {},
       mainD: {},
       mainGType: {},
@@ -154,6 +161,7 @@ export default {
         this.herosDescr = response.data[1];
         this.slots = response.data[2][0];
         this.stuffList = response.data[3];
+        this.connectedPlayers = response.data[4].map(({ email }) => email);
       })
       .then(() => {
         /* new description tab filtered with right heros*/
@@ -383,7 +391,7 @@ export default {
             (this.mainGType == "arme2M" || this.mainDType == "arme2M")
           ) {
             alert("Vos 2 mains sont déjà prises !!!");
-          } else {       
+          } else {
             if (window.confirm("Equiper?")) {
               if (window.confirm("Main gauche? Sinon main droite")) {
                 mainG = item;
@@ -495,9 +503,20 @@ export default {
         }
       }
     },
+    /* fonction to show player to give item*/
+    showPlayers() {
+      document.getElementById("players").style.display = "initial";
+    },
+    /* fonction to show player to give item*/
+    closePlayers() {
+      let players = document.getElementById("players");
+      players.style.display = "none";
+    },
     /* fonction to give item*/
-    give() {
-      console.log("yo");
+    give(e) {
+      let player = e.target.innerHTML;
+      console.log(player);
+      /* A IMPLEMENTER*/
     },
     /* fonction to drop equiped item*/
     dropFromHands() {
