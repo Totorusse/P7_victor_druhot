@@ -360,7 +360,7 @@ export default {
             alert("Vos 2 mains sont déjà prises !!!");
           } else {
             if (window.confirm("Equiper?")) {
-              if (window.confirm("Main gauche?")) {
+              if (window.confirm("Main gauche? Sinon main droite")) {
                 mainG = item;
                 this.mainG = item;
                 this.mainGType = this.itemDetail.type;
@@ -407,7 +407,6 @@ export default {
                 });
             }
           }
-          console.log("FAUX");
         }
       }
     },
