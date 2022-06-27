@@ -118,6 +118,8 @@ export default {
       userSession: sessionStorage.getItem("userName"),
       mainG: {},
       mainD: {},
+      mainGType: {},
+      mainDType: {},
       heros: {},
       herosDescr: [],
       herosDescrFiltered: [],
@@ -143,7 +145,7 @@ export default {
     let seeItem = document.getElementById("item");
     seeItem.style.display = "none";
     let userSession = sessionStorage.getItem("userName");
-    /* display all news */
+    /* display all infos */
     DataService.getAllInfo(userSession)
       .then((response) => {
         this.heros = response.data[0][0].heros;
@@ -272,10 +274,15 @@ export default {
     showDetailsBloc(e) {
       let target = e.target.innerHTML;
       let slot = e.target.id;
-
       sessionStorage.setItem("target", target);
       sessionStorage.setItem("slot", slot);
       document.getElementById("details").style.display = "initial";
+      for (let x in this.stuffList) {
+        if (this.stuffList[x].nom == target) {
+          this.itemDetail = this.stuffList[x];
+          console.log(this.itemDetail.nom);
+        }
+      }
     } /* fonction to show equiped items*/,
     showEquipBloc(e) {
       let equipTarget = e.target.innerHTML;
@@ -284,6 +291,11 @@ export default {
       sessionStorage.setItem("main", main);
 
       document.getElementById("equipDetails").style.display = "initial";
+      for (let x in this.stuffList) {
+        if (this.stuffList[x].nom == equipTarget) {
+          this.itemDetail = this.stuffList[x];
+        }
+      }
     },
     /* fonction to close detailsBloc*/
     closeDetailsBloc() {
@@ -341,10 +353,24 @@ export default {
             alert("Veuillez laisser vos mains libres pour utiliser une arme à 2 mains");
           } else if (this.stuffList[x].type == "arme1M" && mainG && mainD) {
             alert("Veuillez laisser vos mains libres pour utiliser une arme à 2 mains");
-          } /*else if (this.itemDetail.type == "arme2M") {
+          } else if (
+            this.stuffList[x].type == "arme1M" &&
+            (this.mainGType == "arme2M" || this.mainDType == "arme2M")
+          ) {
             alert("Vos 2 mains sont déjà prises !!!");
-          } Fonction seulement qd on clique sur détail car obj item MAJ a ce moment la*/ else {
+          } else {
             if (window.confirm("Equiper?")) {
+              if (window.confirm("Main gauche?")) {
+                mainG = item;
+                this.mainG = item;
+                this.mainGType = this.itemDetail.type;
+              } else {
+                mainD = item;
+                this.mainD = item;
+                this.mainDType = this.itemDetail.type;
+              }
+
+              // Vide l'inventaire de l'objet choisi
               for (let item in this.slots) {
                 if ((item = slot)) {
                   this.slots[item] = null;
@@ -368,18 +394,14 @@ export default {
                 slot15: this.slots.slot15,
                 slot16: this.slots.slot16,
                 user: idPerso,
-                mainG: item,
-                mainD: null, // à check
+                mainG: mainG,
+                mainD: mainD,
               };
 
               DataService.equipItem(dataItems)
                 .then((response) => {
                   console.log(response.data);
                 })
-                .then(() => {
-                  window.location.reload();
-                })
-
                 .catch((e) => {
                   console.log(e);
                 });
@@ -397,8 +419,10 @@ export default {
 
       if (main == "mainG") {
         this.mainG = null;
+        this.mainGType = null;
       } else if (main == "mainD") {
         this.mainD = null;
+        this.mainDType = null;
       }
       for (let slot in this.slots) {
         if (this.slots[slot] == null) {
@@ -429,10 +453,6 @@ export default {
             .then((response) => {
               console.log(response.data);
             })
-            .then(() => {
-              window.location.reload();
-            })
-
             .catch((e) => {
               console.log(e);
             });
