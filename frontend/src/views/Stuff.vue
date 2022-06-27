@@ -25,7 +25,7 @@
   </div>
   <div id="equipDetails" class="hidden">
     <button @click="showEquipDetails">Détails</button><button @click="stock">Stocker</button
-    ><button @click="give">Donner</button><button @click="drop">Jeter</button
+    ><button @click="give">Donner</button><button @click="dropFromHands">Jeter</button
     ><button @click="closeEquipBloc">X</button>
   </div>
   <div id="equipItemDetails" class="hidden">
@@ -98,7 +98,7 @@
   </div>
   <div id="details" class="hidden">
     <button @click="showDetails">Détails</button><button @click="equip">Equiper</button
-    ><button @click="give">Donner</button><button @click="drop">Jeter</button
+    ><button @click="give">Donner</button><button @click="dropFromBag">Jeter</button
     ><button @click="closeDetailsBloc">X</button>
   </div>
   <div id="itemDetails" class="hidden">
@@ -196,6 +196,33 @@ export default {
   },
 
   methods: {
+    /* calc number of slots used*/
+    slotNumber() {
+      let equipedStuff = this.slots;
+      let slotUsed = 0;
+      for (let x in equipedStuff) {
+        if (equipedStuff[x]) {
+          slotUsed += 1;
+        }
+      }
+      return (this.slotUsed = slotUsed);
+    },
+    /* calc extra slots from stuff*/
+    slotTotal() {
+      let stuffList = this.stuffList;
+      let equipedStuff = this.slots;
+      let slotSupSum = 0;
+      for (let x in stuffList) {
+        for (let y in equipedStuff) {
+          if (equipedStuff[y] == stuffList[x].nom) {
+            slotSupSum += stuffList[x].slotSup;
+            this.slotSupSum = slotSupSum;
+          }
+        }
+      }
+      return (this.slotSupSum = slotSupSum);
+    },
+
     /* fonction to send code for items*/
     sendCode() {
       let codeValue = document.getElementById("code").value;
@@ -257,10 +284,8 @@ export default {
               .then(() => {
                 seeItem.style.display = "none";
               })
-
-              .then(() => {
-                window.location.reload();
-              })
+              .then(this.slotNumber())
+              .then(this.slotTotal())
               .catch((e) => {
                 console.log(e);
               });
@@ -402,6 +427,9 @@ export default {
                 .then((response) => {
                   console.log(response.data);
                 })
+                .then(this.slotNumber)
+                .then(this.slotTotal)
+
                 .catch((e) => {
                   console.log(e);
                 });
@@ -452,10 +480,12 @@ export default {
             .then((response) => {
               console.log(response.data);
             })
+            .then(this.slotNumber)
+            .then(this.slotTotal)
+
             .catch((e) => {
               console.log(e);
             });
-
           return;
         }
       }
@@ -464,9 +494,76 @@ export default {
     give() {
       console.log("yo");
     },
-    /* fonction to drop item*/
-    drop() {
-      console.log("yo");
+    /* fonction to drop equiped item*/
+    dropFromHands() {
+      let main = sessionStorage.getItem("main");
+      let idPerso = sessionStorage.getItem("userName");
+      if (window.confirm("Vraiment?")) {
+        if (main == "mainG") {
+          this.mainG = null;
+          this.mainGType = null;
+        } else if (main == "mainD") {
+          this.mainD = null;
+          this.mainDType = null;
+        }
+        let dataItems = {
+          mainG: this.mainG,
+          mainD: this.mainD,
+          user: idPerso,
+        };
+        DataService.equipItem(dataItems)
+          .then((response) => {
+            console.log(response.data);
+          })
+          .then(this.slotNumber())
+          .then(this.slotTotal())
+          .catch((e) => {
+            console.log(e);
+          });
+      }
+    },
+    /* fonction to drop item from bag*/
+    dropFromBag() {
+      //let slotSelected = sessionStorage.getItem("slot");
+      let idPerso = sessionStorage.getItem("userName");
+      let item = sessionStorage.getItem("target");
+
+      if (window.confirm("Really?")) {
+        for (let slot in this.slots) {
+          if (this.slots[slot] == item) {
+            this.slots[slot] = null;
+            let dataItems = {
+              slot1: this.slots.slot1,
+              slot2: this.slots.slot2,
+              slot3: this.slots.slot3,
+              slot4: this.slots.slot4,
+              slot5: this.slots.slot5,
+              slot6: this.slots.slot6,
+              slot7: this.slots.slot7,
+              slot8: this.slots.slot8,
+              slot9: this.slots.slot9,
+              slot10: this.slots.slot10,
+              slot11: this.slots.slot11,
+              slot12: this.slots.slot12,
+              slot13: this.slots.slot13,
+              slot14: this.slots.slot14,
+              slot15: this.slots.slot15,
+              slot16: this.slots.slot16,
+              user: idPerso,
+            };
+            DataService.equipItem(dataItems)
+              .then((response) => {
+                console.log(response.data);
+              })
+              .then(this.slotNumber())
+              .then(this.slotTotal())
+              .catch((e) => {
+                console.log(e);
+              });
+            return;
+          }
+        }
+      }
     },
     /* fonction to close item selection*/
     closeItem() {

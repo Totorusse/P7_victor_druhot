@@ -31,6 +31,7 @@ class DataService {
   putItem(item) {
     return http.put("/stuff", item, config);
   }
+  //route fictive pour faire 2e requete put sur /stuff ; voir si pose pb en prod
   equipItem(item) {
     return http.put("/stuff/item", item, config);
   }
