@@ -339,7 +339,7 @@ export default {
               slot15: this.slots.slot15,
               slot16: this.slots.slot16,
               user: idPerso,
-              receivedItem: this.receivedItem,
+              receivedItem: "",
             };
             DataService.receivedItem(dataItems)
               .then((response) => {
