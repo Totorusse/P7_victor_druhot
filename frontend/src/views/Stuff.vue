@@ -25,12 +25,18 @@
   </div>
   <div id="equipDetails" class="hidden">
     <button @click="showEquipDetails">Détails</button><button @click="stock">Stocker</button
-    ><button @click="showPlayers">Donner</button><button @click="dropFromHands">Jeter</button
+    ><button @click="showPlayers2">Donner</button><button @click="dropFromHands">Jeter</button
     ><button @click="closeEquipBloc">X</button>
   </div>
   <div id="equipItemDetails" class="hidden">
     <div>Image (A ajouter) ; Nom : {{ itemDetail.nom }} ; Type : {{ itemDetail.type }}</div>
     <button @click="closeEquipDetails">X</button>
+  </div>
+  <div id="players2" class="hidden">
+    <button v-for="players in connectedPlayers" :key="players" @click="giveEquiped">
+      {{ players }}
+    </button>
+    <button @click="closePlayers2">X</button>
   </div>
 
   <div>Heros slots : {{ herosDescrFiltered.slot }}</div>
@@ -600,6 +606,50 @@ export default {
           itemToGive: itemToGive,
         };
         DataService.giveItem(dataItems)
+          .then((response) => {
+            console.log(response.data);
+          })
+          .then(() => {
+            location.reload();
+          })
+          .catch((e) => {
+            console.log(e);
+          });
+      }
+    },
+    /* fonction to show players to give EQUIPED item*/
+    showPlayers2() {
+      document.getElementById("players2").style.display = "initial";
+    },
+    /* fonction to show player to give item*/
+    closePlayers2() {
+      let players = document.getElementById("players2");
+      players.style.display = "none";
+    },
+    /* fonction to give from equiped item*/
+    giveEquiped(e) {
+      let receiver = e.target.innerHTML;
+      let itemToGive = sessionStorage.getItem("equipTarget");
+      let giver = sessionStorage.getItem("userName");
+      let main = sessionStorage.getItem("main");
+
+      if (window.confirm(`Donner à ${receiver}?`)) {
+        if (main == "mainG") {
+          this.mainG = null;
+          this.mainGType = null;
+        } else if (main == "mainD") {
+          this.mainD = null;
+          this.mainDType = null;
+        }
+
+        let dataItems = {
+          user: giver,
+          receiver: receiver,
+          itemToGive: itemToGive,
+          mainG: this.mainG,
+          mainD: this.mainD,
+        };
+        DataService.giveEquipedItem(dataItems)
           .then((response) => {
             console.log(response.data);
           })

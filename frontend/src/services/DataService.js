@@ -38,10 +38,16 @@ class DataService {
   //route fictive pour faire 2e requete put sur /stuff ; voir si pose pb en prod
   giveItem(item) {
     return http.put("/stuff/give", item, config);
-  } //route fictive pour faire 2e requete put sur /stuff ; voir si pose pb en prod
+  }
+  //route fictive pour faire 2e requete put sur /stuff ; voir si pose pb en prod
   receivedItem(item) {
     return http.put("/stuff/received", item, config);
   }
+  //route fictive pour faire 2e requete put sur /stuff ; voir si pose pb en prod
+  giveEquipedItem(item) {
+    return http.put("/stuff/giveEquipedItem", item, config);
+  }
+
   getMyProfile(user) {
     return http.get("/profile", { params: { user }, headers: { Authorization: `Bearer ${token}` } });
   }

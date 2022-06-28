@@ -200,6 +200,51 @@ exports.giveItem = (req, res, next) => {
     });
 };
 
+// Give  EQUIPED item  to other  character
+exports.giveEquipedItem = (req, res, next) => {
+  const obj = req.body;
+  console.log(obj);
+  Promise.all([
+    User.update(
+      {
+        mainG: obj.mainG,
+        mainD: obj.mainD,
+      },
+      {
+        where: {
+          email: obj.user,
+        },
+      }
+    ),
+    User.update(
+      {
+        received: obj.itemToGive,
+      },
+      {
+        where: {
+          email: obj.receiver,
+        },
+      }
+    ),
+  ])
+    .then((data) => {
+      if (data) {
+        res.send({
+          message: "Objet donné !",
+        });
+      } else {
+        res.send({
+          message: `Erreur survenue!`,
+        });
+      }
+    })
+    .catch(() => {
+      res.status(500).send({
+        message: "Error updating",
+      });
+    });
+};
+
 // Received  item in bag
 exports.receivedItem = (req, res, next) => {
   const obj = req.body;
