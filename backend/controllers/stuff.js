@@ -46,6 +46,12 @@ exports.getAllInfo = (req, res, next) => {
         isConnected: true,
       },
     }),
+    User.findAll({
+      attributes: ["received"],
+      where: {
+        email: userName,
+      },
+    }),
   ])
     .then((user) => {
       res.status(200).send(user);

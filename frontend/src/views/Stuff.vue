@@ -111,6 +111,9 @@
     </button>
     <button @click="closePlayers">X</button>
   </div>
+  <div id="receivedItem">
+    <button @click="putReceivedItem">Item reçu : {{ itemReceived }} ; Ajouter?</button>
+  </div>
 </template>
 
 <script>
@@ -132,6 +135,7 @@ export default {
       herosDescrFiltered: [],
       item: {},
       itemDetail: {},
+      itemReceived: {},
       slots: {},
       stuffList: [],
       slotSupSum: 0,
@@ -162,6 +166,7 @@ export default {
         this.slots = response.data[2][0];
         this.stuffList = response.data[3];
         this.connectedPlayers = response.data[4].map(({ email }) => email);
+        this.itemReceived = response.data[5][0]["received"];
       })
       .then(() => {
         /* new description tab filtered with right heros*/
@@ -298,6 +303,53 @@ export default {
                 console.log(e);
               });
 
+            return;
+          }
+        }
+      }
+    } /* fonction to add  RECEIVED item in stuff*/,
+    putReceivedItem() {
+      let idPerso = sessionStorage.getItem("userName");
+      let receivedItem = this.itemReceived;
+      let testSlot = this.slotSupSum + this.herosDescrFiltered.slot;
+      console.log(receivedItem);
+
+      if (this.slotUsed >= testSlot) {
+        alert("Inventaire plein");
+      } else {
+        for (let slot in this.slots) {
+          if (this.slots[slot] == null) {
+            this.slots[slot] = receivedItem;
+            this.itemReceived = null;
+            let dataItems = {
+              slot1: this.slots.slot1,
+              slot2: this.slots.slot2,
+              slot3: this.slots.slot3,
+              slot4: this.slots.slot4,
+              slot5: this.slots.slot5,
+              slot6: this.slots.slot6,
+              slot7: this.slots.slot7,
+              slot8: this.slots.slot8,
+              slot9: this.slots.slot9,
+              slot10: this.slots.slot10,
+              slot11: this.slots.slot11,
+              slot12: this.slots.slot12,
+              slot13: this.slots.slot13,
+              slot14: this.slots.slot14,
+              slot15: this.slots.slot15,
+              slot16: this.slots.slot16,
+              user: idPerso,
+              receivedItem: this.receivedItem,
+            };
+            DataService.receivedItem(dataItems)
+              .then((response) => {
+                console.log(response.data);
+              })
+              .then(this.slotNumber())
+              .then(this.slotTotal())
+              .catch((e) => {
+                console.log(e);
+              });
             return;
           }
         }
@@ -514,9 +566,50 @@ export default {
     },
     /* fonction to give item*/
     give(e) {
-      let player = e.target.innerHTML;
-      console.log(player);
-      /* A IMPLEMENTER*/
+      let receiver = e.target.innerHTML;
+      let itemToGive = sessionStorage.getItem("target");
+      let slot = sessionStorage.getItem("slot");
+      let giver = sessionStorage.getItem("userName");
+
+      if (window.confirm(`Donner à ${receiver}?`)) {
+        // Vide l'inventaire de l'objet choisi
+        for (let item in this.slots) {
+          if ((item = slot)) {
+            this.slots[item] = null;
+          }
+        }
+        let dataItems = {
+          slot1: this.slots.slot1,
+          slot2: this.slots.slot2,
+          slot3: this.slots.slot3,
+          slot4: this.slots.slot4,
+          slot5: this.slots.slot5,
+          slot6: this.slots.slot6,
+          slot7: this.slots.slot7,
+          slot8: this.slots.slot8,
+          slot9: this.slots.slot9,
+          slot10: this.slots.slot10,
+          slot11: this.slots.slot11,
+          slot12: this.slots.slot12,
+          slot13: this.slots.slot13,
+          slot14: this.slots.slot14,
+          slot15: this.slots.slot15,
+          slot16: this.slots.slot16,
+          user: giver,
+          receiver: receiver,
+          itemToGive: itemToGive,
+        };
+        DataService.giveItem(dataItems)
+          .then((response) => {
+            console.log(response.data);
+          })
+          .then(() => {
+            location.reload();
+          })
+          .catch((e) => {
+            console.log(e);
+          });
+      }
     },
     /* fonction to drop equiped item*/
     dropFromHands() {

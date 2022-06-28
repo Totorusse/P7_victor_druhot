@@ -21,6 +21,9 @@ module.exports = (sequelize, Sequelize) => {
     mainD: {
       type: Sequelize.STRING,
     },
+    received: {
+      type: Sequelize.STRING,
+    },
     slot1: {
       type: Sequelize.STRING,
     },

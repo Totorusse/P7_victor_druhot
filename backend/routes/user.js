@@ -9,6 +9,9 @@ router.post("/sign", userCtrl.create);
 router.post("/admin", userCtrl.choosePerso);
 router.put("/perso", userCtrl.choosePerso);
 router.put("/stuff/item", auth, userCtrl.equipItem);
+router.put("/stuff/give", auth, userCtrl.giveItem);
+router.put("/stuff/received", auth, userCtrl.receivedItem);
+
 router.post("/login", userCtrl.login);
 router.delete("/profile", auth, userCtrl.deleteProfile);
 
