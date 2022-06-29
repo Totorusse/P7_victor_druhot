@@ -3,6 +3,8 @@ const db = require("../models");
 const Perso = db.perso;
 const User = db.user;
 const Stuff = db.stuff;
+const Gift = db.gift;
+
 const { Op } = require("sequelize");
 
 exports.getAllInfo = (req, res, next) => {
@@ -46,10 +48,11 @@ exports.getAllInfo = (req, res, next) => {
         isConnected: true,
       },
     }),
-    User.findAll({
-      attributes: ["received"],
+    //get gift
+    Gift.findAll({
+      attributes: ["item"],
       where: {
-        email: userName,
+        player: userName,
       },
     }),
   ])

@@ -118,7 +118,9 @@
     <button @click="closePlayers">X</button>
   </div>
   <div id="receivedItem">
-    <button @click="putReceivedItem">Item reçu : {{ itemReceived }} ; Ajouter?</button>
+    <button v-for="item in itemReceived" :key="item" @click="putReceivedItem">
+      Item reçu : {{ item }} ; Ajouter?
+    </button>
   </div>
 </template>
 
@@ -172,7 +174,7 @@ export default {
         this.slots = response.data[2][0];
         this.stuffList = response.data[3];
         this.connectedPlayers = response.data[4].map(({ email }) => email);
-        this.itemReceived = response.data[5][0]["received"];
+        this.itemReceived = response.data[5];
       })
       .then(() => {
         /* new description tab filtered with right heros*/
@@ -615,6 +617,16 @@ export default {
           .catch((e) => {
             console.log(e);
           });
+        DataService.createGift(dataItems)
+          .then((response) => {
+            console.log(response.data);
+          })
+          .then(() => {
+            location.reload();
+          })
+          .catch((e) => {
+            console.log(e);
+          });
       }
     },
     /* fonction to show players to give EQUIPED item*/
@@ -650,6 +662,16 @@ export default {
           mainD: this.mainD,
         };
         DataService.giveEquipedItem(dataItems)
+          .then((response) => {
+            console.log(response.data);
+          })
+          .then(() => {
+            location.reload();
+          })
+          .catch((e) => {
+            console.log(e);
+          });
+        DataService.createGift(dataItems)
           .then((response) => {
             console.log(response.data);
           })

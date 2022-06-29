@@ -40,6 +40,10 @@ class DataService {
     return http.put("/stuff/give", item, config);
   }
   //route fictive pour faire 2e requete put sur /stuff ; voir si pose pb en prod
+  createGift(data) {
+    return http.post("/stuff/gift", data, config);
+  }
+  //route fictive pour faire 2e requete put sur /stuff ; voir si pose pb en prod
   receivedItem(item) {
     return http.put("/stuff/received", item, config);
   }

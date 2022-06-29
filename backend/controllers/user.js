@@ -1,6 +1,5 @@
 const db = require("../models");
 const User = db.user;
-const Comment = db.comment;
 const sequelize = require("sequelize");
 const Op = db.Sequelize.Op;
 const bcrypt = require("bcrypt");
@@ -171,7 +170,7 @@ exports.giveItem = (req, res, next) => {
         },
       }
     ),
-    User.update(
+    /*  User.update(
       {
         received: obj.itemToGive,
       },
@@ -180,7 +179,7 @@ exports.giveItem = (req, res, next) => {
           email: obj.receiver,
         },
       }
-    ),
+    ),*/
   ])
     .then((data) => {
       if (data) {
@@ -216,6 +215,7 @@ exports.giveEquipedItem = (req, res, next) => {
         },
       }
     ),
+    /*
     User.update(
       {
         received: obj.itemToGive,
@@ -225,7 +225,7 @@ exports.giveEquipedItem = (req, res, next) => {
           email: obj.receiver,
         },
       }
-    ),
+    ),*/
   ])
     .then((data) => {
       if (data) {
@@ -276,6 +276,7 @@ exports.receivedItem = (req, res, next) => {
         },
       }
     ),
+    /*
     User.update(
       {
         received: obj.receivedItem,
@@ -285,7 +286,7 @@ exports.receivedItem = (req, res, next) => {
           email: obj.user,
         },
       }
-    ),
+    ),*/
   ])
     .then((data) => {
       if (data) {

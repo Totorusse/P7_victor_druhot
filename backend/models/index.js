@@ -11,4 +11,5 @@ db.sequelize = sequelize;
 db.user = require("./User.js")(sequelize, Sequelize);
 db.perso = require("./Perso.js")(sequelize, Sequelize);
 db.stuff = require("./Stuff.js")(sequelize, Sequelize);
+db.gift = require("./Gift.js")(sequelize, Sequelize);
 module.exports = db;

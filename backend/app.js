@@ -3,6 +3,8 @@ const bodyParser = require("body-parser");
 const userRoutes = require("./routes/user");
 const persoRoutes = require("./routes/perso");
 const stuffRoutes = require("./routes/stuff");
+const giftRoutes = require("./routes/gift");
+
 const path = require("path");
 
 const app = express();
@@ -27,5 +29,6 @@ app.use("/images", express.static(path.join(__dirname, "images")));
 app.use("/", userRoutes);
 app.use("/", persoRoutes);
 app.use("/", stuffRoutes);
+app.use("/", giftRoutes);
 
 module.exports = app;
