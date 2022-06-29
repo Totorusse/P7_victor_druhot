@@ -365,21 +365,16 @@ export default {
               .then((response) => {
                 console.log(response.data);
               })
+              .then(() => {
+                location.reload();
+              })
+
               .catch((e) => {
                 console.log(e);
               });
             return;
           }
         }
-        DataService.deleteGift(receivedItem)
-          .then((response) => {
-            console.log(response.data);
-          })
-          .then(this.slotNumber())
-          .then(this.slotTotal())
-          .catch((e) => {
-            console.log(e);
-          });
       }
     },
     /* fonction to show detailsBloc*/

@@ -43,10 +43,6 @@ class DataService {
   createGift(data) {
     return http.post("/stuff/gift", data, config);
   }
-  //route fictive  ; voir si pose pb en prod
-  deleteGift(data) {
-    return http.delete("/stuff", data, config);
-  }
   //route fictive pour faire 2e requete put sur /stuff ; voir si pose pb en prod
   receivedItem(item) {
     return http.put("/stuff/received", item, config);
