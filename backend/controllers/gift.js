@@ -13,7 +13,7 @@ exports.createGift = (req, res, next) => {
   };
   // Save given item in the database
   Gift.create(gift)
-    .then((data) => {
+    .then(() => {
       res.status(200).send({
         message: "Objet donné",
       });
@@ -24,3 +24,4 @@ exports.createGift = (req, res, next) => {
       });
     });
 };
+

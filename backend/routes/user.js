@@ -14,6 +14,5 @@ router.put("/stuff/giveEquipedItem", auth, userCtrl.giveEquipedItem);
 router.put("/stuff/received", auth, userCtrl.receivedItem);
 
 router.post("/login", userCtrl.login);
-router.delete("/profile", auth, userCtrl.deleteProfile);
 
 module.exports = router;

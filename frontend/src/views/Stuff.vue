@@ -118,9 +118,14 @@
     <button @click="closePlayers">X</button>
   </div>
   <div id="receivedItem">
-    <button v-for="item in itemReceived" :key="item" @click="putReceivedItem">
-      Item reçu : {{ item }} ; Ajouter?
+    Item reçu :
+    <button v-for="item in itemReceived" :key="item" @click="showGiftBloc">
+      {{ item }}
     </button>
+  </div>
+  <div id="giftBloc" class="hidden">
+    <button @click="putReceivedItem">Equiper</button><button @click="dropFromBag">Jeter</button>
+    <button @click="closeGift">X</button>
   </div>
 </template>
 
@@ -174,7 +179,7 @@ export default {
         this.slots = response.data[2][0];
         this.stuffList = response.data[3];
         this.connectedPlayers = response.data[4].map(({ email }) => email);
-        this.itemReceived = response.data[5];
+        this.itemReceived = response.data[5].map(({ item }) => item);
       })
       .then(() => {
         /* new description tab filtered with right heros*/
@@ -315,12 +320,19 @@ export default {
           }
         }
       }
-    } /* fonction to add  RECEIVED item in stuff*/,
+    },
+    /* fonction to show giftBloc*/
+    showGiftBloc(e) {
+      let target = e.target.innerHTML;
+      sessionStorage.setItem("gift", target);
+      document.getElementById("giftBloc").style.display = "initial";
+    },
+
+    /* fonction to add  RECEIVED item in stuff*/
     putReceivedItem() {
       let idPerso = sessionStorage.getItem("userName");
-      let receivedItem = this.itemReceived;
+      let receivedItem = sessionStorage.getItem("gift");
       let testSlot = this.slotSupSum + this.herosDescrFiltered.slot;
-      console.log(receivedItem);
 
       if (this.slotUsed >= testSlot) {
         alert("Inventaire plein");
@@ -328,7 +340,7 @@ export default {
         for (let slot in this.slots) {
           if (this.slots[slot] == null) {
             this.slots[slot] = receivedItem;
-            this.itemReceived = null;
+            //this.itemReceived = null;
             let dataItems = {
               slot1: this.slots.slot1,
               slot2: this.slots.slot2,
@@ -347,20 +359,27 @@ export default {
               slot15: this.slots.slot15,
               slot16: this.slots.slot16,
               user: idPerso,
-              receivedItem: "",
+              receivedItem: receivedItem,
             };
             DataService.receivedItem(dataItems)
               .then((response) => {
                 console.log(response.data);
               })
-              .then(this.slotNumber())
-              .then(this.slotTotal())
               .catch((e) => {
                 console.log(e);
               });
             return;
           }
         }
+        DataService.deleteGift(receivedItem)
+          .then((response) => {
+            console.log(response.data);
+          })
+          .then(this.slotNumber())
+          .then(this.slotTotal())
+          .catch((e) => {
+            console.log(e);
+          });
       }
     },
     /* fonction to show detailsBloc*/
@@ -376,7 +395,8 @@ export default {
           console.log(this.itemDetail.nom);
         }
       }
-    } /* fonction to show equiped items*/,
+    },
+    /* fonction to show equiped items*/
     showEquipBloc(e) {
       let equipTarget = e.target.innerHTML;
       let main = e.target.id;
@@ -571,6 +591,11 @@ export default {
     closePlayers() {
       let players = document.getElementById("players");
       players.style.display = "none";
+    },
+    /* fonction to close giftBloc*/
+    closeGift() {
+      let gift = document.getElementById("giftBloc");
+      gift.style.display = "none";
     },
     /* fonction to give item*/
     give(e) {

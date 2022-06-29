@@ -1,5 +1,6 @@
 const db = require("../models");
 const User = db.user;
+const Gift = db.gift;
 const sequelize = require("sequelize");
 const Op = db.Sequelize.Op;
 const bcrypt = require("bcrypt");
@@ -276,17 +277,9 @@ exports.receivedItem = (req, res, next) => {
         },
       }
     ),
-    /*
-    User.update(
-      {
-        received: obj.receivedItem,
-      },
-      {
-        where: {
-          email: obj.user,
-        },
-      }
-    ),*/
+    Gift.destroy({
+      where: { item: obj.receivedItem },
+    }),
   ])
     .then((data) => {
       if (data) {
@@ -302,39 +295,6 @@ exports.receivedItem = (req, res, next) => {
     .catch(() => {
       res.status(500).send({
         message: "Error updating",
-      });
-    });
-};
-
-// Delete user from the database.
-exports.deleteProfile = (req, res, next) => {
-  const user = req.body.user;
-
-  Promise.all([
-    User.destroy({
-      where: { email: user },
-    }),
-    Actu.destroy({
-      where: { userName: user },
-    }),
-    Comment.destroy({
-      where: { userName: user },
-    }),
-  ])
-    .then((data) => {
-      if (data) {
-        res.send({
-          message: "User was deleted successfully!",
-        });
-      } else {
-        res.send({
-          message: "Cannot delete User",
-        });
-      }
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message: "Could not delete User ",
       });
     });
 };
