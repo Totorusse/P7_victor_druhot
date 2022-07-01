@@ -4,11 +4,10 @@
   <div>
     Liste des joueurs connectés
     <ul class="list">
-      <li class="list__item" v-for="item in users" :key="item" :data-id="`${item.email}`">
+      <li class="list__item" v-for="item in users" :key="item">
         <h1 id="list__titre">Pseudo : {{ item.email }}</h1>
-        <p>Heros : {{ item }}</p>
         <ul>
-          <li v-for="thing in item" :key="thing">{{ thing }}</li>
+          <li v-for="(value, name) in item" :key="value">{{ name }}: {{ value }}</li>
         </ul>
       </li>
     </ul>
@@ -108,10 +107,12 @@ img {
   list-style-type: none;
   padding: 0;
   margin: 0;
+  text-align: left;
 }
 
 #list__titre {
   margin-top: -5px;
+  text-align: center;
 }
 
 .publish {
