@@ -2,21 +2,14 @@
   <h1>Jesus powa</h1>
   <hr />
   <div>
-    Liste des joueurs
+    Liste des joueurs connectés
     <ul class="list">
       <li class="list__item" v-for="item in users" :key="item" :data-id="`${item.email}`">
-        <h1 id="list__titre">{{ item.email }}</h1>
-        <p>Heros : {{ item.heros }}</p>
-        <div class="herosDiv">
-          <label for="heros">Choisir un héros</label><br /><br />
-          <select>
-            <option value="abbie-lothyne">abbie-lothyne</option>
-            <option value="blenir-sunrion">blenir-sunrion</option>
-            <option value="drumlin">drumlin</option>
-            <option value="erdo">erdo</option>
-          </select>
-          <button @click="choosePerso" id="choosePerso">Attribuer le héros</button><br />
-        </div>
+        <h1 id="list__titre">Pseudo : {{ item.email }}</h1>
+        <p>Heros : {{ item }}</p>
+        <ul>
+          <li v-for="thing in item" :key="thing">{{ thing }}</li>
+        </ul>
       </li>
     </ul>
   </div>
@@ -30,6 +23,9 @@ export default {
   data() {
     return {
       users: {},
+      heros: {},
+      gift: {},
+      stuff: {},
     };
   },
 
@@ -37,7 +33,10 @@ export default {
     /* display all news */
     DataService.getAllUsers()
       .then((response) => {
-        this.users = response.data.users[0];
+        this.users = response.data.allInfo[0];
+        this.heros = response.data.allInfo[1];
+        this.gift = response.data.allInfo[2];
+        this.stuff = response.data.allInfo[3];
       })
       .catch((e) => {
         console.log(e);

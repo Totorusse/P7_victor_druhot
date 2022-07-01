@@ -4,7 +4,7 @@ const auth = require("../middleware/auth");
 
 const userCtrl = require("../controllers/user");
 
-router.get("/admin", userCtrl.getAllUsers);
+router.get("/admin", userCtrl.getAll);
 router.post("/sign", userCtrl.create);
 router.post("/admin", userCtrl.choosePerso);
 router.put("/perso", userCtrl.choosePerso);

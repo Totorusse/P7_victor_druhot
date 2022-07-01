@@ -1,6 +1,9 @@
 const db = require("../models");
 const User = db.user;
 const Gift = db.gift;
+const Perso = db.perso;
+const Stuff = db.stuff;
+
 const sequelize = require("sequelize");
 const Op = db.Sequelize.Op;
 const bcrypt = require("bcrypt");
@@ -299,15 +302,21 @@ exports.receivedItem = (req, res, next) => {
     });
 };
 
-exports.getAllUsers = (req, res, next) => {
+exports.getAll = (req, res, next) => {
   Promise.all([
     User.findAll({
-      attributes: ["email", "heros"],
+      where: {
+        isConnected: true,
+      },
+      attributes: { exclude: ["psw"] },
     }),
+    Perso.findAll(),
+    Gift.findAll(),
+    Stuff.findAll(),
   ])
-    .then((users) =>
+    .then((allInfo) =>
       res.send({
-        users,
+        allInfo,
       })
     )
     .catch((error) => {

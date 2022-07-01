@@ -124,7 +124,7 @@
     </button>
   </div>
   <div id="giftBloc" class="hidden">
-    <button @click="putReceivedItem">Equiper</button><button @click="dropFromBag">Jeter</button>
+    <button @click="putReceivedItem">Prendre</button><button @click="dropFromBag">Jeter</button>
     <button @click="closeGift">X</button>
   </div>
 </template>
