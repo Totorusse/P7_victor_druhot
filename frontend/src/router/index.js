@@ -13,6 +13,9 @@ import Pub from "../views/Pub.vue";
 import Comments from "../views/Comments.vue";
 import Profile from "../views/Profile.vue";
 import Admin from "../views/Admin.vue";
+import AdminStuff from "../views/AdminStuff.vue";
+import AdminGift from "../views/AdminGift.vue";
+import AdminHeros from "../views/AdminHeros.vue";
 
 const routes = [
   {
@@ -54,6 +57,21 @@ const routes = [
     path: "/stuff",
     name: "stuff",
     component: Stuff,
+  },
+  {
+    path: "/admin/stuff",
+    name: "AdminStuff",
+    component: AdminStuff,
+  },
+  {
+    path: "/admin/heros",
+    name: "AdminHeros",
+    component: AdminHeros,
+  },
+  {
+    path: "/admin/don",
+    name: "AdminGift",
+    component: AdminGift,
   },
   {
     path: "/story",

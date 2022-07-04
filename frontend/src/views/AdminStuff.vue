@@ -7,7 +7,7 @@
     <button @click="don">Dons d'objets</button>
   </div>
   <hr />
-  <h2>Liste des joueurs connectés</h2>
+  <h2>Liste des équipements</h2>
   <div class="modifUser">id du joueur à modifier : <input id="user" type="text" /></div>
   <div class="modifUser">Champ à modifier : <input id="champ" type="text" /></div>
   <div class="modifUser">Valeur à modifier : <input id="value" type="text" /></div>
@@ -66,7 +66,6 @@ export default {
     don() {
       router.push("/admin/don");
     },
-
     /* fonction to update user */
     updateUser() {
       const id = document.getElementById("user").value;
