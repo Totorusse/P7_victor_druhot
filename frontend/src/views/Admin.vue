@@ -1,8 +1,12 @@
 <template>
   <h1>Jesus powa</h1>
   <hr />
+  <h2>Liste des joueurs connectés</h2>
+  <div class="modifUser">id du joueur à modifier : <input id="user" type="text" /></div>
+  <div class="modifUser">Champ à modifier : <input id="champ" type="text" /></div>
+  <div class="modifUser">Valeur à modifier : <input id="value" type="text" /></div>
+  <button @click="updateUser">Mettre à jour</button>
   <div>
-    Liste des joueurs connectés
     <ul class="list">
       <li class="list__item" v-for="item in users" :key="item">
         <h1 id="list__titre">Pseudo : {{ item.email }}</h1>
@@ -43,22 +47,20 @@ export default {
   },
 
   methods: {
-    /* fonction to choose character*/
-    choosePerso(event) {
-      let target = event.target;
-      let user = target.closest("li");
-      let idPerso = user.dataset.id;
-      let heros = target.previousElementSibling.value;
-      let dataPerso = {
-        user: idPerso,
-        heros: heros,
-      };
-      console.log(idPerso);
+    /* fonction to update user */
+    updateUser() {
+      const id = document.getElementById("user").value;
+      const champ = document.getElementById("champ").value;
+      const value = document.getElementById("value").value;
+      console.log(id);
+      console.log(champ);
+      console.log(value);
 
-      DataService.persoChoosed(dataPerso)
+      const data = { id: id, champ: champ, value: value };
+      /* request to update */
+      DataService.updateUser(data)
         .then((response) => {
           console.log(response.data);
-          location.reload();
         })
         .catch((e) => {
           console.log(e);

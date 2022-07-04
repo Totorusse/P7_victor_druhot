@@ -325,3 +325,33 @@ exports.getAll = (req, res, next) => {
       });
     });
 };
+
+// update  user (admin)
+exports.updateUser = (req, res, next) => {
+  const obj = req.body;
+  const updatedData = { [obj.champ]: obj.value };
+  console.log(updatedData);
+  Promise.all([
+    User.update(updatedData, {
+      where: {
+        id: obj.id,
+      },
+    }),
+  ])
+    .then((data) => {
+      if (data) {
+        res.send({
+          message: "Joueur à jour !",
+        });
+      } else {
+        res.send({
+          message: `Erreur survenue!`,
+        });
+      }
+    })
+    .catch(() => {
+      res.status(500).send({
+        message: "Error updating",
+      });
+    });
+};

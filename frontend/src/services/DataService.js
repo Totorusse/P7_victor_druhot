@@ -83,6 +83,9 @@ class DataService {
   deleteAccount(user) {
     return http.delete("/profile", { data: { user }, headers: { Authorization: `Bearer ${token}` } });
   }
+  updateUser(data) {
+    return http.put("/admin", data, config);
+  }
 }
 
 export default new DataService();
