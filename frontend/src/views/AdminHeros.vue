@@ -14,8 +14,8 @@
   <button @click="updateUser">Mettre à jour</button>
   <div>
     <ul class="list">
-      <li class="list__item" v-for="item in users" :key="item">
-        <h1 id="list__titre">Pseudo : {{ item.email }}</h1>
+      <li class="list__item" v-for="item in heros" :key="item">
+        <h1 id="list__titre">Héros : {{ item.nom }}</h1>
         <ul>
           <li v-for="(value, name) in item" :key="value">{{ name }}: {{ value }}</li>
         </ul>
