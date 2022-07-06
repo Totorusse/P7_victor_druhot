@@ -86,6 +86,15 @@ class DataService {
   updateUser(data) {
     return http.put("/admin", data, config);
   }
+  updateHeros(data) {
+    return http.put("/admin/heros", data, config);
+  }
+  updateStuff(data) {
+    return http.put("/admin/stuff", data, config);
+  }
+  updateGift(data) {
+    return http.put("/admin/don", data, config);
+  }
 }
 
 export default new DataService();

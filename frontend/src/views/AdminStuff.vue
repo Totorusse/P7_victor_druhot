@@ -8,10 +8,10 @@
   </div>
   <hr />
   <h2>Liste des équipements</h2>
-  <div class="modifUser">id du joueur à modifier : <input id="user" type="text" /></div>
+  <div class="modifUser">id de l'équipement à modifier : <input id="stuff" type="text" /></div>
   <div class="modifUser">Champ à modifier : <input id="champ" type="text" /></div>
   <div class="modifUser">Valeur à modifier : <input id="value" type="text" /></div>
-  <button @click="updateUser">Mettre à jour</button>
+  <button @click="updateStuff">Mettre à jour</button>
   <div>
     <ul class="list">
       <li class="list__item" v-for="item in stuff" :key="item">
@@ -67,8 +67,8 @@ export default {
       router.push("/admin/don");
     },
     /* fonction to update user */
-    updateUser() {
-      const id = document.getElementById("user").value;
+    updateStuff() {
+      const id = document.getElementById("stuff").value;
       const champ = document.getElementById("champ").value;
       const value = document.getElementById("value").value;
       console.log(id);
@@ -77,7 +77,7 @@ export default {
 
       const data = { id: id, champ: champ, value: value };
       /* request to update */
-      DataService.updateUser(data)
+      DataService.updateStuff(data)
         .then((response) => {
           console.log(response.data);
         })

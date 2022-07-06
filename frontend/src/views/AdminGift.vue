@@ -8,14 +8,14 @@
   </div>
   <hr />
   <h2>Liste des objets en cours de donation</h2>
-  <div class="modifUser">id du joueur à modifier : <input id="user" type="text" /></div>
+  <div class="modifUser">id du don à modifier : <input id="gift" type="text" /></div>
   <div class="modifUser">Champ à modifier : <input id="champ" type="text" /></div>
   <div class="modifUser">Valeur à modifier : <input id="value" type="text" /></div>
-  <button @click="updateUser">Mettre à jour</button>
+  <button @click="updateGift">Mettre à jour</button>
   <div>
     <ul class="list">
-      <li class="list__item" v-for="item in users" :key="item">
-        <h1 id="list__titre">Pseudo : {{ item.email }}</h1>
+      <li class="list__item" v-for="item in gift" :key="item">
+        <h1 id="list__titre">Joueur qui a reçu un objet : {{ item.player }}</h1>
         <ul>
           <li v-for="(value, name) in item" :key="value">{{ name }}: {{ value }}</li>
         </ul>
@@ -67,9 +67,9 @@ export default {
       router.push("/admin/don");
     },
 
-    /* fonction to update user */
-    updateUser() {
-      const id = document.getElementById("user").value;
+    /* fonction to update gift */
+    updateGift() {
+      const id = document.getElementById("gift").value;
       const champ = document.getElementById("champ").value;
       const value = document.getElementById("value").value;
       console.log(id);
@@ -78,7 +78,7 @@ export default {
 
       const data = { id: id, champ: champ, value: value };
       /* request to update */
-      DataService.updateUser(data)
+      DataService.updateGift(data)
         .then((response) => {
           console.log(response.data);
         })

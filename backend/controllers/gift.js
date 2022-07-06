@@ -25,3 +25,32 @@ exports.createGift = (req, res, next) => {
     });
 };
 
+// update  gift (admin)
+exports.updateGift = (req, res, next) => {
+  const obj = req.body;
+  const updatedData = { [obj.champ]: obj.value };
+  console.log(updatedData);
+  Promise.all([
+    Gift.update(updatedData, {
+      where: {
+        id: obj.id,
+      },
+    }),
+  ])
+    .then((data) => {
+      if (data) {
+        res.send({
+          message: "Gift à jour !",
+        });
+      } else {
+        res.send({
+          message: `Erreur survenue!`,
+        });
+      }
+    })
+    .catch(() => {
+      res.status(500).send({
+        message: "Error updating",
+      });
+    });
+};

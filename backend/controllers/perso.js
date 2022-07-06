@@ -114,6 +114,36 @@ exports.getOneArticle = (req, res, next) => {
     });
 };
 
+// update  heros (admin)
+exports.updateHeros = (req, res, next) => {
+  const obj = req.body;
+  const updatedData = { [obj.champ]: obj.value };
+  console.log(updatedData);
+  Promise.all([
+    Perso.update(updatedData, {
+      where: {
+        id: obj.id,
+      },
+    }),
+  ])
+    .then((data) => {
+      if (data) {
+        res.send({
+          message: "Heros à jour !",
+        });
+      } else {
+        res.send({
+          message: `Erreur survenue!`,
+        });
+      }
+    })
+    .catch(() => {
+      res.status(500).send({
+        message: "Error updating",
+      });
+    });
+};
+
 exports.deleteArticle = (req, res, next) => {
   const id = req.params.id;
   const userName = req.body.dataDel.userName;
