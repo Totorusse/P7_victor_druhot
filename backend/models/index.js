@@ -12,4 +12,16 @@ db.user = require("./User.js")(sequelize, Sequelize);
 db.perso = require("./Perso.js")(sequelize, Sequelize);
 db.stuff = require("./Stuff.js")(sequelize, Sequelize);
 db.gift = require("./Gift.js")(sequelize, Sequelize);
+
+db.stuff.belongsToMany(db.perso, {
+  through: "perso_stuff",
+  as: "persos",
+  foreignKey: "stuff_id",
+});
+db.perso.belongsToMany(db.stuff, {
+  through: "perso_stuff",
+  as: "stuffs",
+  foreignKey: "perso_id",
+});
+
 module.exports = db;

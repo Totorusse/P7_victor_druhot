@@ -55,6 +55,18 @@ exports.getAllInfo = (req, res, next) => {
         player: userName,
       },
     }),
+    Stuff.findAll({
+      include: [
+        {
+          model: Perso,
+          as: "persos",
+          attributes: ["id", "nom"],
+          through: {
+            attributes: [],
+          },
+        },
+      ],
+    }),
   ])
     .then((user) => {
       res.status(200).send(user);
