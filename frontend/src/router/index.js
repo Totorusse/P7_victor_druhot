@@ -16,6 +16,7 @@ import Admin from "../views/Admin.vue";
 import AdminStuff from "../views/AdminStuff.vue";
 import AdminGift from "../views/AdminGift.vue";
 import AdminHeros from "../views/AdminHeros.vue";
+import AdminHerosEquip from "../views/AdminHerosEquip.vue";
 
 const routes = [
   {
@@ -67,6 +68,11 @@ const routes = [
     path: "/admin/heros",
     name: "AdminHeros",
     component: AdminHeros,
+  },
+  {
+    path: "/admin/herosEquip",
+    name: "AdminHerosEquip",
+    component: AdminHerosEquip,
   },
   {
     path: "/admin/don",

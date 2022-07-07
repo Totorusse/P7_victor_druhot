@@ -302,6 +302,7 @@ exports.receivedItem = (req, res, next) => {
     });
 };
 
+//admin infos
 exports.getAll = (req, res, next) => {
   Promise.all([
     User.findAll({
@@ -313,6 +314,19 @@ exports.getAll = (req, res, next) => {
     Perso.findAll(),
     Gift.findAll(),
     Stuff.findAll(),
+    Perso.findAll({
+      attributes: ["nom"],
+      include: [
+        {
+          model: Stuff,
+          as: "stuffs",
+          attributes: ["id", "nom"],
+          through: {
+            attributes: [],
+          },
+        },
+      ],
+    }),
   ])
     .then((allInfo) =>
       res.send({

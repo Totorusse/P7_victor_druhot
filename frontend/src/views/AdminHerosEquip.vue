@@ -8,15 +8,15 @@
     <button @click="don">Dons d'objets</button>
   </div>
   <hr />
-  <h2>Liste des équipements</h2>
-  <div class="modifUser">id de l'équipement à modifier : <input id="stuff" type="text" /></div>
+  <h2>Liste des joueurs connectés</h2>
+  <div class="modifUser">id du stuff à modifier : <input id="user" type="text" /></div>
   <div class="modifUser">Champ à modifier : <input id="champ" type="text" /></div>
   <div class="modifUser">Valeur à modifier : <input id="value" type="text" /></div>
-  <button @click="updateStuff">Mettre à jour</button>
+  <button @click="updateHerosEquip">Mettre à jour</button>
   <div>
     <ul class="list">
-      <li class="list__item" v-for="item in stuff" :key="item">
-        <h1 id="list__titre">Equipement : {{ item.nom }}</h1>
+      <li class="list__item" v-for="item in HerosStuff" :key="item">
+        <h1 id="list__titre">Pseudo : {{ item.nom }}</h1>
         <ul>
           <li v-for="(value, name) in item" :key="value">{{ name }}: {{ value }}</li>
         </ul>
@@ -37,6 +37,7 @@ export default {
       heros: {},
       gift: {},
       stuff: {},
+      HerosStuff: {},
     };
   },
 
@@ -48,6 +49,7 @@ export default {
         this.heros = response.data.allInfo[1];
         this.gift = response.data.allInfo[2];
         this.stuff = response.data.allInfo[3];
+        this.HerosStuff = response.data.allInfo[4];
       })
       .catch((e) => {
         console.log(e);
@@ -67,13 +69,13 @@ export default {
     herosEquip() {
       router.push("/admin/herosEquip");
     },
-
     don() {
       router.push("/admin/don");
     },
+
     /* fonction to update user */
-    updateStuff() {
-      const id = document.getElementById("stuff").value;
+    updateHerosEquip() {
+      const id = document.getElementById("user").value;
       const champ = document.getElementById("champ").value;
       const value = document.getElementById("value").value;
       console.log(id);
@@ -82,7 +84,7 @@ export default {
 
       const data = { id: id, champ: champ, value: value };
       /* request to update */
-      DataService.updateStuff(data)
+      DataService.updateUser(data)
         .then((response) => {
           console.log(response.data);
         })
