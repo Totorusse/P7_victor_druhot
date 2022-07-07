@@ -55,11 +55,13 @@ exports.getAllInfo = (req, res, next) => {
         player: userName,
       },
     }),
-    Stuff.findAll({
+    //get perso_stuff
+    Perso.findAll({
+      attributes: ["nom"],
       include: [
         {
-          model: Perso,
-          as: "persos",
+          model: Stuff,
+          as: "stuffs",
           attributes: ["id", "nom"],
           through: {
             attributes: [],

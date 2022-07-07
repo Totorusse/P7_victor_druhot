@@ -1,5 +1,5 @@
 <template>
-  <h1>{{ heros }}</h1>
+  <h1>{{ heros }} {{ stuffAuthorized }}</h1>
   <div id="user-nav">
     <button @click="story" class="story-button">Chroniques</button>
     <button @click="stat" class="stat-button">Statistiques</button>
@@ -462,19 +462,15 @@ export default {
 
       let item = sessionStorage.getItem("target");
       let slot = sessionStorage.getItem("slot");
-      let count = 0;
 
-      //Check si héros peut équiper
+      //Gestion de l'équipement en fonction du type d'objet et du héros
       for (let element in this.stuffAuthorized) {
         if (item == this.stuffAuthorized[element].nom) {
-          count += 1;
-        }
+          console.log(this.stuffAuthorized[element].nom);
+        } else alert("Ce héros ne peut pas utiliser cet objet");
       }
-      //Gestion de l'équipement en fonction du type d'objet
+
       for (let x in this.stuffList) {
-        if (count == 0) {
-          return alert("Ce héros ne peut pas équiper cet objet");
-        }
         if (this.stuffList[x].nom == item) {
           if (this.stuffList[x].type == "objet") {
             alert("Vous ne pouvez pas équiper cet objet malandrin");
