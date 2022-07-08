@@ -2,11 +2,6 @@
   <div id="main">
     <div id="nav">
       <img id="logo" src="./assets/logo.png" />
-
-      <div id="hidden">
-        <button @click="profile" class="nav__button">Mon profil ({{ userSession }})</button><br />
-        <button @click="logOut" class="nav__button">Se déconnecter</button>
-      </div>
     </div>
   </div>
   <div id="router"><router-view /></div>
@@ -30,17 +25,6 @@ export default {
     }
   },
   methods: {
-    delayedFunction() {
-      location.reload();
-    },
-    logOut() {
-      sessionStorage.setItem("token", "");
-      router.push("/");
-      window.setTimeout(this.delayedFunction, 500);
-    },
-    profile() {
-      router.push("/profile");
-    },
   },
 };
 </script>
