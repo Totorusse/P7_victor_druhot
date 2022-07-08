@@ -95,9 +95,6 @@ class DataService {
   updateGift(data) {
     return http.put("/admin/don", data, config);
   }
-  updateHerosEquip(data) {
-    return http.put("/admin/herosEquip", data, config);
-  }
 }
 
 export default new DataService();

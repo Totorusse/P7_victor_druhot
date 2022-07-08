@@ -186,3 +186,57 @@ exports.updateStuff = (req, res, next) => {
       });
     });
 };
+
+// add  stuff heros relation (admin)
+exports.addHerosEquip = (req, res, next) => {
+  const obj = req.body;
+  const relation = { stuff_id: obj.stuff_id, perso_id: obj.perso_id };
+  console.log(relation);
+
+  Promise.all([Stuff.create(relation.stuff_id).addPerso(relation.perso_id)])
+    .then((data) => {
+      if (data) {
+        res.send({
+          message: "Relation ajoutée!",
+        });
+      } else {
+        res.send({
+          message: `Erreur survenue!`,
+        });
+      }
+    })
+    .catch(() => {
+      res.status(500).send({
+        message: "Error updating",
+      });
+    });
+};
+
+// delete  stuff heros relation (admin)
+exports.deleteHerosEquip = (req, res, next) => {
+  const obj = req.body;
+  const relation = { stuff_id: obj.stuff_id, perso_id: obj.perso_id };
+
+  Promise.all([
+    Perso_stuff.delete({
+      stuff_id: obj.stuff_id,
+      perso_id: obj.perso_id,
+    }),
+  ])
+    .then((data) => {
+      if (data) {
+        res.send({
+          message: "Relation supprimée!",
+        });
+      } else {
+        res.send({
+          message: `Erreur survenue!`,
+        });
+      }
+    })
+    .catch(() => {
+      res.status(500).send({
+        message: "Error updating",
+      });
+    });
+};

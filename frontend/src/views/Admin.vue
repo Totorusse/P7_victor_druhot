@@ -4,7 +4,6 @@
     <button @click="joueur">Joueurs</button>
     <button @click="stat">Heros</button>
     <button @click="equipement">Equipement</button>
-    <button @click="herosEquip">Héros/Equipement</button>
     <button @click="don">Dons d'objets</button>
   </div>
   <hr />
@@ -63,9 +62,6 @@ export default {
     },
     equipement() {
       router.push("/admin/stuff");
-    },
-    herosEquip() {
-      router.push("/admin/herosEquip");
     },
     don() {
       router.push("/admin/don");
