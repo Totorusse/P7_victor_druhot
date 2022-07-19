@@ -287,14 +287,19 @@ export default {
       let seeItem = document.getElementById("item");
       let testSlot = this.slotSupSum + this.herosDescrFiltered.slot;
       console.log(testSlot);
+      console.log("hooo");
 
       if (this.item.isUsed == true) {
         alert("Objet déjà utilisé");
+        console.log("1");
       } else if (this.slotUsed >= testSlot) {
         alert("Inventaire plein");
+        console.log("2");
       } else {
         for (let slot in this.slots) {
           if (this.slots[slot] == null) {
+            console.log("3");
+
             this.slots[slot] = this.item.nom;
             let dataItems = {
               slot1: this.slots.slot1,
