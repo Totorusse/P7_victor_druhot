@@ -10,12 +10,16 @@
 
   <div class="main">
     <form class="code">
-      <input type="text" placeholder="Code" id="code" /><button @click="sendCode" id="sendCode">
+      <input type="text" placeholder="****" id="code" /><button
+        class="codeButton"
+        @click="sendCode"
+        id="sendCode"
+      >
         Ajouter
       </button>
     </form>
     <div id="item">
-      {{ item }}
+      {{ item.nom }}
       <div id="selectItem">
         <p>&Ecirc;tes-vous sûr de vouloir ajouter l'objet dans votre inventaire ?</p>
         <button @click="putItem" id="putItem">Oui</button
@@ -23,10 +27,10 @@
       </div>
     </div>
     <div class="item-bloc">
-      Main gauche : <span id="mainG" @click="showEquipBloc">{{ mainG }}</span>
+      <span id="mainG" @click="showEquipBloc">{{ mainG }}</span>
     </div>
     <div class="item-bloc">
-      Main droite :<span id="mainD" @click="showEquipBloc">{{ mainD }}</span>
+      <span id="mainD" @click="showEquipBloc">{{ mainD }}</span>
     </div>
     <div id="equipDetails" class="hidden">
       <button @click="showEquipDetails">Détails</button><button @click="stock">Stocker</button
@@ -43,11 +47,6 @@
       </button>
       <button @click="closePlayers2">X</button>
     </div>
-
-    <div>Heros slots : {{ herosDescrFiltered.slot }}</div>
-    <div>Items+ : {{ slotSupSum }}</div>
-    <div>Total slots : {{ slotSupSum + herosDescrFiltered.slot }}</div>
-    <div>Slots utilisés : {{ slotUsed }}</div>
 
     <div class="slots" id="slots">
       <div class="rang1">
@@ -843,12 +842,42 @@ a {
 .visible {
   display: initial;
 }
-
+input {
+  background-color: #2a3849;
+  color: #ffffff;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 45%;
+  font-size: 15px;
+  margin-top: 25px;
+  margin-right: 10px;
+  background-color: #503717;
+  opacity: 0.8;
+}
+.codeButton {
+  background-color: #503717;
+  color: #ffffff;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 50%;
+  font-size: 15px;
+  letter-spacing: 2px;
+  opacity: 0.9;
+}
 .item-bloc {
-  border: solid white;
+  background-color: #fff;
   display: inline-block;
+  text-align: center;
+  width: 100px;
+  height: 100px;
+  padding-top: 40px;
   margin: 15px;
-  padding: 15px;
+  border: solid black;
+  vertical-align: top;
 }
 .slots {
   display: flex;
@@ -940,6 +969,7 @@ a {
   height: calc(100% - 100px);
   background-color: white;
   background-image: url(../assets/logo.png);
+  background-color: #422700;
   background-position: center;
   background-size: 100%;
   background-repeat: no-repeat;
