@@ -1,18 +1,23 @@
 <template>
-  <h1>Choisir mon personnage</h1>
-  <hr />
   <div class="main">
+    <h1>ORA</h1>
+    <h2>L'appel souterrain</h2>
+    <div class="logo"><img id="logo" src="../assets/Logo_accueil.svg" /></div>
+  </div>
+  <div>
     <form class="code">
-      <input type="text" placeholder="Code" id="code" /><button @click="sendCode" id="sendCode">
-        Nouveau
+      <input type="text" id="code" /><button @click="sendCode" id="sendCode" class="w50 button1">
+        NOUVEAU
       </button>
     </form>
     <div class="perso-chosen">
-      Perso : {{ perso.nom }}
+      <span class="nom"> {{ perso.nom }}</span>
       <div class="image" v-if="perso.image">
         <img :src="`${perso.image}`" />
       </div>
-      <span class="select"><button @click="choosePerso" id="choose">Sélectionner</button></span>
+      <span class="select"
+        ><button class="button1" @click="choosePerso" id="choose">S&Eacute;LECTIONNER</button></span
+      >
     </div>
   </div>
 </template>
@@ -69,61 +74,69 @@ export default {
 
 <style scoped>
 /* Set  style for view only */
-* {
-  box-sizing: border-box;
+h1 {
+  color: #ffb300;
+  letter-spacing: 8px;
 }
-a {
-  background-color: white;
+h2 {
+  font-size: 18px;
+  letter-spacing: 4px;
 }
-
+/* Set  size for logo */
+.logo {
+  display: flex;
+  justify-content: center;
+  padding: 25px;
+}
+#logo {
+  position: relative;
+  width: 70px;
+}
+.main {
+  margin-top: 55px;
+}
 .description__text {
   margin: 5px 0 0 0;
   font-size: 18px;
 }
 
-img {
-  height: 250px;
-  width: 250px;
-  object-fit: cover;
-}
-
-.list__item {
-  border: solid;
-  margin: 8px;
-  list-style-type: none;
-  background-color: white;
-  border-radius: 8px;
+.w50 {
   width: 45%;
-  color: black;
-  padding: 15px;
-}
-
-.list {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
-#list__titre {
-  margin-top: -5px;
-}
-
-.publish {
-  width: 100%;
-  border-radius: 20px;
-  background-color: #ffd7d7;
-}
-
-#pub__link {
-  margin-bottom: 0;
 }
 
 .userName {
   margin-top: -10px;
   font-size: 12px;
+}
+
+input {
+  background-color: #2a3849;
+  color: #ffb300;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 45%;
+  font-size: 15px;
+  margin-right: 10px;
+}
+
+.perso-chosen {
+  margin-top: 50px;
+}
+
+.nom {
+  font-size: 22px;
+  padding: 15px;
+}
+
+.image {
+  padding: 15px;
+}
+.image img {
+  object-fit: cover;
+  width: 200px;
+  height: 200px;
+  border-radius: 100%;
 }
 </style>

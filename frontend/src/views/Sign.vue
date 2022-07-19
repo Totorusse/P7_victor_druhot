@@ -16,7 +16,7 @@
       <label for="psw">Mot de passe</label>
       <input type="password" id="psw" required v-model="user.psw" name="psw" />
       <p class="errorMessage"></p>
-      <button @click="saveUser" id="sign">CR&Eacute;ER LE COMPTE</button>
+      <button class="button1" @click="saveUser" id="sign">CR&Eacute;ER LE COMPTE</button>
       <p id="error"></p>
       <router-link to="/login" class="retour">Déjà inscrit ?</router-link>
     </div>
@@ -111,6 +111,7 @@ input[type="password"] {
   border: none;
   border-radius: 5px;
   background-color: #2a3849;
+  color: white;
 }
 
 input::placeholder {

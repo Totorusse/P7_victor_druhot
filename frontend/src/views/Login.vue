@@ -21,7 +21,7 @@
       <input type="password" id="psw" required v-model="user.psw" name="psw" placeholder="**********" />
       <p class="errorMessage"></p>
 
-      <button @click="checkUser" id="log">CONNEXION</button>
+      <button class="button1" @click="checkUser" id="log">CONNEXION</button>
       <p id="error"></p>
     </div>
     <router-link to="/sign" class="retour">Créer un compte</router-link>
@@ -118,13 +118,13 @@ input[type="password"] {
   border: none;
   border-radius: 5px;
   background-color: #2a3849;
+  color: white;
 }
 
 input::placeholder {
   color: white;
   letter-spacing: 2px;
 }
-
 
 /* log size */
 #log {

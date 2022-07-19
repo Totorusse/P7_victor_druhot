@@ -29,6 +29,9 @@ export default {
   max-width: 900px;
   box-sizing: border-box;
 }
+* {
+  box-sizing: border-box;
+}
 
 /* Set a style for  links */
 a {
@@ -52,7 +55,7 @@ a:hover {
 }
 
 /* Set a style for  button */
-button {
+.button1 {
   background-color: #312e1d;
   color: #ffb300;
   padding: 14px 20px;
