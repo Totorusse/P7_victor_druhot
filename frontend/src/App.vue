@@ -4,7 +4,6 @@
 </template>
 
 <script>
-
 export default {
   name: "App",
   data() {
@@ -14,8 +13,7 @@ export default {
   },
 
   /* function to hide buttons */
-  mounted() {
-  },
+  mounted() {},
   methods: {},
 };
 </script>
@@ -44,7 +42,7 @@ a {
   background-color: #ffd7d7;
   color: black;
   border: none;
-  border-radius: 20px;
+  border-radius: 5px;
   cursor: pointer;
 }
 
@@ -86,13 +84,6 @@ img {
   width: 150px;
 }
 
-/* Set  size for logo */
-#logo {
-  width: 50%;
-  height: 100%;
-  max-height: 500px;
-  object-fit: contain;
-}
 
 /* Set  position of nav */
 #nav {
@@ -117,9 +108,6 @@ img {
   max-width: 125px;
   width: 100%;
 }
-#router {
-  margin-top: 120px;
-}
 
 @media screen and (max-width: 600px) {
   button {
@@ -133,11 +121,5 @@ img {
     width: 150px;
   }
 
-  #logo {
-    position: absolute;
-    left: 15px;
-    top: 15px;
-    height: 80px;
-  }
 }
 </style>

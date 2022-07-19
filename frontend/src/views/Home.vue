@@ -1,22 +1,19 @@
 <template>
   <h1>ORA</h1>
   <h2>L'appel souterrain</h2>
-  <img id="logo" src="../assets/Logo_accueil.svg" />
+  <div class="logo"><img id="logo" src="../assets/Logo_accueil.svg" /></div>
 
   <router-link to="/login">Se connecter</router-link>
   <router-link to="/sign">S'inscrire</router-link>
-  <router-view></router-view> 
+  <router-view></router-view>
 </template>
 
 <script>
-
 export default {
   name: "accueil",
   //fonction to hide buttons
-  mounted() {
-  },
-  methods: {
-  },
+  mounted() {},
+  methods: {},
 };
 </script>
 
@@ -31,11 +28,13 @@ h2 {
   letter-spacing: 4px;
 }
 /* Set  size for logo */
+.logo {
+  border: solid red;
+  display: flex;
+  justify-content: center;
+}
 #logo {
   position: relative;
-  display: block;
-  width: 100px;
-  margin: auto;
-  padding: 15px;
+  width: 70px;
 }
 </style>
