@@ -1,11 +1,13 @@
 <template>
-  <h1>ORA</h1>
-  <h2>L'appel souterrain</h2>
-  <div class="logo"><img id="logo" src="../assets/Logo_accueil.svg" /></div>
+  <div class="main">
+    <h1>ORA</h1>
+    <h2>L'appel souterrain</h2>
+    <div class="logo"><img id="logo" src="../assets/Logo_accueil.svg" /></div>
 
-  <router-link to="/login">Se connecter</router-link>
-  <router-link to="/sign">S'inscrire</router-link>
-  <router-view></router-view>
+    <router-link to="/login">Se connecter</router-link>
+    <router-link to="/sign">S'inscrire</router-link>
+    <router-view></router-view>
+  </div>
 </template>
 
 <script>
@@ -19,6 +21,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+/* Add a hover effect for links */
 h1 {
   color: #ffb300;
   letter-spacing: 8px;
@@ -29,12 +32,15 @@ h2 {
 }
 /* Set  size for logo */
 .logo {
-  border: solid red;
   display: flex;
   justify-content: center;
+  padding: 25px;
 }
 #logo {
   position: relative;
   width: 70px;
+}
+.main {
+  margin-top: 150px;
 }
 </style>
