@@ -1,23 +1,30 @@
 <template>
   <div>
-    <h1>Connexion</h1>
-    <img id="logo" src="../assets/Logo_accueil.svg" />
-
-    <hr />
+    <div class="main">
+      <h1>ORA</h1>
+      <h2>L'appel souterrain</h2>
+      <div class="logo"><img id="logo" src="../assets/Logo_accueil.svg" /></div>
+    </div>
     <div>
-      <label for="email">Nom d'utilisateur</label>
-      <input type="text" class="form-control" id="email" required v-model="user.email" name="email" />
+      <input
+        type="text"
+        class="form-control"
+        id="email"
+        required
+        v-model="user.email"
+        name="email"
+        placeholder="Identifiant"
+      />
       <p class="errorMessage"></p>
     </div>
     <div>
-      <label for="psw">Mot de passe</label>
-      <input type="password" id="psw" required v-model="user.psw" name="psw" />
+      <input type="password" id="psw" required v-model="user.psw" name="psw" placeholder="**********" />
       <p class="errorMessage"></p>
 
-      <button @click="checkUser" id="log">Se connecter</button>
+      <button @click="checkUser" id="log">CONNEXION</button>
       <p id="error"></p>
     </div>
-    <router-link to="/sign" class="retour">Pas encore inscrit ?</router-link>
+    <router-link to="/sign" class="retour">Créer un compte</router-link>
   </div>
 </template>
 
@@ -105,34 +112,19 @@ input[type="text"],
 input[type="password"] {
   width: 100%;
   padding: 12px 20px;
-  margin: 30px 0;
   display: inline-block;
   border: 1px solid #ccc;
   box-sizing: border-box;
-}
-
-/* Set a style for  button */
-button {
-  background-color: #ffd7d7;
-  color: rgb(0, 0, 0);
-  padding: 14px 20px;
-  margin: 8px 0;
   border: none;
-  cursor: pointer;
-  width: 100%;
-  font-size: 15px;
+  border-radius: 5px;
+  background-color: #2a3849;
 }
 
-/* Add a hover effect for buttons */
-button:hover {
-  opacity: 0.8;
+input::placeholder {
+  color: white;
+  letter-spacing: 2px;
 }
 
-/* label size */
-label {
-  font-size: 20px;
-  margin: 20px;
-}
 
 /* log size */
 #log {
@@ -141,16 +133,36 @@ label {
 
 /* Small size for return button */
 .retour {
-  margin-top: 25px;
-  width: 25%;
   font-size: 12px;
-  background-color: white;
-  color: black;
+  background-color: #122542;
+  color: gray;
 }
 
 /* big red error */
 #error {
   color: red;
   font-size: 24px;
+}
+/* Add a hover effect for links */
+h1 {
+  color: #ffb300;
+  letter-spacing: 8px;
+}
+h2 {
+  font-size: 18px;
+  letter-spacing: 4px;
+}
+/* Set  size for logo */
+.logo {
+  display: flex;
+  justify-content: center;
+  padding: 25px;
+}
+#logo {
+  position: relative;
+  width: 70px;
+}
+.main {
+  margin-top: 150px;
 }
 </style>

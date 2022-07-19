@@ -1,11 +1,14 @@
 <template>
   <div>
-    <h1>Inscription</h1>
-    <p>Merci de remplir le formulaire ci-dessous pour vous inscrire</p>
-    <hr />
+    <div class="main">
+      <h1>ORA</h1>
+      <h2>L'appel souterrain</h2>
+      <div class="logo"><img id="logo" src="../assets/Logo_accueil.svg" /></div>
+    </div>
+    <h2>INSCRIPTION</h2>
 
     <div>
-      <label for="email">Nom d'utilisateur</label>
+      <label for="email">Identifiant</label>
       <input type="text" id="email" required v-model="user.email" name="email" />
       <p class="errorMessage"></p>
     </div>
@@ -13,7 +16,7 @@
       <label for="psw">Mot de passe</label>
       <input type="password" id="psw" required v-model="user.psw" name="psw" />
       <p class="errorMessage"></p>
-      <button @click="saveUser" id="sign">S'inscrire</button>
+      <button @click="saveUser" id="sign">CR&Eacute;ER LE COMPTE</button>
       <p id="error"></p>
       <router-link to="/login" class="retour">Déjà inscrit ?</router-link>
     </div>
@@ -88,41 +91,38 @@ export default {
 </script>
 
 <style scoped>
+h1 {
+  color: #ffb300;
+  letter-spacing: 8px;
+}
+h2 {
+  font-size: 18px;
+  letter-spacing: 4px;
+}
+
 /* Full-width inputs */
 input[type="text"],
 input[type="password"] {
   width: 100%;
   padding: 12px 20px;
-  margin: 30px 0;
   display: inline-block;
   border: 1px solid #ccc;
   box-sizing: border-box;
-}
-
-/* Set a style for  button */
-button {
-  background-color: #ffd7d7;
-  color: black;
-  padding: 14px 20px;
-  margin: 8px 0;
   border: none;
-  cursor: pointer;
-  width: 100%;
-  font-size: 15px;
+  border-radius: 5px;
+  background-color: #2a3849;
 }
 
-/* Add a hover effect for buttons */
-button:hover {
-  opacity: 0.8;
+input::placeholder {
+  color: white;
+  letter-spacing: 2px;
 }
 
 /* Small size for return button */
 .retour {
-  margin-top: 25px;
-  width: 25%;
   font-size: 12px;
-  background-color: white;
-  color: black;
+  background-color: #122542;
+  color: gray;
 }
 
 /* sign size */
@@ -134,5 +134,19 @@ button:hover {
 #error {
   color: red;
   font-size: 24px;
+}
+
+/* Set  size for logo */
+.logo {
+  display: flex;
+  justify-content: center;
+  padding: 25px;
+}
+#logo {
+  position: relative;
+  width: 70px;
+}
+.main {
+  margin-top: 150px;
 }
 </style>

@@ -51,19 +51,22 @@ a:hover {
   opacity: 0.8;
 }
 
-/* Set a style for  buttons */
-/* Set a style for  buttons */
+/* Set a style for  button */
 button {
-  padding: 6px 6px;
-  margin: 8px 8px 0 0;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-  text-decoration: none;
-  color: black;
+  background-color: #312e1d;
+  color: #ffb300;
+  padding: 14px 20px;
   border: none;
-  border-radius: 20px;
+  border-radius: 5px;
   cursor: pointer;
-  overflow: hidden;
+  width: 100%;
+  font-size: 15px;
+  letter-spacing: 2px;
+}
+
+/* Add a hover effect for buttons */
+button:hover {
+  opacity: 0.8;
 }
 
 /* Add bg color */
