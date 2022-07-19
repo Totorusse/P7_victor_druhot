@@ -1,14 +1,9 @@
 <template>
-  <div id="main">
-    <div id="nav">
-      <img id="logo" src="./assets/logo.png" />
-    </div>
-  </div>
-  <div id="router"><router-view /></div>
+  <div id="main"></div>
+  <router-view></router-view>
 </template>
 
 <script>
-import router from "./router/index";
 
 export default {
   name: "App",
@@ -20,12 +15,8 @@ export default {
 
   /* function to hide buttons */
   mounted() {
-    if (router.currentRoute.value.name == "Home") {
-      document.getElementById("hidden").style.display = "none";
-    }
   },
-  methods: {
-  },
+  methods: {},
 };
 </script>
 

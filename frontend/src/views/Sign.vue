@@ -81,9 +81,6 @@ export default {
   },
   //fonction to hide buttons
   mounted() {
-    if (router.currentRoute.value.name == "sign") {
-      document.getElementById("hidden").style.display = "none";
-    }
     let coordonnees = document.querySelectorAll("input");
     coordonnees.forEach((x) => x.addEventListener("change", this.validation));
   },

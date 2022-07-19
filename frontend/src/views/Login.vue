@@ -1,6 +1,8 @@
 <template>
   <div>
     <h1>Connexion</h1>
+    <img id="logo" src="../assets/Logo_accueil.svg" />
+
     <hr />
     <div>
       <label for="email">Nom d'utilisateur</label>
@@ -36,9 +38,6 @@ export default {
   },
   //fonction to hide buttons
   mounted() {
-    if (router.currentRoute.value.name == "login") {
-      document.getElementById("hidden").style.display = "none";
-    }
     let coordonnees = document.querySelectorAll("input");
     coordonnees.forEach((x) => x.addEventListener("change", this.validation));
   },
