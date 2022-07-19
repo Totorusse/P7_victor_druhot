@@ -1,131 +1,137 @@
 <template>
   <h1>{{ heros }}</h1>
   <div id="user-nav">
-    <button @click="story" class="story-button">Chroniques</button>
-    <button @click="stat" class="stat-button">Statistiques</button>
-    <button @click="stuff" class="stuff-button">Inventaire</button>
+    <div class="nav">
+      <button @click="story" class="story-button"><span class="button-text">Chroniques</span></button>
+      <button @click="stat" class="stat-button"><span class="button-text">Statistiques</span></button>
+      <button @click="stuff" class="stuff-button"><span class="button-text">Inventaire</span></button>
+    </div>
   </div>
 
-  <hr />
-  <form class="code">
-    <input type="text" placeholder="Code" id="code" /><button @click="sendCode" id="sendCode">Ajouter</button>
-  </form>
-  <div id="item">
-    {{ item }}
-    <div id="selectItem">
-      <p>&Ecirc;tes-vous sûr de vouloir ajouter l'objet dans votre inventaire ?</p>
-      <button @click="putItem" id="putItem">Oui</button><button @click="closeItem" id="closeItem">Non</button>
-    </div>
-  </div>
-  <div class="item-bloc">
-    Main gauche : <span id="mainG" @click="showEquipBloc">{{ mainG }}</span>
-  </div>
-  <div class="item-bloc">
-    Main droite :<span id="mainD" @click="showEquipBloc">{{ mainD }}</span>
-  </div>
-  <div id="equipDetails" class="hidden">
-    <button @click="showEquipDetails">Détails</button><button @click="stock">Stocker</button
-    ><button @click="showPlayers2">Donner</button><button @click="dropFromHands">Jeter</button
-    ><button @click="closeEquipBloc">X</button>
-  </div>
-  <div id="equipItemDetails" class="hidden">
-    <div>Image (A ajouter) ; Nom : {{ itemDetail.nom }} ; Type : {{ itemDetail.type }}</div>
-    <button @click="closeEquipDetails">X</button>
-  </div>
-  <div id="players2" class="hidden">
-    <button v-for="players in connectedPlayers" :key="players" @click="giveEquiped">
-      {{ players }}
-    </button>
-    <button @click="closePlayers2">X</button>
-  </div>
-
-  <div>Heros slots : {{ herosDescrFiltered.slot }}</div>
-  <div>Items+ : {{ slotSupSum }}</div>
-  <div>Total slots : {{ slotSupSum + herosDescrFiltered.slot }}</div>
-  <div>Slots utilisés : {{ slotUsed }}</div>
-
-  <div class="slots" id="slots">
-    <div class="rang1">
-      <button>
-        <div id="slot1" class="divButton" @click="showDetailsBloc">{{ slots.slot1 }}</div>
+  <div class="main">
+    <form class="code">
+      <input type="text" placeholder="Code" id="code" /><button @click="sendCode" id="sendCode">
+        Ajouter
       </button>
-      <button>
-        <div id="slot2" class="divButton" @click="showDetailsBloc">{{ slots.slot2 }}</div>
-      </button>
-      <button>
-        <div id="slot3" class="divButton" @click="showDetailsBloc">{{ slots.slot3 }}</div>
-      </button>
-      <button>
-        <div id="slot4" class="divButton" @click="showDetailsBloc">{{ slots.slot4 }}</div>
-      </button>
-    </div>
-    <div class="rang2">
-      <button>
-        <div id="slot5" class="divButton" @click="showDetailsBloc">{{ slots.slot5 }}</div>
-      </button>
-      <button>
-        <div id="slot6" class="divButton" @click="showDetailsBloc">{{ slots.slot6 }}</div>
-      </button>
-      <button>
-        <div id="slot7" class="divButton" @click="showDetailsBloc">{{ slots.slot7 }}</div>
-      </button>
-      <button>
-        <div id="slot8" class="divButton" @click="showDetailsBloc">{{ slots.slot8 }}</div>
-      </button>
-    </div>
-    <div class="rang3">
-      <button>
-        <div id="slot9" class="divButton" @click="showDetailsBloc">{{ slots.slot9 }}</div>
-      </button>
-      <button>
-        <div id="slot10" class="divButton" @click="showDetailsBloc">{{ slots.slot10 }}</div>
-      </button>
-      <button>
-        <div id="slot11" class="divButton" @click="showDetailsBloc">{{ slots.slot11 }}</div>
-      </button>
-      <button>
-        <div id="slot12" class="divButton" @click="showDetailsBloc">{{ slots.slot12 }}</div>
-      </button>
-    </div>
-    <div class="rang4">
-      <button>
-        <div id="slot13" class="divButton" @click="showDetailsBloc">{{ slots.slot13 }}</div>
-      </button>
-      <button>
-        <div id="slot14" class="divButton" @click="showDetailsBloc">{{ slots.slot14 }}</div>
-      </button>
-      <button>
-        <div id="slot15" class="divButton" @click="showDetailsBloc">{{ slots.slot15 }}</div>
-      </button>
-      <button>
-        <div id="slot16" class="divButton" @click="showDetailsBloc">{{ slots.slot16 }}</div>
-      </button>
-    </div>
-  </div>
-  <div id="details" class="hidden">
-    <button @click="showDetails">Détails</button><button @click="equip">Equiper</button
-    ><button @click="showPlayers">Donner</button><button @click="dropFromBag">Jeter</button
-    ><button @click="closeDetailsBloc">X</button>
-  </div>
-  <div id="itemDetails" class="hidden">
-    <div>Image (A ajouter) ; Nom : {{ itemDetail.nom }} ; Type : {{ itemDetail.type }}</div>
-    <button @click="closeDetails">X</button>
-  </div>
-  <div id="players" class="hidden">
-    <button v-for="players in connectedPlayers" :key="players" @click="give">
-      {{ players }}
-    </button>
-    <button @click="closePlayers">X</button>
-  </div>
-  <div id="receivedItem">
-    Item reçu :
-    <button v-for="item in itemReceived" :key="item" @click="showGiftBloc">
+    </form>
+    <div id="item">
       {{ item }}
-    </button>
-  </div>
-  <div id="giftBloc" class="hidden">
-    <button @click="putReceivedItem">Prendre</button><button @click="dropFromBag">Jeter</button>
-    <button @click="closeGift">X</button>
+      <div id="selectItem">
+        <p>&Ecirc;tes-vous sûr de vouloir ajouter l'objet dans votre inventaire ?</p>
+        <button @click="putItem" id="putItem">Oui</button
+        ><button @click="closeItem" id="closeItem">Non</button>
+      </div>
+    </div>
+    <div class="item-bloc">
+      Main gauche : <span id="mainG" @click="showEquipBloc">{{ mainG }}</span>
+    </div>
+    <div class="item-bloc">
+      Main droite :<span id="mainD" @click="showEquipBloc">{{ mainD }}</span>
+    </div>
+    <div id="equipDetails" class="hidden">
+      <button @click="showEquipDetails">Détails</button><button @click="stock">Stocker</button
+      ><button @click="showPlayers2">Donner</button><button @click="dropFromHands">Jeter</button
+      ><button @click="closeEquipBloc">X</button>
+    </div>
+    <div id="equipItemDetails" class="hidden">
+      <div>Image (A ajouter) ; Nom : {{ itemDetail.nom }} ; Type : {{ itemDetail.type }}</div>
+      <button @click="closeEquipDetails">X</button>
+    </div>
+    <div id="players2" class="hidden">
+      <button v-for="players in connectedPlayers" :key="players" @click="giveEquiped">
+        {{ players }}
+      </button>
+      <button @click="closePlayers2">X</button>
+    </div>
+
+    <div>Heros slots : {{ herosDescrFiltered.slot }}</div>
+    <div>Items+ : {{ slotSupSum }}</div>
+    <div>Total slots : {{ slotSupSum + herosDescrFiltered.slot }}</div>
+    <div>Slots utilisés : {{ slotUsed }}</div>
+
+    <div class="slots" id="slots">
+      <div class="rang1">
+        <button>
+          <div id="slot1" class="divButton" @click="showDetailsBloc">{{ slots.slot1 }}</div>
+        </button>
+        <button>
+          <div id="slot2" class="divButton" @click="showDetailsBloc">{{ slots.slot2 }}</div>
+        </button>
+        <button>
+          <div id="slot3" class="divButton" @click="showDetailsBloc">{{ slots.slot3 }}</div>
+        </button>
+        <button>
+          <div id="slot4" class="divButton" @click="showDetailsBloc">{{ slots.slot4 }}</div>
+        </button>
+      </div>
+      <div class="rang2">
+        <button>
+          <div id="slot5" class="divButton" @click="showDetailsBloc">{{ slots.slot5 }}</div>
+        </button>
+        <button>
+          <div id="slot6" class="divButton" @click="showDetailsBloc">{{ slots.slot6 }}</div>
+        </button>
+        <button>
+          <div id="slot7" class="divButton" @click="showDetailsBloc">{{ slots.slot7 }}</div>
+        </button>
+        <button>
+          <div id="slot8" class="divButton" @click="showDetailsBloc">{{ slots.slot8 }}</div>
+        </button>
+      </div>
+      <div class="rang3">
+        <button>
+          <div id="slot9" class="divButton" @click="showDetailsBloc">{{ slots.slot9 }}</div>
+        </button>
+        <button>
+          <div id="slot10" class="divButton" @click="showDetailsBloc">{{ slots.slot10 }}</div>
+        </button>
+        <button>
+          <div id="slot11" class="divButton" @click="showDetailsBloc">{{ slots.slot11 }}</div>
+        </button>
+        <button>
+          <div id="slot12" class="divButton" @click="showDetailsBloc">{{ slots.slot12 }}</div>
+        </button>
+      </div>
+      <div class="rang4">
+        <button>
+          <div id="slot13" class="divButton" @click="showDetailsBloc">{{ slots.slot13 }}</div>
+        </button>
+        <button>
+          <div id="slot14" class="divButton" @click="showDetailsBloc">{{ slots.slot14 }}</div>
+        </button>
+        <button>
+          <div id="slot15" class="divButton" @click="showDetailsBloc">{{ slots.slot15 }}</div>
+        </button>
+        <button>
+          <div id="slot16" class="divButton" @click="showDetailsBloc">{{ slots.slot16 }}</div>
+        </button>
+      </div>
+    </div>
+    <div id="details" class="hidden">
+      <button @click="showDetails">Détails</button><button @click="equip">Equiper</button
+      ><button @click="showPlayers">Donner</button><button @click="dropFromBag">Jeter</button
+      ><button @click="closeDetailsBloc">X</button>
+    </div>
+    <div id="itemDetails" class="hidden">
+      <div>Image (A ajouter) ; Nom : {{ itemDetail.nom }} ; Type : {{ itemDetail.type }}</div>
+      <button @click="closeDetails">X</button>
+    </div>
+    <div id="players" class="hidden">
+      <button v-for="players in connectedPlayers" :key="players" @click="give">
+        {{ players }}
+      </button>
+      <button @click="closePlayers">X</button>
+    </div>
+    <div id="receivedItem">
+      Item reçu :
+      <button v-for="item in itemReceived" :key="item" @click="showGiftBloc">
+        {{ item }}
+      </button>
+    </div>
+    <div id="giftBloc" class="hidden">
+      <button @click="putReceivedItem">Prendre</button><button @click="dropFromBag">Jeter</button>
+      <button @click="closeGift">X</button>
+    </div>
   </div>
 </template>
 
@@ -837,20 +843,6 @@ a {
 .visible {
   display: initial;
 }
-.list-item {
-  border: solid;
-  margin-top: 8px;
-  list-style-type: none;
-  background-color: white;
-  color: black;
-  border-radius: 8px;
-}
-
-.list {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
 
 .item-bloc {
   border: solid white;
@@ -883,5 +875,73 @@ a {
   border: solid white;
   justify-content: center;
   align-items: center;
+}
+
+.story-button,
+.stat-button,
+.stuff-button {
+  height: 80px;
+  width: 33%;
+  background-image: url(../assets/logo.png);
+  background-position: top;
+  background-size: 30%;
+  background-repeat: no-repeat;
+  padding: 25px;
+  border: none;
+  background-color: #503717;
+  color: white;
+}
+.story-button {
+  background-image: url(../assets/story.svg);
+}
+
+.stat-button {
+  background-image: url(../assets/stat.svg);
+}
+
+.stuff-button {
+  background-image: url(../assets/stuff2.svg);
+}
+
+.button-text {
+  position: relative;
+  bottom: -20px;
+  letter-spacing: 1.5px;
+}
+
+.list-item {
+  list-style-type: none;
+  background-color: white;
+  color: black;
+}
+
+.list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+#user-nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background-color: #503717;
+}
+.nav {
+  padding-top: 20px;
+}
+.main {
+  color: black;
+  position: absolute;
+  left: 0;
+  top: 100px;
+  width: 100%;
+  height: calc(100% - 100px);
+  background-color: white;
+  background-image: url(../assets/logo.png);
+  background-position: center;
+  background-size: 100%;
+  background-repeat: no-repeat;
 }
 </style>

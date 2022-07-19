@@ -1,18 +1,17 @@
 <template>
-  <h1>{{ heros }}</h1>
-
   <div id="user-nav">
-    <button @click="story" class="story-button">Chroniques</button>
-    <button @click="stat" class="stat-button">Statistiques</button>
-    <button @click="stuff" class="stuff-button">Inventaire</button>
+    <div class="nav">
+      <button @click="story" class="story-button"><span class="button-text">Chroniques</span></button>
+      <button @click="stat" class="stat-button"><span class="button-text">Statistiques</span></button>
+      <button @click="stuff" class="stuff-button"><span class="button-text">Inventaire</span></button>
+    </div>
   </div>
-
-  <hr />
-
-  <ul class="list">
-    <li class="list-item" v-for="h in filteredHeros" :key="h">{{ h.description }}</li>
-    <li class="list-item" v-for="h in filteredHeros" :key="h">{{ h.nom }}</li>
-  </ul>
+  <div class="main">
+    <ul class="list">
+      <li class="list-item" v-for="h in filteredHeros" :key="h">{{ h.description }}</li>
+      <li class="list-item" v-for="h in filteredHeros" :key="h">{{ h.nom }}</li>
+    </ul>
+  </div>
 </template>
 
 <script>
@@ -69,18 +68,70 @@ a {
   background-color: white;
 }
 
+.story-button,
+.stat-button,
+.stuff-button {
+  height: 80px;
+  width: 33%;
+  background-image: url(../assets/logo.png);
+  background-position: top;
+  background-size: 30%;
+  background-repeat: no-repeat;
+  padding: 25px;
+  border: none;
+  background-color: #503717;
+  color: white;
+}
+.story-button {
+  background-image: url(../assets/story.svg);
+}
+
+.stat-button {
+  background-image: url(../assets/stat.svg);
+}
+
+.stuff-button {
+  background-image: url(../assets/stuff2.svg);
+}
+
+.button-text {
+  position: relative;
+  bottom: -20px;
+  letter-spacing: 1.5px;
+}
+
 .list-item {
-  border: solid;
-  margin-top: 8px;
   list-style-type: none;
   background-color: white;
   color: black;
-  border-radius: 8px;
 }
 
 .list {
   list-style-type: none;
   padding: 0;
   margin: 0;
+}
+#user-nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background-color: #503717;
+}
+.nav {
+  padding-top: 20px;
+}
+.main {
+  position: absolute;
+  left: 0;
+  top: 100px;
+  width: 100%;
+  height: calc(100% - 100px);
+  background-color: white;
+  background-image: url(../assets/logo.png);
+  background-position: center;
+  background-size: 100%;
+  background-repeat: no-repeat;
 }
 </style>
